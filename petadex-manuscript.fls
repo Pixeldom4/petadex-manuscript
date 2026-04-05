@@ -387,12 +387,13 @@ INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
-INPUT ./petadex_graphical_abstract.png
-INPUT ./petadex_graphical_abstract.png
-INPUT ./petadex_graphical_abstract.png
-INPUT ./petadex_graphical_abstract.png
-INPUT ./petadex_graphical_abstract.png
+INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmss10.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
+INPUT ./petadex_graphical_abstract.png
+INPUT ./petadex_graphical_abstract.png
+INPUT ./petadex_graphical_abstract.png
+INPUT ./petadex_graphical_abstract.png
+INPUT ./petadex_graphical_abstract.png
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmss8.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssi8.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
@@ -454,6 +455,7 @@ INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssi9.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmss12.tfm
+INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmssi8.tfm
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmtt9.tfm
 INPUT ./petadex_architecture.png
