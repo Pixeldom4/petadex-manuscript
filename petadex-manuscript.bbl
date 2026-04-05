@@ -1,4 +1,4 @@
-\begin{thebibliography}{22}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -47,16 +47,6 @@ D.~Danso, J.~Chow, and W.~R. Streit.
   (19):\penalty0 e01095--19, 2019.
 \newblock \doi{10.1128/AEM.01095-19}.
 
-\bibitem[Edgar et~al.(2022)Edgar, Taylor, Lin, Altman, Barbera, Meleshko, Lohr,
-  Novakovsky, Buchfink, Al-Shayeb, Banfield, de~la Pe\~{n}a, Korobeynikov,
-  Chikhi, and Babaian]{edgar_petabase-scale_2022}
-R.~C. Edgar, B.~Taylor, V.~Lin, T.~Altman, P.~Barbera, D.~Meleshko, D.~Lohr,
-  G.~Novakovsky, B.~Buchfink, B.~Al-Shayeb, J.~F. Banfield, M.~de~la Pe\~{n}a,
-  A.~Korobeynikov, R.~Chikhi, and A.~Babaian.
-\newblock Petabase-scale sequence alignment catalyses viral discovery.
-\newblock \emph{Nature}, 602\penalty0 (7895):\penalty0 142--147, 2022.
-\newblock \doi{10.1038/s41586-021-04332-2}.
-
 \bibitem[Gambarini et~al.(2022)Gambarini, Pantos, Kingsbury, Weaver, Handley,
   and Lear]{gambarini_plasticdb_2022}
 V.~Gambarini, O.~Pantos, J.~M. Kingsbury, L.~Weaver, K.~M. Handley, and
@@ -70,12 +60,6 @@ V.~Gambarini, O.~Pantos, J.~M. Kingsbury, L.~Weaver, K.~M. Handley, and
 {Gatsby}.
 \newblock Gatsby, 2024.
 \newblock \url{https://www.gatsbyjs.com/}.
-
-\bibitem[Geyer et~al.(2017)Geyer, Jambeck, and Law]{geyer_production_2017}
-R.~Geyer, J.~R. Jambeck, and K.~L. Law.
-\newblock Production, use, and fate of all plastics ever made.
-\newblock \emph{Science Advances}, 3\penalty0 (7):\penalty0 e1700782, 2017.
-\newblock \doi{10.1126/sciadv.1700782}.
 
 \bibitem[Jones et~al.(2014)Jones, Binns, Chang, Fraser, Li, {McAnulla},
   {McWilliam}, Maslen, Mitchell, Nuka, Pesseat, Quinn, Sangrador-Vegas,
@@ -103,14 +87,6 @@ J.~Jumper, R.~Evans, A.~Pritzel, T.~Green, M.~Figurnov, O.~Ronneberger,
 \newblock Highly accurate protein structure prediction with {AlphaFold}.
 \newblock \emph{Nature}, 596\penalty0 (7873):\penalty0 583--589, 2021.
 \newblock \doi{10.1038/s41586-021-03819-2}.
-
-\bibitem[Kawai et~al.(2019)Kawai, Kawabata, and Oda]{kawai_current_2019}
-F.~Kawai, T.~Kawabata, and M.~Oda.
-\newblock Current knowledge on enzymatic {PET} degradation and its possible
-  application to waste stream management and other fields.
-\newblock \emph{Applied Microbiology and Biotechnology}, 103\penalty0
-  (11):\penalty0 4253--4268, 2019.
-\newblock \doi{10.1007/s00253-019-09717-y}.
 
 \bibitem[Leinonen et~al.(2011)Leinonen, Sugawara, Shumway, and {International
   Nucleotide Sequence Database Collaboration}]{leinonen_sequence_2011}

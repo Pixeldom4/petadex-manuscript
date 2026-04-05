@@ -3,44 +3,44 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: petadex-manuscript.aux
 The style file: oup-abbrvnat.bst
 Database file #1: petadex-references.bib
-You've used 22 entries,
+You've used 19 entries,
             2773 wiz_defined-function locations,
-            750 strings with 11910 characters,
-and the built_in function-call counts, 18291 in all, are:
-= -- 1447
-> -- 1959
+            730 strings with 11037 characters,
+and the built_in function-call counts, 16117 in all, are:
+= -- 1265
+> -- 1761
 < -- 5
-+ -- 655
-- -- 633
-* -- 1870
-:= -- 3013
-add.period$ -- 85
-call.type$ -- 22
-change.case$ -- 277
-chr.to.int$ -- 22
-cite$ -- 44
-duplicate$ -- 436
-empty$ -- 875
-format.name$ -- 659
-if$ -- 3579
++ -- 589
+- -- 570
+* -- 1646
+:= -- 2663
+add.period$ -- 73
+call.type$ -- 19
+change.case$ -- 247
+chr.to.int$ -- 19
+cite$ -- 38
+duplicate$ -- 373
+empty$ -- 749
+format.name$ -- 593
+if$ -- 3146
 int.to.chr$ -- 1
 int.to.str$ -- 1
-missing$ -- 18
-newline$ -- 137
-num.names$ -- 88
-pop$ -- 520
+missing$ -- 15
+newline$ -- 119
+num.names$ -- 76
+pop$ -- 469
 preamble$ -- 1
-purify$ -- 255
+purify$ -- 228
 quote$ -- 0
-skip$ -- 480
+skip$ -- 423
 stack$ -- 0
-substring$ -- 521
-swap$ -- 22
+substring$ -- 435
+swap$ -- 19
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 242
+type$ -- 209
 warning$ -- 0
-while$ -- 98
+while$ -- 84
 width$ -- 0
-write$ -- 326
+write$ -- 281

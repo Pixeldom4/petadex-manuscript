@@ -2,7 +2,7 @@ PWD /Users/Pixel/Documents/projects/petadex-manuscript
 INPUT /usr/local/texlive/2026basic/texmf.cnf
 INPUT /usr/local/texlive/2026basic/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2026basic/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT petadex-manuscript.tex
+INPUT /Users/Pixel/Documents/projects/petadex-manuscript/petadex-manuscript.tex
 OUTPUT petadex-manuscript.log
 INPUT ./oup-authoring-template.cls
 INPUT oup-authoring-template.cls
@@ -473,11 +473,6 @@ INPUT ./esm-landscape-transparent.png
 INPUT ./esm-landscape-transparent.png
 INPUT ./esm-landscape-transparent.png
 INPUT ./esm-landscape-transparent.png
-INPUT ./petadex-substrate.png
-INPUT ./petadex-substrate.png
-INPUT ./petadex-substrate.png
-INPUT ./petadex-substrate.png
-INPUT ./petadex-substrate.png
 INPUT ./petadex-figure-4.png
 INPUT ./petadex-figure-4.png
 INPUT ./petadex-figure-4.png
@@ -498,5 +493,4 @@ INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
-INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb
