@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.4)  4 APR 2026 22:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.4)  5 APR 2026 00:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1269,17 +1269,17 @@ LaTeX Font Info:    Calculating math sizes for size <7.72884> on input line 77.
 LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 77.
 LaTeX Font Info:    Calculating math sizes for size <5.62097> on input line 77.
 
-<petadex_graphical_abstract.png, id=84, 451.6875pt x 219.63304pt>
+<petadex_graphical_abstract.png, id=84, 453.38133pt x 215.68079pt>
 File: petadex_graphical_abstract.png Graphic file (type png)
 <use petadex_graphical_abstract.png>
 Package pdftex.def Info: petadex_graphical_abstract.png  used on input line 77.
 
-(pdftex.def)             Requested size: 506.45905pt x 246.27887pt.
+(pdftex.def)             Requested size: 506.45905pt x 240.93224pt.
 
-Overfull \vbox (4.51497pt too high) has occurred while \output is active []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
-Overfull \vbox (16.51497pt too high) has occurred while \output is active []
+Overfull \vbox (11.16833pt too high) has occurred while \output is active []
 
 LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 77.
 
@@ -1809,7 +1809,7 @@ Package rerunfilecheck Info: File `petadex-manuscript.out' has not changed.
 Here is how much of TeX's memory you used:
  26599 strings out of 468830
  497654 string characters out of 5451467
- 911483 words of memory out of 5000000
+ 911480 words of memory out of 5000000
  54939 multiletter control sequences out of 15000+600000
  664107 words of font info for 182 fonts, out of 8000000 for 9000
  323 hyphenation exceptions out of 8191
@@ -1826,7 +1826,7 @@ ts/type1/public/amsfonts/cm/cmssi9.pfb></usr/local/texlive/2026basic/texmf-dist
 ist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026basic/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2026basic/t
 exmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on petadex-manuscript.pdf (10 pages, 2494627 bytes).
+Output written on petadex-manuscript.pdf (10 pages, 2495168 bytes).
 PDF statistics:
  344 PDF objects out of 1000 (max. 8388607)
  294 compressed objects within 3 object streams
