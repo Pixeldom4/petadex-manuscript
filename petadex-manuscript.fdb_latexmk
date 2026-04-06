@@ -1,16 +1,18 @@
 # Fdb version 4
-["bibtex petadex-manuscript"] 1775444304.6387 "petadex-manuscript.aux" "petadex-manuscript.bbl" "petadex-manuscript" 1775444631.64978 0
+["bibtex petadex-manuscript"] 1775446330.64123 "petadex-manuscript.aux" "petadex-manuscript.bbl" "petadex-manuscript" 1775446334.10331 0
   "./oup-abbrvnat.bst" 1775346635.71606 26536 aa170d7eca7fcdf9028556aea638081e ""
-  "./petadex-references.bib" 1775360146 9797 eac3769316e5ee7d0cb1bfc473904fdd ""
-  "petadex-manuscript.aux" 1775444631.55926 13074 6c6e33a2cf1505153883bd2ea060f8ac "pdflatex"
+  "./petadex-references.bib" 1775445382.88531 13932 8af9ae8b7f1220d1d6d107ef7d05c3c8 ""
+  "petadex-manuscript.aux" 1775446334.00833 13180 391e1ab25b0f14b9219eb88694efc8aa "pdflatex"
   (generated)
   "petadex-manuscript.bbl"
   "petadex-manuscript.blg"
   (rewritten before read)
-["pdflatex"] 1775444628.50821 "/Users/Pixel/Documents/projects/petadex-manuscript/petadex-manuscript.tex" "petadex-manuscript.pdf" "petadex-manuscript" 1775444631.64994 0
-  "/Users/Pixel/Documents/projects/petadex-manuscript/petadex-manuscript.tex" 1775444628.45458 33224 8053f6679a7b9a20d79fa673f8e8107a ""
+["pdflatex"] 1775446330.65974 "/Users/Pixel/Documents/projects/petadex-manuscript/petadex-manuscript.tex" "petadex-manuscript.pdf" "petadex-manuscript" 1775446334.10344 0
+  "/Users/Pixel/Documents/projects/petadex-manuscript/petadex-manuscript.tex" 1775446327.24942 33430 037cc64e54aeefb8de69e843ba84be3a ""
   "/Users/Pixel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss0800.471pk" 1775346428.8862 6732 e811d6927c7b692fd07714e840053372 ""
+  "/Users/Pixel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss0900.602pk" 1775445551.08217 9552 2b887c0cce558bff215213aa6119d8db ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/tcss0800.tfm" 1136768653 1536 16418351df4369b7cef8f784ccb87a85 ""
+  "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/tcss0900.tfm" 1136768653 1536 ba0169ee8bc017972775b933313cbbb0 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -51,6 +53,7 @@
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm" 1229303445 688 37338d6ab346c2f1466b29e195316aa4 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/rsfs/rsfs5.tfm" 1229303445 684 3a51bd4fd9600428d5264cf25f04bb9a ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/rsfs/rsfs7.tfm" 1229303445 692 1b6510779f0f05e9cbf03e0f6c8361e6 ""
+  "/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb" 1248133631 36094 798f80770b3b148ceedd006d487db67c ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1248133631 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb" 1248133631 24420 52dbb8e8aa0069a1b987309557f8d303 ""
   "/usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb" 1248133631 24373 a91d375736817a75026663adcb2190c1 ""
@@ -218,10 +221,10 @@
   "esm-landscape-transparent.png" 1775360146 346363 73287552aafd0d31685ca94a0bb5166f ""
   "oup-authoring-template.cls" 1775346213.60055 145390 4ccc2f8158af3b740eb8e8448eaa8baf ""
   "petadex-figure-4.png" 1775360146 286939 f6e9c46dfb261e039e485a40276168a9 ""
-  "petadex-manuscript.aux" 1775444631.55926 13074 6c6e33a2cf1505153883bd2ea060f8ac "pdflatex"
-  "petadex-manuscript.bbl" 1775444304.65534 9041 f72b2a9bf4d182f940adcb656e2c0cec "bibtex petadex-manuscript"
-  "petadex-manuscript.out" 1775444631.56008 3496 9ea638a11379723d728db5ac95ccd224 "pdflatex"
-  "petadex-manuscript.tex" 1775444628.45458 33224 8053f6679a7b9a20d79fa673f8e8107a ""
+  "petadex-manuscript.aux" 1775446334.00833 13180 391e1ab25b0f14b9219eb88694efc8aa "pdflatex"
+  "petadex-manuscript.bbl" 1775446330.65734 10350 0abf1902617c15ce0876c5f071bf1d62 "bibtex petadex-manuscript"
+  "petadex-manuscript.out" 1775446334.00915 3496 9ea638a11379723d728db5ac95ccd224 "pdflatex"
+  "petadex-manuscript.tex" 1775446327.24942 33430 037cc64e54aeefb8de69e843ba84be3a ""
   "petadex-substrate.png" 1775360146 412188 f5db3b9e84afadf71c8f77841fb209cd ""
   "petadex_architecture.png" 1775360146 269316 3ae17d5823ef2cb3419b971e4eda3b15 ""
   "petadex_graphical_abstract.png" 1775363399.62231 266744 31b15d09c023fffc9b8e082890a80659 ""

@@ -509,10 +509,13 @@ INPUT ./petadex-figure-4.png
 INPUT ./petadex-manuscript.bbl
 INPUT ./petadex-manuscript.bbl
 INPUT petadex-manuscript.bbl
+INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/jknappen/ec/tcss0900.tfm
 INPUT petadex-manuscript.aux
 INPUT ./petadex-manuscript.out
 INPUT ./petadex-manuscript.out
+INPUT /Users/Pixel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss0900.602pk
 INPUT /Users/Pixel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss0800.471pk
+INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb

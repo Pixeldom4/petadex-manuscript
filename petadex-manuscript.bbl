@@ -1,119 +1,142 @@
-\begin{thebibliography}{19}
+\begin{thebibliography}{20}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
 
+\bibitem[Buchfink et~al.(2021)Buchfink, Reuter, and Drost]{buchfink_sensitive_2021}
+B.~Buchfink, K.~Reuter, and H.-G. Drost.
+\newblock Sensitive protein alignments at tree-of-life scale using {DIAMOND}.
+\newblock \emph{Nature Methods}, 18\penalty0 (4):\penalty0 366--368, Apr. 2021.
+\newblock ISSN 1548-7105.
+\newblock \doi{10.1038/s41592-021-01101-x}.
+\newblock URL \url{https://www.nature.com/articles/s41592-021-01101-x}.
+
 \bibitem[Buchholz et~al.(2022)Buchholz, Feuerriegel, Zhang, Perez-Garcia, Nover, Chow, Streit, and Pleiss]{buchholz_plastics_2022}
 P.~C.~F. Buchholz, G.~Feuerriegel, H.~Zhang, P.~Perez-Garcia, L.-L. Nover, J.~Chow, W.~R. Streit, and J.~Pleiss.
-\newblock Plastics degradation by hydrolytic enzymes: The plastics-active enzymes database--{PAZy}.
-\newblock \emph{Proteins}, 90\penalty0 (7):\penalty0 1443--1456, 2022.
+\newblock Plastics degradation by hydrolytic enzymes: {The} plastics-active enzymes database-{PAZy}.
+\newblock \emph{Proteins}, 90\penalty0 (7):\penalty0 1443--1456, July 2022.
+\newblock ISSN 1097-0134.
 \newblock \doi{10.1002/prot.26325}.
 
 \bibitem[Chamas et~al.(2020)Chamas, Moon, Zheng, Qiu, Tabassum, Jang, Abu-Omar, Scott, and Suh]{chamas_degradation_2020}
 A.~Chamas, H.~Moon, J.~Zheng, Y.~Qiu, T.~Tabassum, J.~H. Jang, M.~Abu-Omar, S.~L. Scott, and S.~Suh.
-\newblock Degradation rates of plastics in the environment.
-\newblock \emph{ACS Sustainable Chemistry \& Engineering}, 8\penalty0 (9):\penalty0 3494--3511, 2020.
+\newblock Degradation {Rates} of {Plastics} in the {Environment}.
+\newblock \emph{ACS Sustainable Chemistry \& Engineering}, 8\penalty0 (9):\penalty0 3494--3511, Mar. 2020.
 \newblock \doi{10.1021/acssuschemeng.9b06635}.
+\newblock URL \url{https://doi.org/10.1021/acssuschemeng.9b06635}.
 
 \bibitem[Chikhi et~al.(2025)Chikhi, Lemane, Loll-Krippleber, Montoliu-Nerin, Raffestin, Camargo, Miller, Fiamenghi, Agustinho, Majidian, Autric, Hugues, Lee, Faure, Curry, Sousa, Rocha, Koslicki, Medvedev, Gupta, Shen, Morales-Tapia, Sihuta, Roy, Brown, Edgar, Korobeynikov, Steinegger, Lareau, Peterlongo, and Babaian]{chikhi_logan_2025}
 R.~Chikhi, T.~Lemane, R.~Loll-Krippleber, M.~Montoliu-Nerin, B.~Raffestin, A.~P. Camargo, C.~J. Miller, M.~B. Fiamenghi, D.~P. Agustinho, S.~Majidian, G.~Autric, M.~Hugues, J.~Lee, R.~Faure, K.~D. Curry, J.~A. M.~d. Sousa, E.~P.~C. Rocha, D.~Koslicki, P.~Medvedev, P.~Gupta, J.~Shen, A.~Morales-Tapia, K.~Sihuta, P.~J. Roy, G.~W. Brown, R.~C. Edgar, A.~Korobeynikov, M.~Steinegger, C.~A. Lareau, P.~Peterlongo, and A.~Babaian.
-\newblock Logan: Planetary-scale genome assembly surveys life's diversity.
-\newblock \emph{bioRxiv}, 2025.
-\newblock \doi{10.1101/2024.07.30.605881}.
-\newblock Preprint.
+\newblock Logan: {Planetary}-{Scale} {Genome} {Assembly} {Surveys} {Life}’s {Diversity}, Sept. 2025.
+\newblock URL \url{https://www.biorxiv.org/content/10.1101/2024.07.30.605881v2}.
+\newblock ISSN: 2692-8205 Pages: 2024.07.30.605881 Section: New Results.
 
 \bibitem[Danso et~al.(2019)Danso, Chow, and Streit]{danso_plastics_2019}
 D.~Danso, J.~Chow, and W.~R. Streit.
-\newblock Plastics: Environmental and biotechnological perspectives on microbial degradation.
-\newblock \emph{Applied and Environmental Microbiology}, 85\penalty0 (19):\penalty0 e01095--19, 2019.
+\newblock Plastics: {Environmental} and {Biotechnological} {Perspectives} on {Microbial} {Degradation}.
+\newblock \emph{Applied and Environmental Microbiology}, 85\penalty0 (19):\penalty0 e01095--19, Sept. 2019.
 \newblock \doi{10.1128/AEM.01095-19}.
+\newblock URL \url{https://journals.asm.org/doi/10.1128/aem.01095-19}.
 
 \bibitem[Gambarini et~al.(2022)Gambarini, Pantos, Kingsbury, Weaver, Handley, and Lear]{gambarini_plasticdb_2022}
 V.~Gambarini, O.~Pantos, J.~M. Kingsbury, L.~Weaver, K.~M. Handley, and G.~Lear.
 \newblock {PlasticDB}: a database of microorganisms and proteins linked to plastic biodegradation.
-\newblock \emph{Database}, 2022:\penalty0 baac008, 2022.
+\newblock \emph{Database: The Journal of Biological Databases and Curation}, 2022:\penalty0 baac008, Mar. 2022.
+\newblock ISSN 1758-0463.
 \newblock \doi{10.1093/database/baac008}.
 
 \bibitem[{Gatsby}(2024)]{noauthor_best_nodate}
 {Gatsby}.
-\newblock Gatsby, 2024.
-\newblock \url{https://www.gatsbyjs.com/}.
+\newblock The {Best} {React}-{Based} {Framework}, 2024.
+\newblock URL \url{https://www.gatsbyjs.com/}.
 
-\bibitem[Jones et~al.(2014)Jones, Binns, Chang, Fraser, Li, {McAnulla}, {McWilliam}, Maslen, Mitchell, Nuka, Pesseat, Quinn, Sangrador-Vegas, Scheremetjew, Yong, Lopez, and Hunter]{jones_interproscan_2014}
-P.~Jones, D.~Binns, H.-Y. Chang, M.~Fraser, W.~Li, C.~{McAnulla}, H.~{McWilliam}, J.~Maslen, A.~Mitchell, G.~Nuka, S.~Pesseat, A.~F. Quinn, A.~Sangrador-Vegas, M.~Scheremetjew, S.-Y. Yong, R.~Lopez, and S.~Hunter.
+\bibitem[Jones et~al.(2014)Jones, Binns, Chang, Fraser, Li, McAnulla, McWilliam, Maslen, Mitchell, Nuka, Pesseat, Quinn, Sangrador-Vegas, Scheremetjew, Yong, Lopez, and Hunter]{jones_interproscan_2014}
+P.~Jones, D.~Binns, H.-Y. Chang, M.~Fraser, W.~Li, C.~McAnulla, H.~McWilliam, J.~Maslen, A.~Mitchell, G.~Nuka, S.~Pesseat, A.~F. Quinn, A.~Sangrador-Vegas, M.~Scheremetjew, S.-Y. Yong, R.~Lopez, and S.~Hunter.
 \newblock {InterProScan} 5: genome-scale protein function classification.
-\newblock \emph{Bioinformatics}, 30\penalty0 (9):\penalty0 1236--1240, 2014.
+\newblock \emph{Bioinformatics}, 30\penalty0 (9):\penalty0 1236--1240, May 2014.
+\newblock ISSN 1367-4811.
 \newblock \doi{10.1093/bioinformatics/btu031}.
 
-\bibitem[Jumper et~al.(2021)Jumper, Evans, Pritzel, Green, Figurnov, Ronneberger, Tunyasuvunakool, Bates, \v{Z}\'{i}dek, Potapenko, Bridgland, Meyer, Kohl, Ballard, Cowie, Romera-Paredes, Nikolov, Jain, Adler, Back, Petersen, Reiman, Clancy, Zielinski, Steinegger, Pacholska, Berghammer, Bodenstein, Silver, Vinyals, Senior, Kavukcuoglu, Kohli, and Hassabis]{jumper_highly_2021}
-J.~Jumper, R.~Evans, A.~Pritzel, T.~Green, M.~Figurnov, O.~Ronneberger, K.~Tunyasuvunakool, R.~Bates, A.~\v{Z}\'{i}dek, A.~Potapenko, A.~Bridgland, C.~Meyer, S.~A.~A. Kohl, A.~J. Ballard, A.~Cowie, B.~Romera-Paredes, S.~Nikolov, R.~Jain, J.~Adler, T.~Back, S.~Petersen, D.~Reiman, E.~Clancy, M.~Zielinski, M.~Steinegger, M.~Pacholska, T.~Berghammer, S.~Bodenstein, D.~Silver, O.~Vinyals, A.~W. Senior, K.~Kavukcuoglu, P.~Kohli, and D.~Hassabis.
+\bibitem[Jumper et~al.(2021)Jumper, Evans, Pritzel, Green, Figurnov, Ronneberger, Tunyasuvunakool, Bates, Žídek, Potapenko, Bridgland, Meyer, Kohl, Ballard, Cowie, Romera-Paredes, Nikolov, Jain, Adler, Back, Petersen, Reiman, Clancy, Zielinski, Steinegger, Pacholska, Berghammer, Bodenstein, Silver, Vinyals, Senior, Kavukcuoglu, Kohli, and Hassabis]{jumper_highly_2021}
+J.~Jumper, R.~Evans, A.~Pritzel, T.~Green, M.~Figurnov, O.~Ronneberger, K.~Tunyasuvunakool, R.~Bates, A.~Žídek, A.~Potapenko, A.~Bridgland, C.~Meyer, S.~A.~A. Kohl, A.~J. Ballard, A.~Cowie, B.~Romera-Paredes, S.~Nikolov, R.~Jain, J.~Adler, T.~Back, S.~Petersen, D.~Reiman, E.~Clancy, M.~Zielinski, M.~Steinegger, M.~Pacholska, T.~Berghammer, S.~Bodenstein, D.~Silver, O.~Vinyals, A.~W. Senior, K.~Kavukcuoglu, P.~Kohli, and D.~Hassabis.
 \newblock Highly accurate protein structure prediction with {AlphaFold}.
-\newblock \emph{Nature}, 596\penalty0 (7873):\penalty0 583--589, 2021.
+\newblock \emph{Nature}, 596\penalty0 (7873):\penalty0 583--589, Aug. 2021.
+\newblock ISSN 1476-4687.
 \newblock \doi{10.1038/s41586-021-03819-2}.
 
 \bibitem[Leinonen et~al.(2011)Leinonen, Sugawara, Shumway, and {International Nucleotide Sequence Database Collaboration}]{leinonen_sequence_2011}
 R.~Leinonen, H.~Sugawara, M.~Shumway, and {International Nucleotide Sequence Database Collaboration}.
 \newblock The sequence read archive.
-\newblock \emph{Nucleic Acids Research}, 39\penalty0 (Database issue):\penalty0 D19--21, 2011.
+\newblock \emph{Nucleic Acids Research}, 39\penalty0 (Database issue):\penalty0 D19--21, Jan. 2011.
+\newblock ISSN 1362-4962.
 \newblock \doi{10.1093/nar/gkq1019}.
 
 \bibitem[Lin et~al.(2023)Lin, Akin, Rao, Hie, Zhu, Lu, Smetanin, Verkuil, Kabeli, Shmueli, Dos Santos~Costa, Fazel-Zarandi, Sercu, Candido, and Rives]{lin_evolutionary-scale_2023}
 Z.~Lin, H.~Akin, R.~Rao, B.~Hie, Z.~Zhu, W.~Lu, N.~Smetanin, R.~Verkuil, O.~Kabeli, Y.~Shmueli, A.~Dos Santos~Costa, M.~Fazel-Zarandi, T.~Sercu, S.~Candido, and A.~Rives.
 \newblock Evolutionary-scale prediction of atomic-level protein structure with a language model.
-\newblock \emph{Science}, 379\penalty0 (6637):\penalty0 1123--1130, 2023.
+\newblock \emph{Science}, 379\penalty0 (6637):\penalty0 1123--1130, Mar. 2023.
+\newblock ISSN 1095-9203.
 \newblock \doi{10.1126/science.ade2574}.
 
 \bibitem[Lu et~al.(2022)Lu, Diaz, Czarnecki, Zhu, Kim, Shroff, Acosta, Alexander, Cole, Zhang, Lynd, Ellington, and Alper]{lu_machine_2022}
 H.~Lu, D.~J. Diaz, N.~J. Czarnecki, C.~Zhu, W.~Kim, R.~Shroff, D.~J. Acosta, B.~R. Alexander, H.~O. Cole, Y.~Zhang, N.~A. Lynd, A.~D. Ellington, and H.~S. Alper.
 \newblock Machine learning-aided engineering of hydrolases for {PET} depolymerization.
-\newblock \emph{Nature}, 604\penalty0 (7907):\penalty0 662--667, 2022.
+\newblock \emph{Nature}, 604\penalty0 (7907):\penalty0 662--667, Apr. 2022.
+\newblock ISSN 1476-4687.
 \newblock \doi{10.1038/s41586-022-04599-z}.
+\newblock URL \url{https://www.nature.com/articles/s41586-022-04599-z}.
 
-\bibitem[{McInnes} et~al.(2020){McInnes}, Healy, and Melville]{mcinnes_umap_2020}
-L.~{McInnes}, J.~Healy, and J.~Melville.
-\newblock {UMAP}: Uniform manifold approximation and projection for dimension reduction, 2020.
-\newblock arXiv:1802.03426.
+\bibitem[McInnes et~al.(2020)McInnes, Healy, and Melville]{mcinnes_umap_2020}
+L.~McInnes, J.~Healy, and J.~Melville.
+\newblock {UMAP}: {Uniform} {Manifold} {Approximation} and {Projection} for {Dimension} {Reduction}, Sept. 2020.
+\newblock URL \url{http://arxiv.org/abs/1802.03426}.
+\newblock arXiv:1802.03426 [stat].
 
 \bibitem[{Plastics Europe}(2023)]{noauthor_plastics_nodate}
 {Plastics Europe}.
-\newblock Plastics -- the fast facts 2023, 2023.
-\newblock \url{https://plasticseurope.org/knowledge-hub/plastics-the-fast-facts-2023/}.
+\newblock Plastics – the fast {Facts} 2023 • {Plastics} {Europe}, 2023.
+\newblock URL \url{https://plasticseurope.org/knowledge-hub/plastics-the-fast-facts-2023/}.
 
 \bibitem[{Serverless}(2024)]{noauthor_serverless_nodate}
 {Serverless}.
-\newblock Serverless framework, 2024.
-\newblock \url{https://www.serverless.com/framework}.
+\newblock Serverless {Framework}: {Build} {Apps} {On} {AWS} {Lambda}, 2024.
+\newblock URL \url{https://www.serverless.com/framework}.
 
-\bibitem[Steinegger and S\"{o}ding(2017)]{steinegger_mmseqs2_2017}
-M.~Steinegger and J.~S\"{o}ding.
+\bibitem[Steinegger and Söding(2017)]{steinegger_mmseqs2_2017}
+M.~Steinegger and J.~Söding.
 \newblock {MMseqs2} enables sensitive protein sequence searching for the analysis of massive data sets.
-\newblock \emph{Nature Biotechnology}, 35\penalty0 (11):\penalty0 1026--1028, 2017.
+\newblock \emph{Nature Biotechnology}, 35\penalty0 (11):\penalty0 1026--1028, Nov. 2017.
+\newblock ISSN 1546-1696.
 \newblock \doi{10.1038/nbt.3988}.
 
-\bibitem[Teufel et~al.(2022)Teufel, Almagro~Armenteros, Johansen, G\'{i}slason, Pihl, Tsirigos, Winther, Brunak, von Heijne, and Nielsen]{teufel_signalp_2022}
-F.~Teufel, J.~J. Almagro~Armenteros, A.~R. Johansen, M.~H. G\'{i}slason, S.~I. Pihl, K.~D. Tsirigos, O.~Winther, S.~Brunak, G.~von Heijne, and H.~Nielsen.
+\bibitem[Teufel et~al.(2022)Teufel, Almagro~Armenteros, Johansen, Gíslason, Pihl, Tsirigos, Winther, Brunak, von Heijne, and Nielsen]{teufel_signalp_2022}
+F.~Teufel, J.~J. Almagro~Armenteros, A.~R. Johansen, M.~H. Gíslason, S.~I. Pihl, K.~D. Tsirigos, O.~Winther, S.~Brunak, G.~von Heijne, and H.~Nielsen.
 \newblock {SignalP} 6.0 predicts all five types of signal peptides using protein language models.
-\newblock \emph{Nature Biotechnology}, 40\penalty0 (7):\penalty0 1023--1025, 2022.
+\newblock \emph{Nature Biotechnology}, 40\penalty0 (7):\penalty0 1023--1025, July 2022.
+\newblock ISSN 1546-1696.
 \newblock \doi{10.1038/s41587-021-01156-3}.
 
-\bibitem[Tournier et~al.(2020)Tournier, Topham, Gilles, David, Folgoas, Moya-Leclair, Kamionka, Desrousseaux, Texier, Gavalda, Cot, Gu\'{e}mard, Dalibey, Nomme, Cioci, Barbe, Chateau, Andr\'{e}, Duquesne, and Marty]{tournier_engineered_2020}
-V.~Tournier, C.~M. Topham, A.~Gilles, B.~David, C.~Folgoas, E.~Moya-Leclair, E.~Kamionka, M.-L. Desrousseaux, H.~Texier, S.~Gavalda, M.~Cot, E.~Gu\'{e}mard, M.~Dalibey, J.~Nomme, G.~Cioci, S.~Barbe, M.~Chateau, I.~Andr\'{e}, S.~Duquesne, and A.~Marty.
+\bibitem[Tournier et~al.(2020)Tournier, Topham, Gilles, David, Folgoas, Moya-Leclair, Kamionka, Desrousseaux, Texier, Gavalda, Cot, Guémard, Dalibey, Nomme, Cioci, Barbe, Chateau, André, Duquesne, and Marty]{tournier_engineered_2020}
+V.~Tournier, C.~M. Topham, A.~Gilles, B.~David, C.~Folgoas, E.~Moya-Leclair, E.~Kamionka, M.-L. Desrousseaux, H.~Texier, S.~Gavalda, M.~Cot, E.~Guémard, M.~Dalibey, J.~Nomme, G.~Cioci, S.~Barbe, M.~Chateau, I.~André, S.~Duquesne, and A.~Marty.
 \newblock An engineered {PET} depolymerase to break down and recycle plastic bottles.
-\newblock \emph{Nature}, 580\penalty0 (7802):\penalty0 216--219, 2020.
+\newblock \emph{Nature}, 580\penalty0 (7802):\penalty0 216--219, Apr. 2020.
+\newblock ISSN 1476-4687.
 \newblock \doi{10.1038/s41586-020-2149-4}.
 
 \bibitem[Wei and Zimmermann(2017)]{wei_microbial_2017}
 R.~Wei and W.~Zimmermann.
 \newblock Microbial enzymes for the recycling of recalcitrant petroleum-based plastics: how far are we?
-\newblock \emph{Microbial Biotechnology}, 10\penalty0 (6):\penalty0 1308--1322, 2017.
+\newblock \emph{Microbial Biotechnology}, 10\penalty0 (6):\penalty0 1308--1322, Nov. 2017.
+\newblock ISSN 1751-7915.
 \newblock \doi{10.1111/1751-7915.12710}.
 
 \bibitem[Yoshida et~al.(2016)Yoshida, Hiraga, Takehana, Taniguchi, Yamaji, Maeda, Toyohara, Miyamoto, Kimura, and Oda]{yoshida_bacterium_2016}
 S.~Yoshida, K.~Hiraga, T.~Takehana, I.~Taniguchi, H.~Yamaji, Y.~Maeda, K.~Toyohara, K.~Miyamoto, Y.~Kimura, and K.~Oda.
 \newblock A bacterium that degrades and assimilates poly(ethylene terephthalate).
-\newblock \emph{Science}, 351\penalty0 (6278):\penalty0 1196--1199, 2016.
+\newblock \emph{Science}, 351\penalty0 (6278):\penalty0 1196--1199, Mar. 2016.
+\newblock ISSN 1095-9203.
 \newblock \doi{10.1126/science.aad6359}.
 
 \end{thebibliography}
