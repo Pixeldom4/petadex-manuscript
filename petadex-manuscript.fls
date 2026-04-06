@@ -2,7 +2,7 @@ PWD /Users/Pixel/Documents/projects/petadex-manuscript
 INPUT /usr/local/texlive/2026basic/texmf.cnf
 INPUT /usr/local/texlive/2026basic/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2026basic/texmf-var/web2c/pdftex/pdflatex.fmt
-INPUT /Users/Pixel/Documents/projects/petadex-manuscript/petadex-manuscript.tex
+INPUT petadex-manuscript.tex
 OUTPUT petadex-manuscript.log
 INPUT ./oup-authoring-template.cls
 INPUT oup-authoring-template.cls
