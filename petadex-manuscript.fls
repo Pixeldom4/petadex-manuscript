@@ -496,6 +496,11 @@ INPUT ./esm-landscape-transparent.png
 INPUT ./esm-landscape-transparent.png
 INPUT ./esm-landscape-transparent.png
 INPUT /usr/local/texlive/2026basic/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+INPUT ./petadex-substrate.png
+INPUT ./petadex-substrate.png
+INPUT ./petadex-substrate.png
+INPUT ./petadex-substrate.png
+INPUT ./petadex-substrate.png
 INPUT ./petadex-figure-4.png
 INPUT ./petadex-figure-4.png
 INPUT ./petadex-figure-4.png
