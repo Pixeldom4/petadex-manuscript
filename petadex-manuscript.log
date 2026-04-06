@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.4)  5 APR 2026 22:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.4.4)  5 APR 2026 22:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -982,8 +982,8 @@ Underfull \hbox (badness 1092) in paragraph at lines 95--96
  []
 
 
-Underfull \hbox (badness 1383) in paragraph at lines 95--96
-\OT1/cmss/m/n/9.03374 sequences as \OT1/cmss/m/sl/9.03374 PETadex-Logan\OT1/cmss/m/n/9.03374 . Together, PETadex-nr and
+Underfull \hbox (badness 1303) in paragraph at lines 95--96
+\OT1/cmss/m/n/9.03374 comprise 1.3 billion unique PETase-like protein sequences
  []
 
 
@@ -1083,16 +1083,6 @@ Underfull \hbox (badness 1205) in paragraph at lines 125--126
  []
 
 
-Underfull \hbox (badness 2142) in paragraph at lines 125--126
-\OT1/cmss/m/n/9.03374 for each hit: accession, organism, percent identity, E-
- []
-
-
-Underfull \hbox (badness 1253) in paragraph at lines 125--126
-\OT1/cmss/m/n/9.03374 value, bit score, query coverage, alignment length, and
- []
-
-
 Underfull \hbox (badness 1466) in paragraph at lines 125--126
 \OT1/cmss/m/n/9.03374 with database-derived fields including family classification,
  []
@@ -1111,9 +1101,6 @@ Underfull \hbox (badness 1436) in paragraph at lines 129--130
 Underfull \hbox (badness 1635) in paragraph at lines 129--130
 \OT1/cmss/m/n/9.03374 flags are surfaced in the web interface and included in
  []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \hbox (badness 5374) in paragraph at lines 135--136
@@ -1278,34 +1265,12 @@ Underfull \hbox (badness 2735) in paragraph at lines 200--201
  []
 
 
-Underfull \hbox (badness 1478) in paragraph at lines 204--205
-\OT1/cmss/m/n/9.03374 dataset is derived entirely from homology search against
+Underfull \hbox (badness 1817) in paragraph at lines 204--205
+\OT1/cmss/m/n/9.03374 and temporal metadata are available for only 38.2% of
  []
 
 
-Underfull \hbox (badness 2181) in paragraph at lines 204--205
-\OT1/cmss/m/n/9.03374 sequencing platforms, and geographic regions. Metadata
- []
-
-
-Underfull \hbox (badness 1502) in paragraph at lines 204--205
-\OT1/cmss/m/n/9.03374 completeness remains uneven: geographic annotations are
- []
-
-
-Underfull \hbox (badness 1024) in paragraph at lines 208--209
-\OT1/cmss/m/n/9.03374 integrate published activity data from PAZy, the primary
- []
-
-
-Underfull \hbox (badness 2846) in paragraph at lines 208--209
-\OT1/cmss/m/n/9.03374 more comprehensive structure-activity mapping. Similarly,
- []
-
-
-Underfull \hbox (badness 2503) in paragraph at lines 208--209
-\OT1/cmss/m/n/9.03374 integration of experimental activity annotations into the
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
@@ -1322,6 +1287,21 @@ Overfull \vbox (3.0pt too high) has occurred while \output is active []
 Non-PDF special ignored!
 <special> ps: [{ThisPage} << /CropBox [0 0 595.82918 782.7922] >> /PUT pdfm...
  <./petadex-substrate.png>]
+Underfull \hbox (badness 1024) in paragraph at lines 208--209
+\OT1/cmss/m/n/9.03374 integrate published activity data from PAZy, the primary
+ []
+
+
+Underfull \hbox (badness 2846) in paragraph at lines 208--209
+\OT1/cmss/m/n/9.03374 more comprehensive structure-activity mapping. Similarly,
+ []
+
+
+Underfull \hbox (badness 2503) in paragraph at lines 208--209
+\OT1/cmss/m/n/9.03374 integration of experimental activity annotations into the
+ []
+
+
 Underfull \hbox (badness 2680) in paragraph at lines 213--214
 \OT1/cmss/m/n/9.03374 database can be queried through the web interface or
  []
@@ -1332,12 +1312,12 @@ Overfull \hbox (17.64796pt too wide) in paragraph at lines 213--214
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
 Underfull \hbox (badness 5908) in paragraph at lines 218--219
 \OT1/cmss/m/n/9.03374 D.Z. developed the PETadex web platform, database
  []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \hbox (261.76535pt too wide) has occurred while \output is active
@@ -1413,7 +1393,7 @@ Here is how much of TeX's memory you used:
  323 hyphenation exceptions out of 8191
  99i,12n,108p,17412b,535s stack positions out of 10000i,1000n,20000p,200000b,200000s
  </Users/Pixel/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknappen/ec/tcss0800.471pk></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmss9.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi9.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on petadex-manuscript.pdf (9 pages, 2489648 bytes).
+Output written on petadex-manuscript.pdf (9 pages, 2489709 bytes).
 PDF statistics:
  349 PDF objects out of 1000 (max. 8388607)
  300 compressed objects within 3 object streams
