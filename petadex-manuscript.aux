@@ -21,14 +21,14 @@
 \@writefile{toc}{\contentsline {section}{\numberline {2}Materials and Methods}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {{2.1}}Data sources and sequence acquisition}{2}{subsection.2.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {{2.2}}Functional annotation}{2}{subsection.2.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {{2.3}}NCBI metadata enrichment}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {{2.3}}Metadata enrichment}{2}{subsection.2.3}\protected@file@percent }
 \citation{lin_evolutionary-scale_2023}
 \citation{mcinnes_umap_2020}
 \citation{noauthor_best_nodate}
 \citation{noauthor_serverless_nodate}
 \citation{steinegger_mmseqs2_2017}
 \citation{chikhi_logan_2025}
-\citation{yoshida_bacterium_2016}
+\citation{chikhi_logan_2025}
 \@writefile{toc}{\contentsline {subsection}{\numberline {{2.4}}ESM-2 embedding landscape}{3}{subsection.2.4}\protected@file@percent }
 \newlabel{sec:esm}{{{2.4}}{3}{ESM-2 embedding landscape}{subsection.2.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {{2.5}}Database architecture and web platform}{3}{subsection.2.5}\protected@file@percent }
@@ -38,27 +38,28 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3}Results}{3}{section.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {{3.1}}Database scale and composition}{3}{subsection.3.1}\protected@file@percent }
 \citation{yoshida_bacterium_2016}
+\citation{yoshida_bacterium_2016}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces \textbf  {Architecture of the PETadex web platform.} A Gatsby static site (petadex.net) routes requests through AWS API Gateway to a serverless Node.js backend (AWS Lambda), which queries a PostgreSQL database (AWS RDS) and invokes a dedicated Lambda function for MMseqs2 sequence search. Precomputed assets are stored in Amazon S3.}}{4}{figure.caption.1}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{fig:architecture}{{1}{4}{\textbf {Architecture of the PETadex web platform.} A Gatsby static site (petadex.net) routes requests through AWS API Gateway to a serverless Node.js backend (AWS Lambda), which queries a PostgreSQL database (AWS RDS) and invokes a dedicated Lambda function for MMseqs2 sequence search. Precomputed assets are stored in Amazon S3}{figure.caption.1}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {{3.2}}Biological signal from the embedding landscape}{4}{subsection.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {{3.3}}Querying IsPETase against PETadex}{4}{subsection.3.3}\protected@file@percent }
-\citation{buchholz_plastics_2022}
-\citation{gambarini_plasticdb_2022}
+\newlabel{sec:atlas-results}{{{3.2}}{4}{Biological signal from the embedding landscape}{subsection.3.2}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces \textbf  {Metadata landscape of the PETadex non-redundant sequence database.} (A) Taxonomic domain composition of 1,196,644 annotated sequences, dominated by Bacteria (89.5\%) with representation across Eukaryota, Archaea, and Viruses. (B) Top 15 source organisms by sequence count, colored by phylum. (C) Family size distribution across the database. (D) Temporal distribution of sample collection years, showing increased deposition following the characterization of IsPETase \citep  {yoshida_bacterium_2016}. (E) Metadata field completeness across all records.}}{5}{figure.caption.2}\protected@file@percent }
 \newlabel{fig:metadata}{{2}{5}{\textbf {Metadata landscape of the PETadex non-redundant sequence database.} (A) Taxonomic domain composition of 1,196,644 annotated sequences, dominated by Bacteria (89.5\%) with representation across Eukaryota, Archaea, and Viruses. (B) Top 15 source organisms by sequence count, colored by phylum. (C) Family size distribution across the database. (D) Temporal distribution of sample collection years, showing increased deposition following the characterization of IsPETase \citep {yoshida_bacterium_2016}. (E) Metadata field completeness across all records}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {{3.3}}Querying IsPETase against PETadex}{5}{subsection.3.3}\protected@file@percent }
+\citation{buchholz_plastics_2022}
+\citation{gambarini_plasticdb_2022}
 \citation{chikhi_logan_2025}
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces \textbf  {ESM-2 embedding landscape (Atlas) of PETadex family centroids.} UMAP projection of ESM-2 embeddings computed for approximately 65,000 family centroids. Each point represents a PETadex family. The annotated region highlights a cluster of multi-domain (cocktail enzyme) families associated with sulfur-rich, aerobic environments, identified by cross-referencing embedding coordinates with NCBI environmental metadata.}}{6}{figure.caption.3}\protected@file@percent }
 \newlabel{fig:atlas}{{3}{6}{\textbf {ESM-2 embedding landscape (Atlas) of PETadex family centroids.} UMAP projection of ESM-2 embeddings computed for approximately 65,000 family centroids. Each point represents a PETadex family. The annotated region highlights a cluster of multi-domain (cocktail enzyme) families associated with sulfur-rich, aerobic environments, identified by cross-referencing embedding coordinates with NCBI environmental metadata}{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Discussion}{6}{section.4}\protected@file@percent }
 \citation{jumper_highly_2021}
 \citation{lin_evolutionary-scale_2023}
-\citation{chikhi_logan_2025}
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces \textbf  {MMseqs2 search results for IsPETase queried against PETadex.} Beeswarm plot showing the distribution of 50 hits across percent identity, colored by PETadex family assignment. Experimentally characterized enzymes are labeled. The search recovers hits from at least seven distinct families spanning diverse bacterial lineages.}}{7}{figure.caption.4}\protected@file@percent }
 \newlabel{fig:beeswarm}{{4}{7}{\textbf {MMseqs2 search results for IsPETase queried against PETadex.} Beeswarm plot showing the distribution of 50 hits across percent identity, colored by PETadex family assignment. Experimentally characterized enzymes are labeled. The search recovers hits from at least seven distinct families spanning diverse bacterial lineages}{figure.caption.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {{4.1}}Limitations}{7}{subsection.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {{4.2}}Future directions}{7}{subsection.4.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Data Availability}{7}{section.5}\protected@file@percent }
+\citation{chikhi_logan_2025}
 \citation{chikhi_logan_2025}
 \bibstyle{oup-abbrvnat}
 \bibdata{petadex-references}
@@ -78,11 +79,12 @@
 \bibcite{noauthor_serverless_nodate}{{14}{2024}{{Serverless}}{{}}}
 \bibcite{steinegger_mmseqs2_2017}{{15}{2017}{{Steinegger and S\"{o}ding}}{{}}}
 \bibcite{teufel_signalp_2022}{{16}{2022}{{Teufel et~al.}}{{Teufel, Almagro~Armenteros, Johansen, G\'{i}slason, Pihl, Tsirigos, Winther, Brunak, von Heijne, and Nielsen}}}
-\bibcite{tournier_engineered_2020}{{17}{2020}{{Tournier et~al.}}{{Tournier, Topham, Gilles, David, Folgoas, Moya-Leclair, Kamionka, Desrousseaux, Texier, Gavalda, Cot, Gu\'{e}mard, Dalibey, Nomme, Cioci, Barbe, Chateau, Andr\'{e}, Duquesne, and Marty}}}
-\bibcite{wei_microbial_2017}{{18}{2017}{{Wei and Zimmermann}}{{}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Data Availability}{8}{section.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {6}Author Contributions}{8}{section.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {7}Acknowledgements}{8}{section.7}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {8}Funding}{8}{section.8}\protected@file@percent }
+\bibcite{tournier_engineered_2020}{{17}{2020}{{Tournier et~al.}}{{Tournier, Topham, Gilles, David, Folgoas, Moya-Leclair, Kamionka, Desrousseaux, Texier, Gavalda, Cot, Gu\'{e}mard, Dalibey, Nomme, Cioci, Barbe, Chateau, Andr\'{e}, Duquesne, and Marty}}}
+\bibcite{wei_microbial_2017}{{18}{2017}{{Wei and Zimmermann}}{{}}}
 \bibcite{yoshida_bacterium_2016}{{19}{2016}{{Yoshida et~al.}}{{Yoshida, Hiraga, Takehana, Taniguchi, Yamaji, Maeda, Toyohara, Miyamoto, Kimura, and Oda}}}
 \global\@namedef{@lastpage@}{9}
 \expandafter\ifx\csname c@myauthcount@totc\endcsname\relax\newcounter{myauthcount@totc}\fi\setcounter{myauthcount@totc}{4}
