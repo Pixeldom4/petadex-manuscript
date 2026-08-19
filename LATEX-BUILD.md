@@ -23,54 +23,76 @@ install." Everything below was reconstructed from the build artifacts
 
 ### The build recipe
 
-`latexmk` recorded exactly two rules in [petadex-manuscript.fdb_latexmk](petadex-manuscript.fdb_latexmk):
-`pdflatex` and `bibtex petadex-manuscript`. No `-synctex=1` was used (no `.synctex.gz` was
-produced), so the build was plain:
+A [.latexmkrc](.latexmkrc) is now checked in (it wasn't originally — see git history if you want
+the archaeology of why). It pins `$pdf_mode = 1`, `$bibtex_use = 2`, and `-synctex=1`, so the
+recipe is just:
 
 ```bash
-latexmk -pdf petadex-manuscript.tex
+latexmk -pdf petadex-manuscript.tex     # reads .latexmkrc automatically
 ```
 
 `latexmk` handles the pdflatex → bibtex → pdflatex → pdflatex loop until `.aux`/`.bbl` converge.
+`.claude/settings.local.json` pre-approves exactly this command (plus `latexmk -c` for cleanup) —
+it used to pre-approve a bare single-pass `pdflatex ...` with no bibtex step, which silently left
+the bibliography stale on any `.bib` edit; that's been fixed, don't revert it back to a raw
+`pdflatex` call.
 
-Other equivalent invocations that appear in this repo's history:
-
-```bash
-# what .claude/settings.local.json pre-approves (single pass, no bibliography)
-pdflatex -interaction=nonstopmode petadex-manuscript.tex
-
-# the manual equivalent of the latexmk loop
-pdflatex petadex-manuscript && bibtex petadex-manuscript && pdflatex petadex-manuscript && pdflatex petadex-manuscript
-```
-
-To clean: `latexmk -C` (removes the PDF too) or `latexmk -c` (keeps the PDF).
+To clean: `latexmk -C` (removes the PDF too) or `latexmk -c` (keeps the PDF, per `$clean_ext` in
+`.latexmkrc`).
 
 ### Document-side setup
 
-- Class: [oup-authoring-template.cls](oup-authoring-template.cls) v1.2 (2025-11-17), the Oxford
-  University Press authoring template, **vendored into the repo** — it is not a CTAN package.
-  Loaded as `\documentclass[unnumsec,webpdf,modern,large]{oup-authoring-template}`.
-- Bibliography style: [oup-abbrvnat.bst](oup-abbrvnat.bst), also vendored. Used via
-  `\bibliographystyle{oup-abbrvnat}` + `\bibliography{petadex-references}` (natbib-style,
-  BibTeX-only).
-- References: [petadex-references.bib](petadex-references.bib) (20 entries as of the last build).
-- Figures: PNGs sit in the **repo root**, not in a subfolder. The source declares
-  `\graphicspath{{Fig/}}` (inherited from the OUP template), which is a no-op here — the root is
-  already on the search path. If you move figures into `Fig/`, that line starts doing real work.
-- `NAR.png` is the journal logo pulled into a custom `\ps@opening` page style in the preamble.
+As of 2026-08-19 this repo targets **Nature Communications** (Nature Portfolio house style),
+not the original NAR/OUP submission. The v1 NAR-formatted manuscript, its figures, its populated
+bibliography, and the OUP template files it depended on are preserved in
+[archive/v1-petadex-manuscript/](archive/v1-petadex-manuscript/) — that folder is a complete,
+independently buildable snapshot of the original submission (copy it out and `latexmk -pdf` it if
+you ever need to rebuild the NAR version).
 
-### Build artifacts are committed
+- Class: [sn-jnl.cls](sn-jnl.cls), the official Springer Nature LaTeX authoring template
+  (v3.1, December 2024), **vendored into the repo** — like the OUP template before it, this is
+  not a CTAN package; it ships from Springer Nature's own LaTeX Author Support page. Loaded as
+  `\documentclass[pdflatex,sn-nature]{sn-jnl}`. The `sn-nature` option is the reference style
+  Nature Portfolio journals use exclusively; the same `sn-jnl.cls` also serves every other
+  Springer/BMC journal via a different option (`sn-basic`, `sn-vancouver-num`, etc. — see the
+  vendored `user-manual.pdf` in the original template zip if you ever need a different style).
+- Bibliography style: [sn-nature.bst](sn-nature.bst), also vendored (one of eight `.bst` files
+  Springer Nature ships; only the one this document uses was pulled in). The class auto-sets
+  `\bibliographystyle{sn-nature}` from the `sn-nature` documentclass option — do **not** add an
+  explicit `\bibliographystyle{...}` call, it's redundant and can conflict. Used with
+  `\bibliography{petadex-references}` (natbib-based, BibTeX-only, same as before).
+- References: [petadex-references.bib](petadex-references.bib) is **empty** — the populated v1
+  bibliography was archived (see above). Start adding entries for the new manuscript here.
+- Figures: none currently referenced — the v1 PNGs were archived along with the v1 manuscript.
+  Drop new figures in the repo root (no `\graphicspath` is declared in the new scaffold).
+- Section numbering: the scaffold sets `\unnumbered` in the preamble, matching Nature Portfolio's
+  house style of unnumbered section heads (`Introduction`, not `1 Introduction`). Remove it if a
+  numbered layout is ever needed.
+- `NAR.png` (the old NAR journal-logo header hack) is gone — `sn-jnl.cls` handles its own running
+  heads/footers, no custom `\ps@opening` override is needed or present.
 
-`.aux`, `.bbl`, `.blg`, `.fls`, `.fdb_latexmk`, `.log`, `.out`, and the `.pdf` are all tracked in
-git, and there is no `.gitignore`. That is a choice, not an accident — but it means every rebuild
-produces diff noise. See "Optional cleanups" below.
+### Build artifacts are no longer committed
+
+A [.gitignore](.gitignore) now excludes `.aux/.bbl/.blg/.fdb_latexmk/.fls/.log/.out/.synctex.gz/.toc`.
+These files used to be tracked (with no `.gitignore` at all), which produced diff noise on every
+rebuild and — worse — baked this machine's local absolute paths
+(`/Users/Pixel/Library/texlive/...`) into git history via `.fls`/`.log`/`.fdb_latexmk`. The `.pdf`
+itself is still meant to be tracked once the manuscript has real content; the current
+`petadex-manuscript.pdf` is a placeholder render of the empty scaffold and hasn't been added to
+git yet — that's a deliberate pause, not an oversight, so a near-blank PDF doesn't sit in history
+next to the real one.
 
 ### Verified reproducibility
 
-Copying only `*.tex`, `*.bib`, `*.cls`, `*.bst`, `*.png` into an empty directory and running
-`latexmk -pdf petadex-manuscript.tex` exits 0 and produces a PDF byte-identical in size
-(2,502,498 bytes, 10 pages) to the committed one. There are no external includes or generated
-inputs.
+The `sn-jnl.cls`/`sn-nature.bst` scaffold was test-built with `latexmk -pdf -gg` (forced full
+rebuild) on 2026-08-19: exits 0, no `!`-errors, no missing-package errors, produces a 2-page PDF
+(title/author block + empty section skeleton — expected, since the scaffold currently has no
+body content). The only warnings are a `hyperref` bookmark-depth notice from the `\unnumbered`
+option and natbib's expected "empty `thebibliography`" notice (the `.bib` is intentionally
+empty). Re-verify page count/size once real content and citations are added — the old
+"byte-identical to N bytes" claim from the NAR/OUP version no longer applies to this scaffold;
+see [archive/v1-petadex-manuscript/](archive/v1-petadex-manuscript/) if you need that original
+reproducibility check.
 
 ---
 
@@ -97,30 +119,33 @@ brew install --cask mactex        # full TeX Live, everything below is already p
 
 ### 2. Install the packages BasicTeX is missing
 
-BasicTeX ships a minimal set. These are the packages this document actually loads that a plain
-BasicTeX install does **not** have:
+BasicTeX ships a minimal set. These are the packages the **current** (`sn-jnl.cls`, Nature
+Communications) scaffold actually loads that a plain BasicTeX install does **not** have:
 
 ```bash
-sudo tlmgr install \
-  algorithmicx algorithms anyfontsize caption changepage crop float footmisc \
-  jknapltx listings mdwtools multirow pgf silence sttools subfloat totcount \
-  wrapfig xcolor xetexconfig latexmk
+sudo tlmgr install jknapltx wrapfig xcolor latexmk
 ```
 
 Package → what needs it:
 
 | Package | Provides | Required by |
 |---|---|---|
-| `crop`, `xetexconfig` | `crop.sty`, `crop.cfg` | OUP class (crop marks) |
-| `caption`, `float`, `subfloat`, `multirow`, `wrapfig` | float/caption/table handling | OUP class |
-| `sttools` | `flushend.sty`, `stfloats.sty` | OUP class (two-column balancing) |
-| `changepage`, `totcount`, `anyfontsize`, `silence` | layout & log control | OUP class |
-| `mdwtools` | `footnote.sty` | OUP class |
-| `footmisc` | bottom-aligned footnotes | OUP class |
-| `pgf` | `tikz.sty` | OUP class |
-| `listings`, `algorithms`, `algorithmicx` | code & pseudocode envs | OUP class |
-| `jknapltx` | `mathrsfs.sty` | OUP class |
-| `xcolor` | color | OUP class |
+| `jknapltx` | `mathrsfs.sty` | `sn-jnl.cls` |
+| `wrapfig` | `wrapfig.sty` | `sn-jnl.cls` |
+| `xcolor` | color | manually loaded in [petadex-manuscript.tex](petadex-manuscript.tex) |
+
+`sn-jnl.cls` also loads `geometry`, `hyperref`, `natbib`, `amsthm`, `rotating`, and `appendix`,
+but those were already present on this machine's BasicTeX install (likely pulled in earlier by
+the now-archived OUP template's own requirements) — the build never hit a missing-package error
+for them. If you're setting this up on a genuinely bare BasicTeX install and one of those turns
+up missing, install it the same way (see the fallback note below).
+
+The previous (NAR/OUP) package list — `algorithmicx`, `algorithms`, `anyfontsize`, `caption`,
+`changepage`, `crop`, `float`, `footmisc`, `listings`, `mdwtools`, `multirow`, `pgf`, `silence`,
+`sttools`, `subfloat`, `totcount`, `xetexconfig` — was specific to
+[archive/v1-petadex-manuscript/oup-authoring-template.cls](archive/v1-petadex-manuscript/oup-authoring-template.cls)
+and is not needed for the current scaffold; it's kept here for the record in case that archived
+version is ever rebuilt.
 
 Also worth installing, though this build didn't need them:
 
@@ -128,12 +153,13 @@ Also worth installing, though this build didn't need them:
 sudo tlmgr install cm-super arydshln
 ```
 
-- **`cm-super`** — without it, pdfTeX has no Type 1 outline for a few text-companion sans glyphs
-  and silently falls back to `mktexpk`-generated bitmap fonts (you can see
-  `tcss0800.471pk` / `tcss0900.602pk` in [petadex-manuscript.log](petadex-manuscript.log)). Those
-  render fuzzy at high zoom and some journals reject bitmap fonts at submission. Installing
-  `cm-super` removes the fallback.
-- **`arydshln`** — only loaded if you pass the class's `dashline` option.
+- **`cm-super`** — without it, pdfTeX has no Type 1 outline for a few text-companion glyphs and
+  silently falls back to `mktexpk`-generated bitmap fonts (you can see e.g. `tcrm1000.602pk` in
+  [petadex-manuscript.log](petadex-manuscript.log) — still present with `sn-jnl.cls`, same root
+  cause as before). Those render fuzzy at high zoom and some journals reject bitmap fonts at
+  submission. Installing `cm-super` removes the fallback.
+- **`arydshln`** — not currently loaded by `sn-jnl.cls`'s `sn-nature` option; only relevant if a
+  future package or table needs dashed array/tabular lines.
 
 If a build fails on a missing `foo.sty`, find its package with `tlmgr search --global --file foo.sty`
 and `sudo tlmgr install <pkg>`.
@@ -160,10 +186,10 @@ latexmk -pdf -pvc manuscript.tex # watch mode: rebuild on save
 latexmk -c                       # clean aux files, keep PDF
 ```
 
-### Optional: pin the recipe so it's not implicit
+### Pin the recipe so it's not implicit
 
-This repo relies on `latexmk` defaults. If you want the next project to be self-documenting, add
-these two files.
+This repo does this already — [.latexmkrc](.latexmkrc) and [.gitignore](.gitignore) are both
+checked in at the root. For a new project, copy the same pattern:
 
 **`.latexmkrc`** (project root — `latexmk` picks it up automatically):
 
@@ -175,8 +201,7 @@ $pdflatex = 'pdflatex -synctex=1 -interaction=nonstopmode -file-line-error %O %S
 $clean_ext = 'bbl fdb_latexmk fls synctex.gz';
 ```
 
-`-synctex=1` enables click-to-source jumping between the PDF viewer and editor — worth having;
-this repo's builds ran without it.
+`-synctex=1` enables click-to-source jumping between the PDF viewer and editor.
 
 **`.gitignore`:**
 
