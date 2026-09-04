@@ -1,11 +1,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PETadex manuscript scaffold -- Nature Communications format.
+%% PETadex manuscript -- Nature Communications format.
 %% Class/bib style vendored from the official Springer Nature LaTeX
 %% template (v3.1, December 2024): sn-jnl.cls with the sn-nature
 %% reference style, which Nature Portfolio journals use exclusively.
+%%
+%% Section order follows the Nature Communications article structure:
+%%   Sections   -- Abstract, Introduction, Results, Discussion, Methods
+%%   Figures    -- figure legends, collected after the body text
+%%   References -- \bibliography, last
+%%
+%% Body text for Introduction and Results is a TENTATIVE DRAFT
+%% transcribed from archive/reference/. Unresolved numbers and
+%% citations from that draft are marked with \todo{...} (red in the
+%% PDF) -- search for "todo" to find every open item.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\documentclass[pdflatex,sn-nature]{sn-jnl}% Style for submissions to Nature Portfolio journals
+\documentclass[pdflatex,sn-nature,iicol]{sn-jnl}% Style for submissions to Nature Portfolio journals
 
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
@@ -13,6 +23,10 @@
 
 \unnumbered% Nature Portfolio house style: unnumbered section heads
 \raggedbottom
+
+%% Draft marker for unresolved values/citations. Delete this macro and
+%% its call sites once the draft is complete.
+\newcommand{\todo}[1]{\textcolor{red}{[#1]}}
 
 \begin{document}
 
@@ -24,17 +38,72 @@
 
 \affil*[1]{\orgdiv{Donnelly Centre for Cellular and Biomolecular Research}, \orgname{University of Toronto}, \orgaddress{\city{Toronto}, \state{ON}, \country{Canada}}}
 
+%% ============================================================
+%% Abstract
+%% ============================================================
 \abstract{}
 
 \maketitle
 
+%% ============================================================
+%% Introduction
+%% ============================================================
 \section{Introduction}
 
+By the end of 2026, an estimated 13 billion tonnes, or 13 Gigatonnes (GT), of plastic waste will have been produced globally \todo{plastic pollution citation here} (Fig.~\ref{fig:intro}A,C). About half of the waste will have been managed through recycling or incineration, but the fate of the rest remains unaccounted for in the environment. Plastic-degrading enzymes represent a promising solution to this plastic problem. These enzymes are capable of degrading plastics down into its constituent monomers, which are then available for the repolymerization of new plastic-products, or biodegradation (Fig.~\ref{fig:intro}B--D).
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{plastics_intro-260811.png}
+\caption{\textbf{Plastic waste and its enzymatic degradation.} \textbf{(A)} Cumulative global plastic waste by fate, 1950--2050. \textbf{(B)} IsPETase hydrolyses PET to the monomer BHET, then to TPA and EG, feeding biomass or recycling. \textbf{(C)} Carbon mass by category; plastics (6.7~Gt) exceed all animals (2.5~Gt) 2.6-fold. \textbf{(D)} IsPETase active site: Ser160--His237--Asp206 triad with bound PET dimer. \textbf{(E)} Logan assembles 27~million SRA experiments into contigs.}
+\label{fig:intro}
+\end{figure*}
+
+Existing databases of plastic-degrading enzymes are limited in scope and biodiversity. A notable database, the plastics-active enzymes database (PAZy), contains 501 functionally verified plastic-active enzymes. This dataset is constrained by limited diversity, with most enzymes being homologs of LCC or IsPETase. Sequence-based mining for the discovery of new enzymes has been done, and has produced real results. Danso \textit{et al.}, 2018 \todo{cite}, discovered 504 candidates from database searches on UniprotKB and NCBI-nr, alongside 349 candidates from mining 133 metagenomes. More recent attempts, such as Erickson \textit{et al.}, 2022 \todo{cite} expanded by screening 87 targeted hot-spring metagenomes ($\sim$38 million sequences) for plastic-degrading enzymes, characterizing 74 putative enzymes, and further testing 51 for activity, and characterizing 23 novel plastic-active enzymes. Overall, these previous surveys have merely scrapped the surface of the plastic-degrading enzyme diversity that exists within metagenomic datasets.
+
+In our previous work, we build Logan \todo{cite}, a tool that assembled the entire SRA, 27.3 million metagenomic datasets (Fig.~\ref{fig:intro}E), and searched for plastic-degrading enzymes, retrieving 215.7M putative plastic-degrading enzymes from an input query of 213 characterized plastic-degrading enzymes. We demonstrated that the discovery of novel plastic-degrading enzymes within this dataset is possible through operationally random selection. However, the lack of annotations prevents strategic selection of putative plastic-degrading enzymes for validation.
+
+Here we present PETadex, methodological and quantitative rebuild of our previous dataset. This novel dataset supports the targeted selection of enzymes with plastic-degrading activity. Using an input dataset of 411 plastic-degrading enzymes, we searched NCBI-nr and the SRA (using the Logan assembly), constraining results using catalytic-residue-constrained profile HMMs. As a result, we've built a dataset of \todo{x} million enzymes that carry the catalytic domain boundaries, annotated with fold-assignments, protein-structures and the temperature/pH of the biosamples of origin. This enables candidate plastic-degrading enzymes to be filtered based on catalytic integrity, structural fold, and metadata properties prior to testing. This enables the high throughput targeted-selection of candidates, a process which can be further automated using innovative machine learning methods. The dataset of enzymes, annotations and a toolkit of applicable methods are freely available at \url{https://petadex.net}.
+
+%% ============================================================
+%% Results
+%% ============================================================
 \section{Results}
 
+\subsection{The PETadex dataset of putative plastic-degrading enzymes}
+
+Following established workflows for the homology-based retrieval and expansion of a given set of enzymes of interest \todo{cite Erickson, Danso, Logan etc.}, we built a workflow for the retrieval of plastic-degrading enzymes from NCBI-nr and the SRA (using the Logan assembly).
+
+Taking the previous PETadex dataset, modernizing the input search query and fixing several methodological limitations, we present the updated PETadex v2 dataset.
+
+To generate this updated PETadex-260701 dataset, we created a starting search query from combining two versions of the PAZy database, the first from the original PETadex generation (pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; $n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was then clustered at 90\% amino acid identity to 411 cluster centroids. Predicting structures of these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database with Foldseek alongside searching against InterProScan resolved the proteins into 15 distinct protein domains. These centroids are further aligned into 46 graph components ($\ge$30\% amino acid identity and $E < 1\times10^{-5}$).
+
+\subsection{PETadex rebuild}
+
+We first searched these 411 centroids into the NCBI nr database using DIAMOND (DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, \texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences. Of these, 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns a final count of 7,825,107 sequences.
+
+We then searched the nr hits against their component HMM, which were built from seed MSAs of plasticome sequences together with their closest nr homologs ($E \le 1\times10^{-50}$). Each component was then clustered down to 100--1000 sequences, aligned with MUSCLE 5.3, and finally manually curated to remove accessory domains and poorly aligned termini. The 46 graph components from plasticome resolved into 57 alignment units, and a further 53 final MSAs/HMMs.
+
+Catalytic proteins are then defined as a hit containing the expected residue (or an annotated alternative) at the literature-annotated positions on the relevant component HMM, whereas a fragment is a hit missing the residue at any of the annotated positions. Catalytic residues are curated per CATH family from mechanistic literature, anchored to a reference structure, then transferred to an HMM match-state column.
+
+Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,485 HMM hits. These resolved to 2,747,171 non-redundant sequences with a complete catalytic domain following 90\% identity clustering.
+
+Expanding on the nr search, we queried these \todo{x} million enzyme homologs across Logan (version \todo{x}) contigs, recovering \todo{x} billion matching sequences. Of these Logan sequences, \todo{x} matched an nr enzyme at 90\% identity, and clustering the remaining \todo{x} at 90\% aaid, yielding \todo{x} million non-redundant enzyme homologs. We've dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome (or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. \todo{Describe a domain from the search, can be a/B hydrolase, Amydases, etc.}
+
+%% ============================================================
+%% Discussion
+%% ============================================================
 \section{Discussion}
 
+%% ============================================================
+%% Methods
+%% ============================================================
 \section{Methods}
+
+%% ============================================================
+%% Figures -- legends collected after the body, before References
+%% ============================================================
+\section{Figures}
 
 \backmatter
 
@@ -55,6 +124,9 @@
 \item Author contribution
 \end{itemize}
 
+%% ============================================================
+%% References
+%% ============================================================
 \bibliography{petadex-references}
 
 \end{document}

@@ -1,0 +1,26 @@
+﻿The PETadex dataset of Putative Plastic-degrading enzymes
+
+
+Following established workflows for the homology-based retrieval and expansion of a given set of enzymes of interest [cite Erickson, Danso, Logan etc.], we built a workflow for the retrieval of plastic-degrading enzymes from NCBI-nr and the SRA (using the Logan assembly). 
+
+
+Taking the previous PETadex dataset, modernizing the input search query and fixing several methodological limitations, we present the updated PETadex v2 dataset.
+
+
+To generate this updated PETadex-260701 dataset, we created a starting search query from combining two versions of the PAZy database, the first from the original PETadex generation (pazy-240826; n=212; August 26th, 2024), and a recently updated version (pazy-260701; n=473; July 1st, 2026). Sourcing 136 enzymes from pazy-24082, 397 enzymes from pazy-260701 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was then clustered at 90% amino acid identity to 411 cluster centroids. Predicting structures of these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database with Foldseek alongside searching against Interproscan resolved the proteins into 15 distinct protein domains. These centroids are further aligned into 46 graph components (≥30% amino acid identity and e-value < 1e-5).
+
+
+(PETadex Rebuild)
+We first searched these 411 centroids into the NCBI nr database using DIAMOND (DIAMOND v2.2.4.184, --very-sensitive, -k0), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences. Of these, 7,825,535 pass the e-value filter (E ≤ 1e-5), and further removing plasticome self-hits returns a final count of 7,825,107 sequences.
+
+
+We then searched the nr hits against their component HMM, which were built from seed MSAs of plasticome sequences together with their closest nr homologs (E ≤ 1e-50). Each component was then clustered down to 100-1000 sequences, aligned with MUSCLE 5.3, and finally manually curated to remove accessory domains and poorly aligned termini. The 46 graph components from plasticome resolved into 57 alignment units, and a further 53 final MSAs/ HMMs.
+
+
+Catalytic proteins are then defined as a hit containing the expected residue (or an annotated alternative) at the literature-annotated positions on the relevant component HMM, whereas a fragment is a hit missing the residue at any of the annotated positions. Catalytic residues are curated per CATH family from mechanistic literature, anchored to a reference structure, then transferred to an HMM match-state column. 
+
+
+Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,485 HMM hits. These resolved to 2,747,171 non-redundant sequences with a complete catalytic domain following 90% identity clustering. 
+
+
+Expanding on the nr search, we queried these [x] million enzyme homologs across Logan (version) contigs, recovering [x] billion matching sequences. Of these Logan sequences, [x] matched an nr enzyme at 90% identity, and clustering the remaining [x] at 90% aaid, yielding [x] million non-redundant enzyme homologs. We’ve dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome (or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. [Describe a domain from the search, can be a/B hydrolase, Amydases, etc.].

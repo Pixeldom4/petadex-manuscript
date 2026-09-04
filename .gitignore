@@ -7,3 +7,9 @@
 *.out
 *.synctex.gz
 *.toc
+
+# local-only template-package comparison build (see CLAUDE.md)
+template-test/
+
+# local-only repo notes for Claude Code
+CLAUDE.md
