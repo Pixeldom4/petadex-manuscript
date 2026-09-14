@@ -94,23 +94,28 @@ acid identity and $E < 1\times10^{-5}$).
 
 To expand the dataset of known plastic-degrading enzymes beyond the plasticome set, we first searched these 
 411 centroids into the NCBI nr database using DIAMOND(DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, 
-\texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences. Of these,
+\texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences \todo{cite}. Of these,
 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns
 a final count of 7,825,107 sequences.
 
-We then searched the nr hits against their component HMM, which were built from seed MSAs of plasticome
-sequences together with their closest nr homologs ($E \le 1\times10^{-50}$). Each component was then
-clustered down to 100--1000 sequences, aligned with MUSCLE 5.3, and finally manually curated to remove
-accessory domains and poorly aligned termini. The 46 graph components from plasticome resolved into 57
-alignment units, and a further 53 final MSAs/HMMs.
+In order to search Logan with only the catalytic domains of these plasticome homologs, we built profile HMMs to
+characterize the plastic-degrading domain boundaries and catalytic residues. These HMMs were built from seed MSAs
+(MUSCLE 5.3) of plasticome sequences together with their closest nr homologs ($E \le 1\times10^{-50}$), where each member of
+the alignments must contain the residues involved in the catalytic mechanism, annotated from literature \todo{cite}. 
+The 46 graph components were further segmented using these catalytic mechanisms, resolving into 53 MSAs.
+The HMMs were built from the seed MSAs using a pipeline analogous to JACKhmmer \todo{cite}. HMMs were created using
+HMMbuild, and then searched (HMMsearch) against close NCBI-nr homologs ($E \le 1\times10^{-10}$), annotating the catalytic
+residues \todo{cite}. Alignments were created from sequences that were below the e-value cut-off of 1.0E-10 and 
+contained all of the canonical catalytic residues. These MSAs serve as the seed MSAs for the next iteration of the pipeline.
+While creating the next iteration's HMMs, match and insert state annotations were progated from the previous HMM and
+any column of the alignment that had an occupancy below 0.7 was declared an insert state. The pipeline was then
+repeated for a total of 4 iterations.
 
-Catalytic proteins are then defined as a hit containing the expected residue (or an annotated alternative)
-at the literature-annotated positions on the relevant component HMM, whereas a fragment is a hit missing
-the residue at any of the annotated positions. Catalytic residues are curated per CATH family from mechanistic
-literature, anchored to a reference structure, then transferred to an HMM match-state column.
-
-Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,485 HMM hits. These resolved
-to 2,747,171 non-redundant sequences with a complete catalytic domain following 90\% identity clustering.
+Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,397 HMM hits. Of these hits,
+the HMM range of 6,857,582 contained all of the positions of the catalytic residues ("complete hits"),
+of which 6,343,582 contained the canonical catalytic residue identities. The ranges annotated as the catalytic
+domains were then clustered (DIAMOND --linclust), resulting in 2,740,458 90\% centroids. These centroids serve
+as the input query into Logan.
 
 Expanding on the nr search, we queried these \todo{x} million enzyme homologs across Logan (version \todo{x})
 contigs, recovering \todo{x} billion matching sequences. Of these Logan sequences, \todo{x} matched an nr
