@@ -134,10 +134,12 @@ the search, can be a/B hydrolase, Amydases, etc.}
 \subsection{Structural, environmental and taxonomic annotations of the PETadex dataset}
 
 To explore and utilize the PETadex dataset, we annotated the sequences along four axes. Using metadata, structural, environmental and 
-taxonomic information. We first annotated these sequences with structures, folding each of the superfamily (/30\% centroids) the structures using ESMFold2 (ESMC-6B trunk).
+taxonomic information. We first annotated these sequences with structures, folding each of the superfamily (30\% centroids) the structures using ESMFold2 (ESMC-6B trunk).
 We then annotated the sequences with domains, the catalytic domain boundaries and the catalytic residues, alongside accessory domain annotations that may 
 additionally contribute to the catalytic mechanism. Furthermore, we enriched the dataset using environmental and taxonomic metadata such as geographical locations (Fig.~\ref{fig:metadata}B),
-the organisms that the sequences came from (Fig.~\ref{fig:metadata}A), and the environmental conditions they were collected from.
+the organisms that the sequences came from (Fig.~\ref{fig:metadata}A), and the environmental conditions they were collected from. This 
+homology-based characterization pipeline is implemented through a DIAMOND sequence search interface available freely on the website 
+petadex.net. This sequence search runs 20-shards in parallel to achieve an average search time of ~47 seconds over the database of ~215.7 million enzymes.
 
 These annotations were then applied towards the dataset to enable homology-based characterization of previously uncharacterized enzymes following metadata filtering. 
 Furthermore, these metadata features are useful for the discovery and selection of novel enzymes of interest for future characterization experiments.
