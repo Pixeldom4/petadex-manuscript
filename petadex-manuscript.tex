@@ -79,16 +79,23 @@ the retrieval of plastic-degrading enzymes from NCBI-nr and the SRA (using the L
 Improving upon our previous PETadex dataset, by updating the input search query and fixing 
 several methodological limitations, we present the updated PETadex v2 dataset.
 
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{petadex-manuscript-figure.2_petadex-dataset.png}
+\caption{\textbf{The PETadex-260701 dataset.} \textbf{(A)} Composition of the plasticome: the 609-enzyme union of the two PAZy snapshots, its collapse to 411 cluster centroids at 90\% amino acid identity, the 46 graph components those centroids resolve into, and the CATH folds assigned to them, coloured by provenance. \textbf{(B)} Overview of PETadex generation, from the 411 input sequences through the PETadex-nr and PETadex-logan expansions. \textbf{(C)} Hierarchical clustering of catalytic sequences into enzymes (90\% identity), families (60\%), superfamilies (30\%) and distinct folds. \textbf{(D)} Cluster size distributions at the protein, enzyme and family levels.}
+\label{fig:dataset}
+\end{figure*}
+
 To generate this updated PETadex-260701 dataset, we created a starting search query from 
 combining two versions of the PAZy database, the first from the original PETadex generation 
 (pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; 
 $n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 
 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was 
-then clustered at 90\% amino acid identity to 411 cluster centroids. Predicting structures of 
+then clustered at 90\% amino acid identity to 411 cluster centroids (Fig.~\ref{fig:dataset}A). Predicting structures of 
 these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database 
 with Foldseek alongside searching against InterProScan resolved the proteins into 15 distinct 
 protein domains. These centroids are further aligned into 46 graph components ($\ge$30\% amino 
-acid identity and $E < 1\times10^{-5}$).
+acid identity and $E < 1\times10^{-5}$) (Fig.~\ref{fig:dataset}A).
 
 \subsection{Homology-based retrieval yields a dataset of 215.7 million putative plastic-degrading enzymes}
 
@@ -96,7 +103,7 @@ To expand the dataset of known plastic-degrading enzymes beyond the plasticome s
 411 centroids into the NCBI nr database using DIAMOND(DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, 
 \texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences \todo{cite}. Of these,
 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns
-a final count of 7,825,107 sequences.
+a final count of 7,825,107 sequences (Fig.~\ref{fig:dataset}B).
 
 In order to search Logan with only the catalytic domains of these plasticome homologs, we built profile HMMs to
 characterize the plastic-degrading domain boundaries and catalytic residues. These HMMs were built from seed MSAs
@@ -114,15 +121,22 @@ repeated for a total of 4 iterations.
 Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,397 HMM hits. Of these hits,
 the HMM range of 6,857,582 contained all of the positions of the catalytic residues ("complete hits"),
 of which 6,343,582 contained the canonical catalytic residue identities. The ranges annotated as the catalytic
-domains were then clustered (DIAMOND --linclust), resulting in 2,740,458 90\% centroids. These centroids serve
+domains were then clustered (DIAMOND --linclust), resulting in 2,740,458 90\% centroids (Fig.~\ref{fig:dataset}B). These centroids serve
 as the input query into Logan.
 
 Expanding on the nr search, we queried these \todo{x} million enzyme homologs across Logan (version \todo{x})
-contigs, recovering \todo{x} billion matching sequences. Of these Logan sequences, \todo{x} matched an nr
+contigs, recovering \todo{x} billion matching sequences (Fig.~\ref{fig:dataset}B). Of these Logan sequences, \todo{x} matched an nr
 enzyme at 90\% identity, and clustering the remaining \todo{x} at 90\% aaid, yielding \todo{x} million
-non-redundant enzyme homologs. We've dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome
+non-redundant enzyme homologs (Fig.~\ref{fig:dataset}C,D). We've dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome
 (or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. \todo{Describe a domain from
 the search, can be a/B hydrolase, Amydases, etc.}
+
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{petadex-manuscript-figure.3_metadata-annotations.png}
+\caption{\textbf{Metadata annotations across the PETadex dataset.} \textbf{(A)} Taxonomic domain composition of the 1.19~million taxonomically annotated nr sequences: Bacteria (89.5\%), Eukaryota (8.6\%), Archaea (1.5\%) and Viruses ($<$0.1\%). \textbf{(B)} Global geographic distribution of PETadex sequences by biosample collection site, coloured on a log scale.}
+\label{fig:metadata}
+\end{figure*}
 
 %% ============================================================
 %% Discussion
