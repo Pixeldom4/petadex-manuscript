@@ -6,7 +6,6 @@
 %%
 %% Section order follows the Nature Communications article structure:
 %%   Sections   -- Abstract, Introduction, Results, Discussion, Methods
-%%   Figures    -- figure legends, collected after the body text
 %%   References -- \bibliography, last
 %%
 %% Body text for Introduction and Results is a TENTATIVE DRAFT
@@ -20,6 +19,7 @@
 \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
 \usepackage{xcolor}
+\usepackage{lmodern}% Type 1 outlines for the template's Computer Modern look
 
 \unnumbered% Nature Portfolio house style: unnumbered section heads
 \raggedbottom
@@ -59,7 +59,7 @@ By the end of 2026, an estimated 13 billion tonnes, or 13 Gigatonnes (GT), of pl
 \label{fig:intro}
 \end{figure*}
 
-Existing databases of plastic-degrading enzymes are limited in scope and biodiversity. A notable database, the plastics-active enzymes database (PAZy), contains 501 functionally verified plastic-active enzymes. This dataset is constrained by limited diversity, with most enzymes being homologs of LCC or IsPETase. Sequence-based mining for the discovery of new enzymes has been done, and has produced real results. Danso \textit{et al.}, 2018 \todo{cite}, discovered 504 candidates from database searches on UniprotKB and NCBI-nr, alongside 349 candidates from mining 133 metagenomes. More recent attempts, such as Erickson \textit{et al.}, 2022 \todo{cite} expanded by screening 87 targeted hot-spring metagenomes ($\sim$38 million sequences) for plastic-degrading enzymes, characterizing 74 putative enzymes, and further testing 51 for activity, and characterizing 23 novel plastic-active enzymes. Overall, these previous surveys have merely scrapped the surface of the plastic-degrading enzyme diversity that exists within metagenomic datasets.
+Existing databases of plastic-degrading enzymes are limited in scope and biodiversity. A notable database, the plastics-active enzymes database (PAZy), contains 495 functionally verified plastic-active enzymes. This dataset is constrained by limited diversity, with most enzymes being homologs of LCC or IsPETase. Sequence-based mining for the discovery of new enzymes is a well established method, with Danso \textit{et al.}, 2018 \todo{cite} having discovered 504 candidates from database searches on UniprotKB and NCBI-nr, alongside 349 candidates from mining 133 metagenomes. More recent attempts, such as Erickson \textit{et al.}, 2022 \todo{cite} expanded by screening 87 targeted hot-spring metagenomes ($\sim$38 million sequences) for plastic-degrading enzymes, characterizing 74 putative enzymes, and further testing 51 for activity, and characterizing 23 novel plastic-active enzymes. Overall, these previous surveys have merely scrapped the surface of the plastic-degrading enzyme diversity that exists within metagenomic datasets.
 
 In our previous work, we build Logan \todo{cite}, a tool that assembled the entire SRA, 27.3 million metagenomic datasets (Fig.~\ref{fig:intro}E), and searched for plastic-degrading enzymes, retrieving 215.7M putative plastic-degrading enzymes from an input query of 213 characterized plastic-degrading enzymes. We demonstrated that the discovery of novel plastic-degrading enzymes within this dataset is possible through operationally random selection. However, the lack of annotations prevents strategic selection of putative plastic-degrading enzymes for validation.
 
@@ -70,17 +70,17 @@ Here we present PETadex, methodological and quantitative rebuild of our previous
 %% ============================================================
 \section{Results}
 
-\subsection{The PETadex dataset of putative plastic-degrading enzymes}
+\subsection{Sequence and structure-based annotation of 609 known plastic-degrading enzymes}
 
 Following established workflows for the homology-based retrieval and expansion of a given set of enzymes of interest \todo{cite Erickson, Danso, Logan etc.}, we built a workflow for the retrieval of plastic-degrading enzymes from NCBI-nr and the SRA (using the Logan assembly).
 
-Taking the previous PETadex dataset, modernizing the input search query and fixing several methodological limitations, we present the updated PETadex v2 dataset.
+Improving upon our previous PETadex dataset, by updating the input search query and fixing several methodological limitations, we present the updated PETadex v2 dataset.
 
 To generate this updated PETadex-260701 dataset, we created a starting search query from combining two versions of the PAZy database, the first from the original PETadex generation (pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; $n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was then clustered at 90\% amino acid identity to 411 cluster centroids. Predicting structures of these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database with Foldseek alongside searching against InterProScan resolved the proteins into 15 distinct protein domains. These centroids are further aligned into 46 graph components ($\ge$30\% amino acid identity and $E < 1\times10^{-5}$).
 
-\subsection{PETadex rebuild}
+\subsection{Homology-based retrieval yields a dataset of 215.7 million putative plastic-degrading enzymes}
 
-We first searched these 411 centroids into the NCBI nr database using DIAMOND (DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, \texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences. Of these, 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns a final count of 7,825,107 sequences.
+To expand the dataset of known plastic-degrading enzymes beyond the plasticome set, we first searched these 411 centroids into the NCBI nr database using DIAMOND (DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, \texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences. Of these, 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns a final count of 7,825,107 sequences.
 
 We then searched the nr hits against their component HMM, which were built from seed MSAs of plasticome sequences together with their closest nr homologs ($E \le 1\times10^{-50}$). Each component was then clustered down to 100--1000 sequences, aligned with MUSCLE 5.3, and finally manually curated to remove accessory domains and poorly aligned termini. The 46 graph components from plasticome resolved into 57 alignment units, and a further 53 final MSAs/HMMs.
 
@@ -99,11 +99,6 @@ Expanding on the nr search, we queried these \todo{x} million enzyme homologs ac
 %% Methods
 %% ============================================================
 \section{Methods}
-
-%% ============================================================
-%% Figures -- legends collected after the body, before References
-%% ============================================================
-\section{Figures}
 
 \backmatter
 
