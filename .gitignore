@@ -13,3 +13,4 @@ template-test/
 
 # local-only repo notes for Claude Code
 CLAUDE.md
+.DS_Store

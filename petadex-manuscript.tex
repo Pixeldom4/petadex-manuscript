@@ -50,18 +50,18 @@
 %% ============================================================
 \section{Introduction}
 
-By the end of 2026, an estimated 13 billion tonnes, or 13 Gigatonnes (GT), of plastic waste will have been produced globally \todo{plastic pollution citation here} (Fig.~\ref{fig:intro}A,C). About half of the waste will have been managed through recycling or incineration, but the fate of the rest remains unaccounted for in the environment. Plastic-degrading enzymes represent a promising solution to this plastic problem. These enzymes are capable of degrading plastics down into its constituent monomers, which are then available for the repolymerization of new plastic-products, or biodegradation (Fig.~\ref{fig:intro}B--D).
+Plastics have proven invaluable for improving the accessibility and afforability of many consumer goods such as medical supplies and food packaging. The same traits responsible for these benefits, low production costs and durability, have also made plastics a persistent large-scale pollutant \todo{plastic pollution citation here}. About half of the estimated 13 billion tonnes of globally produced plastic waste has been managed through recycling or incineration, but the fate of the rest remains unaccounted for in the environment \todo{plastic pollution citation here} (Fig.~\ref{fig:intro}A,C). Plastic-degrading enzymes represent a promising solution to this problem. These enzymes are capable of degrading plastics into its constituent monomers, which are then available for the repolymerization of new plastic-products, or biodegradation (Fig.~\ref{fig:intro}B--D).
 
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=\textwidth]{petadex-manuscript-figure.1_plastic-degrading-enzyme-introduction.png}
-\caption{\textbf{Plastic waste and its enzymatic degradation.} \textbf{(A)} Cumulative global plastic waste by fate, 1950--2050. \textbf{(B)} IsPETase hydrolyses PET to the monomer BHET, then to TPA and EG, feeding biomass or recycling. \textbf{(C)} Carbon mass by category; plastics (6.7~Gt) exceed all animals (2.5~Gt) 2.6-fold. \textbf{(D)} IsPETase active site: Ser160--His237--Asp206 triad with bound PET dimer. \textbf{(E)} Logan assembles 27~million SRA experiments into contigs.}
+\caption{\textbf{Plastic waste and its enzymatic degradation.} \textbf{(A)} Cumulative global plastic waste by fate, 1950--2050. \textbf{(B)} IsPETase hydrolyses PET to the monomer BHET, then to TPA and EG, feeding biomass or recycling. \textbf{(C)} Carbon mass by category; plastics (6.7~Gt) exceed all animals (2.5~Gt) 2.6-fold. \textbf{(D)} IsPETase active site: Ser160--His237--Asp206 triad with bound PET dimer.}
 \label{fig:intro}
 \end{figure*}
 
 Existing databases of plastic-degrading enzymes are limited in scope and biodiversity. A notable database, the plastics-active enzymes database (PAZy), contains 495 functionally verified plastic-active enzymes. This dataset is constrained by limited diversity, with most enzymes being homologs of LCC or IsPETase. Sequence-based mining for the discovery of new enzymes is a well established method, with Danso \textit{et al.}, 2018 \todo{cite} having discovered 504 candidates from database searches on UniprotKB and NCBI-nr, alongside 349 candidates from mining 133 metagenomes. More recent attempts, such as Erickson \textit{et al.}, 2022 \todo{cite} expanded by screening 87 targeted hot-spring metagenomes ($\sim$38 million sequences) for plastic-degrading enzymes, characterizing 74 putative enzymes, and further testing 51 for activity, and characterizing 23 novel plastic-active enzymes. Overall, these previous surveys have merely scrapped the surface of the plastic-degrading enzyme diversity that exists within metagenomic datasets.
 
-In our previous work, we build Logan \todo{cite}, a tool that assembled the entire SRA, 27.3 million metagenomic datasets (Fig.~\ref{fig:intro}E), and searched for plastic-degrading enzymes, retrieving 215.7M putative plastic-degrading enzymes from an input query of 213 characterized plastic-degrading enzymes. We demonstrated that the discovery of novel plastic-degrading enzymes within this dataset is possible through operationally random selection. However, the lack of annotations prevents strategic selection of putative plastic-degrading enzymes for validation.
+In our previous work, we build Logan \todo{cite}, a tool that assembled the entire SRA, 27.3 million metagenomic datasets, and searched for plastic-degrading enzymes, retrieving 215.7M putative plastic-degrading enzymes from an input query of 213 characterized plastic-degrading enzymes. We demonstrated that the discovery of novel plastic-degrading enzymes within this dataset is possible through operationally random selection. However, the lack of annotations prevents strategic selection of putative plastic-degrading enzymes for validation.
 
 Here we present PETadex, methodological and quantitative rebuild of our previous dataset. This novel dataset supports the targeted selection of enzymes with plastic-degrading activity. Using an input dataset of 411 plastic-degrading enzymes, we searched NCBI-nr and the SRA (using the Logan assembly), constraining results using catalytic-residue-constrained profile HMMs. As a result, we've built a dataset of \todo{x} million enzymes that carry the catalytic domain boundaries, annotated with fold-assignments, protein-structures and the temperature/pH of the biosamples of origin. This enables candidate plastic-degrading enzymes to be filtered based on catalytic integrity, structural fold, and metadata properties prior to testing. This enables the high throughput targeted-selection of candidates, a process which can be further automated using innovative machine learning methods. The dataset of enzymes, annotations and a toolkit of applicable methods are freely available at \url{https://petadex.net}.
 
@@ -131,25 +131,28 @@ non-redundant enzyme homologs (Fig.~\ref{fig:dataset}C,D). We've dubbed this dat
 (or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. \todo{Describe a domain from
 the search, can be a/B hydrolase, Amydases, etc.}
 
-\subsection{Structural, environmental and taxonomic annotations of the PETadex dataset}
-
-To explore and utilize the PETadex dataset, we annotated the sequences along four axes. Using metadata, structural, environmental and 
-taxonomic information. We first annotated these sequences with structures, folding each of the superfamily (30\% centroids) the structures using ESMFold2 (ESMC-6B trunk).
-We then annotated the sequences with domains, the catalytic domain boundaries and the catalytic residues, alongside accessory domain annotations that may 
-additionally contribute to the catalytic mechanism. Furthermore, we enriched the dataset using environmental and taxonomic metadata such as geographical locations (Fig.~\ref{fig:metadata}B),
-the organisms that the sequences came from (Fig.~\ref{fig:metadata}A), and the environmental conditions they were collected from. This 
-homology-based characterization pipeline is implemented through a DIAMOND sequence search interface available freely on the website 
-petadex.net. This sequence search runs 20-shards in parallel to achieve an average search time of ~47 seconds over the database of ~215.7 million enzymes.
-
-These annotations were then applied towards the dataset to enable homology-based characterization of previously uncharacterized enzymes following metadata filtering. 
-Furthermore, these metadata features are useful for the discovery and selection of novel enzymes of interest for future characterization experiments.
-
 \begin{figure*}[!t]
 \centering
 \includegraphics[width=\textwidth]{petadex-manuscript-figure.3_metadata-annotations.png}
 \caption{\textbf{Metadata annotations across the PETadex dataset.} \textbf{(A)} Taxonomic domain composition of the 1.19~million taxonomically annotated nr sequences: Bacteria (89.5\%), Eukaryota (8.6\%), Archaea (1.5\%) and Viruses ($<$0.1\%). \textbf{(B)} Global geographic distribution of PETadex sequences by biosample collection site, coloured on a log scale.}
 \label{fig:metadata}
 \end{figure*}
+
+\subsection{Structural, environmental and taxonomic annotations builds the PETadex enzyme space}
+
+To explore the PETadex dataset, we annotated its sequences along three axes: structural, environmental and taxonomic.
+
+We first predicted structures for the 22,235 superfamily centroids (30\% amino acid identity) using ESMFold2 (ESMC-6B trunk). These structures resolve both the catalytic domain and the accessory domains flanking it, which may additionally contribute to the catalytic mechanism.
+
+We next enriched the dataset with environmental metadata from the record each sequence was assembled from, recovering geographical origin for \todo{x} sequences (Fig.~\ref{fig:metadata}B) alongside conditions documented at collection, including temperature (\todo{x} biosamples) and pH (9,287 biosamples). This distribution reflects where sequencing has been performed as much as where these enzymes occur.
+
+Finally, we assigned each sequence a source organism, from the NCBI taxonomy of its GenBank record (PETadex-nr) or the taxonomic composition of its source run (PETadex-logan). Of \todo{x} PETadex-nr sequences, 1,192,350 (\todo{x}\%) carry an assignment, overwhelmingly bacterial (1,071,209; 89.5\%), followed by Eukaryota (103,380; 8.6\%), Archaea (17,493; 1.5\%) and Viruses (268; $<$0.1\%) (Fig.~\ref{fig:metadata}A). Joining these taxa to cultivated growth optima further yields an inferred growth temperature and pH for \todo{x} and 3,463,106 biosamples respectively \todo{cite BacDive}. As averages over cultivated organisms, these are compressed toward mesophilic, neutral values (\todo{T\_env range}), and we treat them as distinct from the conditions recorded at collection.
+
+Together these annotations support homology-based characterization of uncharacterized enzymes, and allow candidates to be filtered on catalytic integrity, fold and habitat prior to testing.
+
+\subsection{Website}
+
+This homology-based characterization pipeline is implemented through a DIAMOND sequence search interface available freely at petadex.net. This sequence search runs 20 shards in parallel to achieve an average search time of $\sim$47 seconds over the database of $\sim$215.7 million enzymes.
 
 %% ============================================================
 %% Discussion
