@@ -1,8 +1,8 @@
 {
   "[latex]": {
     "editor.wordWrap": "bounded",
-    "editor.wordWrapColumn": 125,
+    "editor.wordWrapColumn": 190,
     "editor.wrappingIndent": "same",
-    "editor.rulers": [125]
+    "editor.rulers": [190]
   }
 }
