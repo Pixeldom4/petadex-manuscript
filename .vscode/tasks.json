@@ -1,0 +1,22 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      // Rebuild the PDF on every save of the .tex, .bib, or figure files.
+      // Starts automatically when this folder is opened in VS Code.
+      "label": "Watch & rebuild manuscript PDF",
+      "type": "shell",
+      "command": "latexmk -pdf -pvc -view=none petadex-manuscript.tex",
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "dedicated",
+        "clear": false
+      },
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}
