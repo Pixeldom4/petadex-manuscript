@@ -3,6 +3,19 @@
     "editor.wordWrap": "bounded",
     "editor.wordWrapColumn": 190,
     "editor.wrappingIndent": "same",
-    "editor.rulers": [190]
-  }
+    "editor.rulers": [190],
+
+    // No autocomplete while writing prose. Ctrl+Space still opens suggestions on demand
+    // (e.g. for \ref / \cite keys).
+    "editor.quickSuggestions": { "other": "off", "comments": "off", "strings": "off" },
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.wordBasedSuggestions": "off",
+    "editor.inlineSuggest.enabled": false,
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.tabCompletion": "off"
+  },
+  // Copilot: no inline completions or next-edit suggestions anywhere in this repo
+  "github.copilot.enable": { "*": false },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "editor.inlineSuggest.enabled": false
 }
