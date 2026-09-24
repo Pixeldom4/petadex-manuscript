@@ -34,9 +34,9 @@
 
 \author[1]{\fnm{Dennis} \sur{Zhu}}
 \author[1]{\fnm{Thomas} \sur{Quigley}}
-\author*[1]{\fnm{Artem} \sur{Babaian}}\email{a.babaian@utoronto.ca}
+\author[1]{\fnm{Artem} \sur{Babaian}}\email{a.babaian@utoronto.ca}
 
-\affil*[1]{\orgdiv{Donnelly Centre for Cellular and Biomolecular Research}, \orgname{University of Toronto}, \orgaddress{\city{Toronto}, \state{ON}, \country{Canada}}}
+\affil[1]{\orgdiv{Donnelly Centre for Cellular and Biomolecular Research}, \orgname{University of Toronto}, \orgaddress{\city{Toronto}, \state{ON}, \country{Canada}}}
 
 %% ============================================================
 %% Abstract
@@ -50,7 +50,11 @@
 %% ============================================================
 \section{Introduction}
 
-Plastics have proven invaluable for improving the accessibility and affordability of many consumer goods such as medical supplies and food packaging. The same traits responsible for these benefits, low production costs and durability, have also made plastics a persistent large-scale pollutant \todo{plastic pollution citation here}. About half of the estimated 13 billion tonnes of globally produced plastic waste has been managed through recycling or incineration, but the fate of the rest remains unaccounted for in the environment \todo{plastic pollution citation here} (Fig.~\ref{fig:intro}A,C). Plastic-degrading enzymes represent a promising solution to this problem. These enzymes are capable of degrading plastics into their constituent monomers, which are then available for the repolymerization of new plastic-products, or biodegradation (Fig.~\ref{fig:intro}B--D).
+Plastic products are a cornerstone of our modern lifestyles. As a material, plastics have proven invaluable for improving the accessibility and affordability of many necessities, such as medical supplies and food packaging. These features make plastic indispensable in much of the Global South, where alternative materials are scarce and prohibitively expensive. The same traits responsible for these benefits, low production cost and durability, have also made plastics a persistent, large-scale pollutant, with over 400 million tonnes produced annually, accumulating 13 billion tonnes since the mid 20th century \todo{plastic production citation here}. About half of the estimated 13 billion tonnes of plastic waste produced globally has been managed through recycling or incineration (6.7 billion tonnes), while the remaining 6.3 billion tonnes are unaccounted for in the environment \todo{plastic pollution citation here} (Fig.~\ref{fig:intro}A). For perspective, the total mass of all animals on Earth is an estimated 2.5 billion tonnes, meaning that the mass of unaccounted-for plastic waste exceed that of all animals by 2.6-fold (Fig.~\ref{fig:intro}A).
+
+The unaccounted-for plastic waste degrades into micro and nano-plastics (MNPs) that permeates the Earth's ecosystems, entering food-chains and eventually bioaccumulating in humans \todo{Thompson 2024 citation here}. These MNPs should be considered toxic pollutants, as polystyrene MNPs fed to mice have been shown to cause focal disruption of the gut epithelial barrier and inflammatory cytokine release. 
+
+Plastic-degrading enzymes represent a promising solution to this problem. These enzymes break plastics down into their constituent monomers, which can then be repolymerized into new plastic products or repurposed into biomass (Fig.~\ref{fig:intro}B).
 
 \begin{figure*}[!t]
 \centering
@@ -63,7 +67,7 @@ Existing databases of plastic-degrading enzymes are limited in scope and biodive
 
 In our previous work, we built Logan \todo{cite}, a tool that assembled the entire SRA, 27.3 million metagenomic datasets, and searched for plastic-degrading enzymes, retrieving 215.7M putative plastic-degrading enzymes from an input query of 213 characterized plastic-degrading enzymes. We demonstrated that the discovery of novel plastic-degrading enzymes within this dataset is possible through operationally random selection. However, the lack of annotations prevents strategic selection of putative plastic-degrading enzymes for validation.
 
-Here we present PETadex, methodological and quantitative rebuild of our previous dataset. This novel dataset supports the targeted selection of enzymes with plastic-degrading activity. Using an input dataset of 411 plastic-degrading enzymes, we searched NCBI-nr and the SRA (using the Logan assembly), constraining results using catalytic-residue-constrained profile HMMs. As a result, we've built a dataset of \todo{x} million enzymes that carry the catalytic domain boundaries, annotated with fold-assignments, protein-structures and the temperature/pH of the biosamples of origin. This enables candidate plastic-degrading enzymes to be filtered based on catalytic integrity, structural fold, and metadata properties prior to testing. This enables the high throughput targeted-selection of candidates, a process which can be further automated using innovative machine learning methods. The dataset of enzymes, annotations and a toolkit of applicable methods are freely available at \url{https://petadex.net}.
+Here we present PETadex, a methodological and quantitative rebuild of our previous dataset. This novel dataset supports the targeted selection of enzymes with plastic-degrading activity. Using an input dataset of 411 plastic-degrading enzymes, we searched NCBI-nr and the SRA (using the Logan assembly), constraining results using catalytic-residue-constrained profile HMMs. As a result, we've built a dataset of \todo{x} million enzymes that carry the catalytic domain boundaries, annotated with fold-assignments, protein-structures and the temperature/pH of the biosamples of origin. This enables candidate plastic-degrading enzymes to be filtered based on catalytic integrity, structural fold, and metadata properties prior to testing. This enables the high throughput targeted-selection of candidates, a process which can be further automated using innovative machine learning methods. The dataset of enzymes, annotations and a toolkit of applicable methods are freely available at \url{https://petadex.net}.
 
 %% ============================================================
 %% Results
@@ -72,12 +76,9 @@ Here we present PETadex, methodological and quantitative rebuild of our previous
 
 \subsection{Sequence and structure-based annotation of 609 known plastic-degrading enzymes}
 
-Following established workflows for the homology-based retrieval and expansion of a given 
-set of enzymes of interest \todo{cite Erickson, Danso, Logan etc.}, we built a workflow for 
-the retrieval of plastic-degrading enzymes from NCBI-nr and the SRA (using the Logan assembly).
+Following established workflows for the homology-based retrieval and expansion of a given set of enzymes of interest \todo{cite Erickson, Danso, Logan etc.}, we built a workflow for the retrieval of plastic-degrading enzymes from NCBI-nr and the SRA (using the Logan assembly).
 
-Improving upon our previous PETadex dataset, by updating the input search query and fixing 
-several methodological limitations, we present the updated PETadex v2 dataset.
+Improving upon our previous PETadex dataset, by updating the input search query and fixing several methodological limitations, we present the updated PETadex v2 dataset.
 
 \begin{figure*}[!t]
 \centering
@@ -86,67 +87,44 @@ several methodological limitations, we present the updated PETadex v2 dataset.
 \label{fig:dataset}
 \end{figure*}
 
-To generate this updated PETadex-260701 dataset, we created a starting search query from 
-combining two versions of the PAZy database, the first from the original PETadex generation 
-(pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; 
-$n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 
-and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was 
-then clustered at 90\% amino acid identity to 411 cluster centroids (Fig.~\ref{fig:dataset}A). Predicting structures of 
-these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database 
-with Foldseek alongside searching against InterProScan resolved the proteins into 15 distinct 
-protein domains. These centroids are further aligned into 46 graph components ($\ge$30\% amino 
-acid identity and $E < 1\times10^{-5}$) (Fig.~\ref{fig:dataset}A).
+To generate this updated PETadex-260701 dataset, we created a starting search query from combining two versions of the PAZy database, the first from the original PETadex generation (pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; $n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was then clustered at 90\% amino acid identity to 411 cluster centroids (Fig.~\ref{fig:dataset}A). Predicting structures of these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database with Foldseek alongside searching against InterProScan resolved the proteins into 15 distinct protein domains. These centroids are further aligned into 46 graph components ($\ge$30\% amino acid identity and $E < 1\times10^{-5}$) (Fig.~\ref{fig:dataset}A).
 
 \subsection{Homology-based retrieval yields a dataset of 215.7 million putative plastic-degrading enzymes}
 
-To expand the dataset of known plastic-degrading enzymes beyond the plasticome set, we first searched these 
-411 centroids into the NCBI nr database using DIAMOND(DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, 
-\texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences \todo{cite}. Of these,
-7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns
-a final count of 7,825,107 sequences (Fig.~\ref{fig:dataset}B).
+To expand the dataset of known plastic-degrading enzymes beyond the plasticome set, we first searched these 411 centroids into the NCBI nr database using DIAMOND(DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, \texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences \todo{cite}. Of these, 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns a final count of 7,825,107 sequences (Fig.~\ref{fig:dataset}B).
 
-In order to search Logan with only the catalytic domains of these plasticome homologs, we built profile HMMs to
-characterize the plastic-degrading domain boundaries and catalytic residues. These HMMs were built from seed MSAs
-(MUSCLE 5.3) of plasticome sequences together with their closest nr homologs ($E \le 1\times10^{-50}$), where each member of
-the alignments must contain the residues involved in the catalytic mechanism, annotated from literature \todo{cite}. 
-The 46 graph components were further segmented using these catalytic mechanisms, resolving into 53 MSAs.
-The HMMs were built from the seed MSAs using a pipeline analogous to JACKhmmer \todo{cite}. HMMs were created using
-HMMbuild, and then searched (HMMsearch) against close NCBI-nr homologs ($E \le 1\times10^{-10}$), annotating the catalytic
-residues \todo{cite}. Alignments were created from sequences that were below the e-value cut-off of 1.0E-10 and 
-contained all of the canonical catalytic residues. These MSAs serve as the seed MSAs for the next iteration of the pipeline.
-While creating the next iteration's HMMs, match and insert state annotations were progated from the previous HMM and
-any column of the alignment that had an occupancy below 0.7 was declared an insert state. The pipeline was then
-repeated for a total of 4 iterations.
+In order to search Logan with only the catalytic domains of these plasticome homologs, we built profile HMMs to characterize the plastic-degrading domain boundaries and catalytic residues. These HMMs were built from seed MSAs (MUSCLE 5.3) of plasticome sequences together with their closest nr homologs ($E \le 1\times10^{-50}$), where each member of the alignments must contain the residues involved in the catalytic mechanism, annotated from literature \todo{cite}. The 46 graph components were further segmented using these catalytic mechanisms, resolving into 53 MSAs. The HMMs were built from the seed MSAs using a pipeline analogous to JACKhmmer \todo{cite}. HMMs were created using HMMbuild, and then searched (HMMsearch) against close NCBI-nr homologs ($E \le 1\times10^{-10}$), annotating the catalytic residues \todo{cite}. Alignments were created from sequences that were below the e-value cut-off of 1.0E-10 and contained all of the canonical catalytic residues. These MSAs serve as the seed MSAs for the next iteration of the pipeline. While creating the next iteration's HMMs, match and insert state annotations were progated from the previous HMM and any column of the alignment that had an occupancy below 0.7 was declared an insert state. The pipeline was then repeated for a total of 4 iterations.
 
-Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,397 HMM hits. Of these hits,
-the HMM range of 6,857,582 contained all of the positions of the catalytic residues ("complete hits"),
-of which 6,343,582 contained the canonical catalytic residue identities. The ranges annotated as the catalytic
-domains were then clustered (DIAMOND --linclust), resulting in 2,740,458 90\% centroids (Fig.~\ref{fig:dataset}B). These centroids serve
-as the input query into Logan.
+Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,397 HMM hits. Of these hits, the HMM range of 6,857,582 contained all of the positions of the catalytic residues ("complete hits"), of which 6,343,582 contained the canonical catalytic residue identities. The ranges annotated as the catalytic domains were then clustered (DIAMOND --linclust), resulting in 2,740,458 90\% centroids (Fig.~\ref{fig:dataset}B). These centroids serve as the input query into Logan.
 
-Expanding on the nr search, we queried these \todo{x} million enzyme homologs across Logan (version \todo{x})
-contigs, recovering \todo{x} billion matching sequences (Fig.~\ref{fig:dataset}B). Of these Logan sequences, \todo{x} matched an nr
-enzyme at 90\% identity, and clustering the remaining \todo{x} at 90\% aaid, yielding \todo{x} million
-non-redundant enzyme homologs (Fig.~\ref{fig:dataset}C,D). We've dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome
-(or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. \todo{Describe a domain from
-the search, can be a/B hydrolase, Amydases, etc.}
+Expanding on the nr search, we queried these \todo{x} million enzyme homologs across Logan (version \todo{x}) contigs, recovering \todo{x} billion matching sequences (Fig.~\ref{fig:dataset}B). Of these Logan sequences, \todo{x} matched an nr enzyme at 90\% identity, and clustering the remaining \todo{x} at 90\% aaid, yielding \todo{x} million non-redundant enzyme homologs (Fig.~\ref{fig:dataset}C,D). We've dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome (or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. \todo{Describe a domain from the search, can be a/B hydrolase, Amydases, etc.}
 
-\begin{figure*}[!t]
-\centering
-\includegraphics[width=\textwidth]{petadex-manuscript-figure.3_metadata-annotations.png}
-\caption{\textbf{Metadata annotations across the PETadex dataset.} \textbf{(A)} Taxonomic domain composition of the 1.19~million taxonomically annotated nr sequences: Bacteria (89.5\%), Eukaryota (8.6\%), Archaea (1.5\%) and Viruses ($<$0.1\%). \textbf{(B)} Global geographic distribution of PETadex sequences by biosample collection site, coloured on a log scale.}
-\label{fig:metadata}
-\end{figure*}
+\subsection{Structural and taxonomic annotation of the PETadex enzyme space}
 
-\subsection{Structural, environmental and taxonomic annotations build the PETadex enzyme space}
-
-To explore the PETadex dataset, we annotated its sequences along three axes: structural, environmental and taxonomic.
+To explore the PETadex dataset, we annotated its sequences structurally and taxonomically, and linked each sequence to the metadata of the sample it was recovered from.
 
 We first predicted structures for the 22,235 superfamily centroids (30\% amino acid identity) using ESMFold2 (ESMC-6B trunk). These structures resolve both the catalytic domain and the accessory domains flanking it, which may additionally contribute to the catalytic mechanism.
 
-We next enriched the dataset with environmental metadata from the record each sequence was assembled from, recovering geographical origin for \todo{x} sequences (Fig.~\ref{fig:metadata}B) alongside conditions documented at collection, including temperature (\todo{x} biosamples) and pH (9,287 biosamples). This distribution reflects where sequencing has been performed as much as where these enzymes occur.
+We next assigned each sequence a source organism, from the NCBI taxonomy of its GenBank record (PETadex-nr) or the taxonomic composition of its source run (PETadex-logan). Of \todo{x} PETadex-nr sequences, 1,192,350 (\todo{x}\%) carry an assignment, overwhelmingly bacterial (1,071,209; 89.8\%), followed by Eukaryota (103,380; 8.7\%), Archaea (17,493; 1.5\%) and Viruses (268; $<$0.1\%) \todo{taxonomy panel removed from Fig.~3; cite a Supplementary figure or drop the reference}.
 
-Finally, we assigned each sequence a source organism, from the NCBI taxonomy of its GenBank record (PETadex-nr) or the taxonomic composition of its source run (PETadex-logan). Of \todo{x} PETadex-nr sequences, 1,192,350 (\todo{x}\%) carry an assignment, overwhelmingly bacterial (1,071,209; 89.5\%), followed by Eukaryota (103,380; 8.6\%), Archaea (17,493; 1.5\%) and Viruses (268; $<$0.1\%) (Fig.~\ref{fig:metadata}A). Joining these taxa to cultivated growth optima further yields an inferred growth temperature and pH for \todo{x} and 3,463,106 biosamples respectively \todo{cite BacDive}. As averages over cultivated organisms, these are compressed toward mesophilic, neutral values (\todo{T\_env range}), and we treat them as distinct from the conditions recorded at collection.
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure3_metadata.png}
+\caption{\textbf{Environmental metadata coverage and composition of the PETadex corpus.} \textbf{(A)} Metadata coverage across all corpus ORFs ($n = 307{,}155{,}746$). Solid bars are the share of ORFs with each field resolved directly: a linked SRA BioSample, an environment profile for the ORF's 90\% sequence cluster or its own BioSample, collection date, stated latitude/longitude, isolation source, and stated temperature and pH. Hatched bars (*) are growth temperature and pH optima inferred by propagating BacDive species-level optima across the taxa observed in each BioSample; inference raises coverage from 2.1\% to 80.6\% for temperature and from 0.7\% to 65.8\% for pH. \textbf{(B)} Geographic distribution of PETadex sequences from BioSamples with stated coordinates, binned on a global grid. Colour is the log-scaled sequence count per cell ($10^0$--$10^8$). \textbf{(C)} Environment categories of profiled BioSamples (left; $n = 2{,}478{,}477$, excluding unprofilable samples) and of 90\% sequence clusters with $\geq 2$ profiled ORFs (right; $n = 6{,}904{,}458$), ordered by share of clusters. Blue, environmental categories; grey, host-associated or other categories. Human-associated sources make up much of the BioSample set, while sequence clusters come mostly from soil and other environmental sources.}
+\label{fig:metadata}
+\end{figure*}
+
+\subsection{Sample metadata places PETadex sequences in their environment of origin}
+
+% NOTE: Fig. 3 and every number in this subsection are computed on the v1 corpus (307,155,746 ORFs); re-run on v2 before submission. (TODO is to rewrite this later.)
+Each PETadex-logan sequence is assembled from a single SRA run, which links it to the BioSample record describing the sample it was sequenced from. Following this link resolves a BioSample for 256,236,322 of the 307,155,746 corpus ORFs (83.4\%), drawn from 5,170,787 BioSamples (Fig.~\ref{fig:metadata}A). The remaining 16.6\% come from runs that have no BioSample in the SRA, so this figure is the ceiling for sample-level annotation rather than a loss in our pipeline.
+
+BioSample records describe where a sample came from far more often than the conditions it was collected under. Collection date is recorded for 47.5\% of ORFs, stated coordinates for 32.0\% and an isolation source for 28.4\% (Fig.~\ref{fig:metadata}A). The coordinates place PETadex sequences worldwide, with the densest coverage in North America, Europe and East Asia (Fig.~\ref{fig:metadata}B); this distribution reflects where sequencing has been performed as much as where these enzymes occur. Physical conditions at collection, by contrast, are rarely documented: a stated temperature accompanies 2.1\% of ORFs and a stated pH 0.7\%, and of the 6.8 million BioSamples in our harmonised metadata set, only 157,613 (2.3\%) carry any environmental measurement.
+
+To make these heterogeneous records comparable, we classified each BioSample into one of 21 environment categories from its stated environment terms, isolation source and host (Methods), assigning a category to 2,478,477 BioSamples. We then propagated categories to 90\% sequence clusters through their member ORFs: 52.4\% of ORFs come from a BioSample with a category, and 97.1\% belong to a cluster that carries one (Fig.~\ref{fig:metadata}A). Counted by BioSample and by cluster, the categories tell opposite stories (Fig.~\ref{fig:metadata}C). Human-associated categories make up 54.3\% of profiled BioSamples, led by \textit{human other} (31.1\%) and \textit{human gut} (11.6\%), but only 1.7\% of clusters with at least two profiled ORFs. Environmental categories make up 18.7\% of BioSamples but 82.2\% of clusters, with soil alone contributing 31.1\%, followed by other environmental sources (16.6\%), marine and freshwater (8.4\% each), sediment (7.2\%) and wastewater sludge (6.7\%). Sequencing effort is therefore dominated by host-associated samples, whereas the sequence diversity of PETadex enzymes lies in environmental ones.
+
+% NOTE: inferred temperature still rests on the BacDive cache in which many "optima" are incubator settings (SRA-B3); recompute on the full BacDive pull before submission, or hold temperature out. pH is unaffected.
+Because stated temperature and pH are so sparse, we inferred both from community composition: for each BioSample, we averaged the BacDive growth optima of the taxa detected in its run, weighted by their read abundance (Methods) \todo{cite BacDive}. This raises coverage from 2.1\% to 80.6\% of ORFs for temperature, and from 0.7\% to 65.8\% for pH (Fig.~\ref{fig:metadata}A). Inferred optima describe the organisms in a sample rather than the sample itself, so we validated them against stated measurements. Abundance-weighted optima correlate with measured pH across 6,473 BioSamples (Pearson $r = 0.34$, against 0.14 without weighting) and with measured temperature across 45,741 BioSamples ($r = 0.16$, against 0.05). They are, however, compressed toward neutral pH and mesophilic temperatures, and do not improve on a constant in absolute error. We therefore provide inferred optima as a means of ranking and filtering samples, not as estimates of \textit{in situ} conditions, and report them separately from stated values.
 
 Together these annotations support homology-based characterization of uncharacterized enzymes, and allow candidates to be filtered on catalytic integrity, fold and habitat prior to testing.
 
