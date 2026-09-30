@@ -20,6 +20,7 @@
 \usepackage{amsmath,amssymb}
 \usepackage{xcolor}
 \usepackage{lmodern}% Type 1 outlines for the template's Computer Modern look
+\usepackage{framed}% supplies MakeFramed, used by the aidraft margin bar below
 
 \unnumbered% Nature Portfolio house style: unnumbered section heads
 \raggedbottom
@@ -27,6 +28,26 @@
 %% Draft marker for unresolved values/citations. Delete this macro and
 %% its call sites once the draft is complete.
 \newcommand{\todo}[1]{\textcolor{red}{[#1]}}
+
+%% ------------------------------------------------------------------
+%% AI-DRAFT MARKERS. Everything drafted by an AI is flagged three ways:
+%%   1. a %% >>>>> AI-GENERATED banner in the source;
+%%   2. an {aidraft} environment, which draws an orange bar down the
+%%      margin of the column so the text is obvious in the PDF;
+%%   3. \aitag, for captions and other places a bar cannot wrap.
+%% The open items inside those blocks are listed in the "AI draft
+%% checklist" section at the end of the document.
+%% To retire a block once it is rewritten: delete its banner comments,
+%% unwrap the \begin{aidraft}/\end{aidraft}, and strike its entries off
+%% the checklist. Deleting the three macros below plus the checklist
+%% section removes the whole apparatus.
+%% ------------------------------------------------------------------
+\definecolor{aibar}{rgb}{0.85,0.45,0.10}
+\newenvironment{aidraft}{%
+  \def\FrameCommand{{\color{aibar}\vrule width 2pt}\hspace{5pt}}%
+  \MakeFramed{\advance\hsize-\width\FrameRestore}%
+}{\endMakeFramed}
+\newcommand{\aitag}{\textcolor{aibar}{\textbf{[AI-drafted]}}\ }
 
 \begin{document}
 
@@ -127,21 +148,136 @@ BioSample records are also highly heterogeneous, for instance the isolation sour
 To improve the sparse metadata annotation for environmental physical conditions of temperature (2.1\%) and pH (0.7\%), we attempt to leverage community species composition for BioSamples. For each run, we first averaged BacDive growth optima of the taxa detected and then weighted by read abundance to obtain an approximation of sample conditons (Methods) \todo{cite BacDive}. This proved effective at raising coverage from 2.1\% to 80.6\% of ORFs for temperature, and from 0.7\% to 65.8\% for pH (Fig.~\ref{fig:metadata}A). These inferred optima describes the organism within a sample, so we validated them against stated measurements for BioSamples where data was available. Abundance-weighted optima correlate with measured pH across 6,473 BioSamples (Pearson $r = 0.34$, against 0.14 without weighting) and with measured temperature across 45,741 BioSamples ($r = 0.16$, against 0.05). These samples are compressed towards neutral pH and mesophilic temperatures, and therefore do not improve on a constant in absolute error. We therefore propose that inferred optima can be applied as a means of ranking and filtering samples, but is not reliable as an estimate of \textit{in situ} conditions, and should thus be treated as distinct from stated values. 
 
 
-Together these annotations support homology-based characterization of uncharacterized enzymes, and allow candidates to be filtered on catalytic integrity, fold and habitat prior to testing.
+Together these annotations support homology-based characterization of afore uncharacterized enzymes, and allow candidates to be filtered on catalytic integrity, fold and habitat prior to testing.
 
-\subsection{Website}
+%% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-09-30) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
+%% Super (Obsidian, Plans and Reflections, 2026-09-30). Treat it as a
+%% placeholder to rewrite in your own words. Numbers marked \todo{} are unverified.
+%% The plan's caveat: every number and screenshot must come from the Next.js/Vercel
+%% rebuild, not the current Gatsby site.
+%%
+%% Original (human-written) text of this subsection, kept for reference:
+%%   This homology-based characterization pipeline is implemented through a DIAMOND
+%%   sequence search interface available freely at petadex.net. This sequence search runs
+%%   20 shards in parallel to achieve an average search time of ~47 seconds over the
+%%   database of ~215.7 million enzymes.
+%% NOTE: the plan gives 32 shards / ~44 s over ~307M ORFs, which conflicts with the above
+%% (20 shards / ~47 s / 215.7M). Re-benchmark on the rebuild and use one set of numbers.
+\subsection{PETadex makes every annotation layer queryable}
 
-This homology-based characterization pipeline is implemented through a DIAMOND sequence search interface available freely at petadex.net. This sequence search runs 20 shards in parallel to achieve an average search time of $\sim$47 seconds over the database of $\sim$215.7 million enzymes.
+% AI-GENERATED -- paragraph 1: data model
+\begin{aidraft}
+To make the dataset and its annotations usable for enzyme discovery, we built PETadex as an openly accessible web resource (\url{https://petadex.net}) in which every annotation layer described above can be queried and cross-referenced. The database is organized around six linked entity types: sequences (307,155,746 ORFs); their cluster centroids at 90\%, 60\% and 30\% amino acid identity; the 609 plasticome reference enzymes; the BioSamples the sequences were recovered from; the plastic substrates (polymers) that the reference enzymes act on; and kinetic measurements linking reference enzymes to substrates. Because these entities are linked, a user can traverse from any putative enzyme to its cluster centroid, from the centroid to its nearest characterized plasticome enzyme and that enzyme's known substrates and kinetics, and from the sequence to the environmental metadata of the sample it came from.
+\end{aidraft}
+
+% AI-GENERATED -- paragraph 2: search
+\begin{aidraft}
+The main entry point is sequence search. Query proteins are searched against the full PETadex corpus with DIAMOND \todo{cite DIAMOND}, which we split into \todo{32} shards searched in parallel, giving an end-to-end latency of $\sim$\todo{44}\,s per query (Methods) \todo{add latency vs corpus size and/or query length, ideally as a Supplementary figure}. Each search is stored with a persistent URL, so a result set can be shared or cited and later retrieved without being recomputed, which makes candidate selection from PETadex reproducible. Each hit links to a sequence page that reports its cluster memberships, closest plasticome enzyme, source organism and BioSample metadata.
+\end{aidraft}
+
+% AI-GENERATED -- paragraph 3: browse layers
+\begin{aidraft}
+Alongside search, PETadex provides four browsable layers. The ESM Atlas is an interactive embedding map of the 64,730 \todo{60\%?} family centroids, where users can locate plasticome enzymes and explore uncharacterized neighbourhoods of sequence space in ESM-2 embedding space \todo{cite ESM-2}. Predicted ESMFold2 structures of the 22,235 superfamily centroids can be viewed in the browser from each centroid page. The Enzyme Activity layer collects 464 kinetic records for plasticome enzymes against a library of 20 polymer substrates, curated from the literature (Methods). The BioSample layer exposes the environmental metadata of each sample, including the 21 environment categories and the stated and inferred temperature and pH described above (inferred values cover 80.6\% of ORFs for temperature and 65.8\% for pH), with inferred values labelled separately from stated ones.
+\end{aidraft}
+
+% AI-GENERATED -- paragraph 4: open access
+\begin{aidraft}
+All PETadex data are openly available. Sequences, cluster assignments, annotations and metadata can be downloaded in bulk from public Amazon S3 buckets \todo{bucket names/URLs}, and the PlasticESM model and its training set are released on Hugging Face \todo{URL}. Data are released under \todo{licence, e.g.\ CC BY 4.0}, and the source code for the website and search infrastructure is available on GitHub (Code availability).
+\end{aidraft}
+
+% Website figure removed (2026-09-30): Fig. 4 is reserved for the superfamily case study
+% (IsPETase-LCC). If the website gets a figure later (entity-graph schematic + search /
+% sequence page / Atlas screenshots from the rebuild), it goes in the Supplementary.
+%% <<<<<<<<<< END AI-GENERATED DRAFT (Website subsection) <<<<<<<<<<
+
+%% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-09-30) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
+%% Superfamily case study. Written from the Obsidian vault, PETadex/Projects/Superfamily
+%% Case Study (IsPETase-LCC): Overview.md, Review 2026-09-28 - Response.md (verified
+%% numbers), T9SS-CTD Lineage 2026-09-30.md, Composite v1/v2 caption notes.
+%%
+%% IMPORTANT -- WHICH COMPOSITE THIS IS. The committed PNG
+%% (figure_4_superfamily-case-study_composite.png) is COMPOSITE v1: panel A carries the
+%% sample-type and environment rings, panel B is the 563-tip linear tree, and panel C is
+%% ORF-weighted. The vault marks v1 superseded by v2, in which A gains the Logan-fraction /
+%% family-size / enrichment rings, B becomes an architecture strip over all 41,871 members,
+%% and C moves to 90% cluster level (the Logan-vs-nr gap falls from 17 to 6 points). The
+%% caption below therefore describes v1, because that is the image. Swap in the v2 PNG and
+%% the v2 caption (in the vault) before submission, or the caption will not match the figure.
+%%
+%% ALSO OPEN in the vault: the thesis of this figure is not yet agreed with Artem, and the
+%% choice in panel C between leading with the Logan-vs-nr divergence or with "62% of 90%
+%% clusters are Logan-only" is undecided. The prose below takes the review's proposed
+%% thesis (characterized enzymes sample a narrow, nr-centric corner of the superfamily).
+\subsection{A single superfamily shows that characterized enzymes sample a narrow corner of the sequence space}
+
+% AI-GENERATED -- paragraph 1: the superfamily as a worked example
+\begin{aidraft}
+To show how these annotation layers combine in practice, we examined one 30\% identity superfamily in detail: superfamily 6, the $\alpha/\beta$-hydrolase superfamily (CATH 3.40.50.1820) that contains both IsPETase and LCC, along with the two further reference enzymes Cut190 and TfCut2 \todo{cite Cut190, TfCut2}. It contains 41,871 ORFs, 32,230 of them from Logan and 9,565 from NCBI-nr, resolving into 407 families at 60\% identity and 5,532 clusters at 90\% identity. Of these 90\% clusters, 62\% are recovered only from Logan, and 129 of the 407 families contain Logan sequences alone. Characterized plasticome enzymes fall in just 40 of the 407 families, so most of the superfamily has no characterized representative at all.
+\end{aidraft}
+
+% AI-GENERATED -- paragraph 2: phylogeny and environment
+\begin{aidraft}
+We inferred a maximum-likelihood phylogeny of 563 representatives of the superfamily: the 388 family centroids, 161 characterized plasticome enzymes, the four reference enzymes and two centroids from neighbouring superfamilies (Fig.~\ref{fig:superfamily}A; Methods). The neighbouring superfamily centroids nest inside superfamily 6 rather than outside it, and no candidate outgroup we tested fell outside the superfamily, so the tree is midpoint-rooted and the 30\% identity boundary is an operational unit rather than a clade. The deep backbone is weakly supported (15\% of nodes below 70\% UFBoot) and we do not interpret deep branching. The superfamily is nonetheless environmentally structured rather than cosmopolitan: testing each family for enrichment of an environment category against the rest of the superfamily, counting distinct BioProjects so that a single large study cannot drive an enrichment, 82 of 130 testable families are significantly enriched for one category (one-sided Fisher, Benjamini--Hochberg $q < 0.05$), most often soil (26 families), aquatic (17) or engineered environments (15) \todo{this enrichment analysis is panel A of composite v2, not of the v1 figure committed here; either swap the figure or cite a Supplementary panel}.
+\end{aidraft}
+
+% AI-GENERATED -- paragraph 3: architecture and the T9SS lineage
+\begin{aidraft}
+Domain architecture across the superfamily is highly uniform: the $\alpha/\beta$-hydrolase core is present in 41,815 of the 41,871 members (99.9\%) and occurs alone in 91.8\% of them, and the canonical Ser-Asp-His catalytic triad is conserved in 548 of the 555 representatives present in the corpus (Fig.~\ref{fig:superfamily}B). The remaining 7.3\% of members, drawn from 47 families, carry an accessory domain \todo{cite Pfam}. The most frequent is the type-IX secretion system C-terminal sorting domain (T9SS-CTD, PF18962; 1,662 members in 24 families, 84\% of them from Logan), followed by a Ricin-B lectin (729 members) and the carbohydrate-binding module CBM2 (324). The T9SS-CTD marks a Bacteroidota radiation on the opposite side of the tree from all four reference enzymes, and is more deeply phylogenetically conserved than any environmental or sample-type trait we measured on this superfamily (consenTRAIT $\tau_D$ 1.45-fold the permuted null on the family tree, $p = 0.002$) \todo{cite consenTRAIT}, though less so than host taxonomy. Only two characterized enzymes, PET30 and PET27, sit within it \todo{cite PET30, PET27}. Its largest family (2,287 ORFs, 97.6\% from Logan, drawn from 438 BioProjects and enriched in engineered environments, mostly wastewater sludge, with freshwater samples next most common) sits at a median 46.7\% identity to any characterized enzyme, making the secretion-tagged lineage a concrete example of a candidate group that is invisible to a search of characterized sequences alone.
+\end{aidraft}
+
+% AI-GENERATED -- paragraph 4: novelty
+\begin{aidraft}
+Finally, we measured how far this diversity sits from what has been characterized (Fig.~\ref{fig:superfamily}C,D). Logan members lie a median 61.8\% identity from their nearest characterized enzyme, against 78.9\% for nr members, with 32\% and 11\% respectively below 50\% identity. This comparison is ORF-weighted, and because near-identical nr sequences pile up in a few large clusters next to characterized enzymes it overstates the difference: at 90\% cluster level the medians are 56.5\% (Logan-only) and 62.3\% (nr-only), a gap of 6 points rather than 17, still significant (Mann--Whitney $p = 1.5\times10^{-7}$) but modest \todo{decide which unit the figure and text report; composite v2 shows the cluster-level version}. Some of this difference is expected by construction, since characterized enzymes come from cultured organisms deposited in nr. The reference enzymes themselves have strikingly few close relatives: only 41 (LCC) to 233 (Cut190) of the 41,871 members are $\geq$90\% identical to a reference, and an exhaustive search of all nr and PAZy ORFs together with every 60\% family centroid found no closer homolog anywhere else in PETadex. Most of the superfamily is 30--50\% identical to all four references. The characterized enzymes that anchor this field therefore sample a narrow corner of the sequence space their own superfamily occupies.
+\end{aidraft}
+
+% AI-GENERATED -- Fig. 4. NOTE: this PNG is composite v1 (8800x8000 RGBA, ~5.8 MB); the
+% caption matches it. Downsample to 600 DPI before committing the PDF (see CLAUDE.md).
+\begin{figure*}[!t]
+\centering
+\includegraphics[width=\textwidth]{figure_4_superfamily-case-study_composite.png}
+\caption{\aitag\textbf{Characterized PET hydrolases sample a narrow corner of the IsPETase/LCC superfamily, most of whose diversity is recovered only from Logan.} PETadex superfamily 6 (30\% identity cluster) contains 41,871 ORFs, 77\% of them from Logan assemblies of SRA runs, in 407 families at 60\% identity. The superfamily is an operational unit, not a clade: neighbouring superfamilies nest within it. \textbf{(A)} Maximum-likelihood phylogeny (IQ-TREE, WAG+F+I+R10, midpoint-rooted) of 563 representatives: 388 family centroids (60\% identity), 161 characterized plasticome enzymes (filled dots), 8 characterized sequences absent from PETadex (open dots), the four reference enzymes IsPETase, LCC, Cut190 and TfCut2 (diamonds), and 2 neighbouring-superfamily centroids (red triangles). The deep backbone is weakly supported and is not interpreted. Rings, inner to outer: sample type and environment category of each family's BioSamples. \textbf{(B)} The same tree drawn linearly, with the domain architecture of each representative: Pfam domains, SignalP~6.0 signal peptides, and the catalytic triad (dots; Ser-Asp-His in 548 of the 555 representatives present in the corpus). \textbf{(C)} Identity of each member to its nearest characterized enzyme (plasticome v2). Logan members: median 61.8\%, 32\% below 50\% ($n = 32{,}228$). nr members: median 78.9\%, 11\% below 50\% ($n = 9{,}565$). nr is enriched near characterized enzymes by construction. \textbf{(D)} Identity of every member to each reference enzyme, and to any characterized enzyme. Only 41 (LCC) to 233 (Cut190) members are $\geq$90\% identical to a reference.}
+\label{fig:superfamily}
+\end{figure*}
+%% <<<<<<<<<< END AI-GENERATED DRAFT (Superfamily case study) <<<<<<<<<<
 
 %% ============================================================
 %% Discussion
 %% ============================================================
 \section{Discussion}
 
+%% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-09-30) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
+%% Website/resource paragraph from the website-section plan. Positioning, limitations,
+%% sustainability and future layers. Reviewers ask about sustainability for resource
+%% papers, so keep that part in some form even if the rest is cut.
+\begin{aidraft}
+PETadex complements, rather than replaces, curated resources of plastic-degrading enzymes. PAZy \todo{cite PAZy} and PlasticDB \todo{cite PlasticDB} catalogue experimentally characterized enzymes, and PMBD \todo{cite PMBD} collects plastic-degrading microorganisms and genes from the literature. PETadex is several orders of magnitude larger, is derived mainly from metagenomes, and pairs each sequence with the environmental context of its source sample, while linking back to characterized enzymes through the plasticome. This scale has limits. Apart from the plasticome, PETadex entries are putative enzymes that have not been validated experimentally, and the website labels them as such \todo{confirm the rebuild shows this on every non-plasticome page}. Environmental metadata are recorded per sample, not per ORF, so they describe where a sequence was found rather than the conditions its enzyme is adapted to. To keep the resource maintainable, PETadex is released in numbered versions (the present release is PETadex-260701), and it runs on serverless infrastructure whose costs scale with use rather than with uptime \todo{give the maintenance plan and funding horizon, plus approximate monthly cost}. Future releases will add new annotation layers, including novel domain and TED structural-domain annotations \todo{cite TED}, feed wet-lab assay results for PETadex candidates back into the Enzyme Activity layer, and accept community submissions of characterized enzymes.
+\end{aidraft}
+%% <<<<<<<<<< END AI-GENERATED DRAFT (Discussion: resource paragraph) <<<<<<<<<<
+
 %% ============================================================
 %% Methods
 %% ============================================================
 \section{Methods}
+
+%% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-09-30) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
+%% Stub for the stack/infrastructure details the plan moves out of Results. Almost
+%% everything here is a \todo{} -- fill it in from the Next.js/Vercel rebuild.
+\subsection{Web platform and sequence search}
+
+\begin{aidraft}
+The PETadex website is a Next.js application hosted on Vercel \todo{backend, database engine and hosting (v1 used AWS Lambda + RDS PostgreSQL; confirm for the rebuild)}. For sequence search, the PETadex corpus is divided into \todo{32} DIAMOND databases (DIAMOND v\todo{x}; \todo{sensitivity mode, e-value cutoff, max target sequences}) that are searched in parallel on \todo{compute service}, and the per-shard hits are merged and ranked by \todo{bit score / e-value}. Search results are written to \todo{storage} under a unique identifier that forms the persistent result URL. Latency was benchmarked as the end-to-end time from submission to rendered results for \todo{n} queries of \todo{length range}. The ESM Atlas was built from ESM-2 \todo{cite ESM-2; model size, e.g.\ 650M} embeddings of the family centroids \todo{pooling, dimensionality reduction and parameters}. Kinetic records for the Enzyme Activity layer were curated from the published literature \todo{search strategy, date range, inclusion criteria, extracted fields}. \todo{Structure viewer: library used to render ESMFold2 models.}
+\end{aidraft}
+%% <<<<<<<<<< END AI-GENERATED DRAFT (Methods: web platform) <<<<<<<<<<
+
+%% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-09-30) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
+%% Methods for the superfamily case study, from the vault Overview.md pipeline table.
+%% Pipeline scripts: ~/superfamily-case-study/scripts/, rerun by scripts/run_all.sh.
+\subsection{Superfamily case study}
+
+\begin{aidraft}
+Members of superfamily 6 were exported from the PETadex clustering tables with their 90\% and 60\% cluster assignments and origin, and characterized enzymes were mapped onto them with DIAMOND (ultra-sensitive) at $\geq$95\% identity and $\geq$80\% coverage. The tip set of 563 sequences comprises the 388 family centroids at 60\% identity, the four reference enzymes as their own exact ORFs, one characterized member per 90\% cluster containing a plasticome enzyme (161), 8 plasticome enzymes that are superfamily-like ($\geq$50\% identity to a member) but absent from the corpus, and 2 centroids of neighbouring superfamilies. Sequences were aligned with FAMSA \todo{cite FAMSA} and trimmed with ClipKIT (\texttt{kpic-smart-gap}) \todo{cite ClipKIT}, retaining 988 of 2,603 columns, and the tree was inferred with IQ-TREE using ModelFinder (WAG+F+I+R10 by BIC) and 1,000 ultrafast bootstrap replicates \todo{cite IQ-TREE, ModelFinder, UFBoot}. Because every candidate outgroup nested inside the superfamily, the tree is midpoint-rooted. Domains were annotated with Pfam~37 (\texttt{hmmsearch -{}-cut\_ga}, overlapping hits resolved greedily by score) and signal peptides with SignalP~6.0 \todo{cite Pfam, HMMER, SignalP}; signal-peptide calls are reported for nr members only, because 99\% of Logan ORFs are cut from contigs and do not begin at a methionine. Catalytic triads were taken from the profile-HMM annotation and confirmed against the untrimmed alignment. Identity to the nearest characterized enzyme used DIAMOND with \texttt{-k 10}, taking the best bit score \todo{state sensitivity mode and coverage filter used for the reported numbers}. Environment enrichment per family was tested with a one-sided Fisher exact test on distinct BioProjects against the rest of the superfamily, in families with $\geq$5 profiled units, with Benjamini--Hochberg correction. Phylogenetic conservation of the T9SS-CTD was assessed with Fitch parsimony and consenTRAIT against 1,000 label permutations \todo{cite consenTRAIT, and state which tree each statistic was computed on}.
+\end{aidraft}
+%% <<<<<<<<<< END AI-GENERATED DRAFT (Methods: superfamily case study) <<<<<<<<<<
 
 \backmatter
 
@@ -161,6 +297,28 @@ This homology-based characterization pipeline is implemented through a DIAMOND s
 \item Code availability
 \item Author contribution
 \end{itemize}
+
+%% ============================================================
+%% AI draft checklist -- DELETE BEFORE SUBMISSION
+%% ============================================================
+%% Every item below sits inside an orange-barred {aidraft} block or a
+%% \todo{} marker in the text. This list is maintained by hand: after
+%% editing, re-check it against
+%%     grep -c todo petadex-manuscript.tex
+%%     grep -n "aidraft\|AI-GENERATED" petadex-manuscript.tex
+\section{AI draft checklist}
+
+\aitag All orange-barred text was drafted by an AI (Claude, 2026-09-30) and is meant to be rewritten. Open items, by section:
+
+\textbf{Results -- website.} Rewrite all four paragraphs in your own voice. Re-benchmark the search on the Next.js/Vercel rebuild and settle the conflict between 20 shards / 47\,s / 215.7\,M and 32 shards / 44\,s / 307\,M; add the latency-vs-corpus-size or query-length measurement. Confirm the ESM Atlas is built on the 60\% family centroids. Fill in the S3 bucket names, the Hugging Face URL and the data licence. Decide whether PlasticESM belongs in this paper at all, since no analysis here uses it. Decide whether the website needs a Supplementary figure now that Fig.~4 is the case study.
+
+\textbf{Results -- superfamily case study.} Rewrite all four paragraphs. The numbers were checked against the analysis on 2026-09-30: the architecture, UFBoot, CATH, triad and enrichment counts are correct as written, and two overstated claims (consenTRAIT depth, and the environment of family 110802) have been corrected in the text above. \textbf{The committed figure is composite v1, which your notes supersede:} swapping in v2 resolves both bracketed notes, since v2 carries the enrichment ring in panel~A and the per-cluster novelty in panel~C. Still to decide: the thesis (with A.B.), whether panel~C reports ORF-level or 90\% cluster-level novelty, and whether the T9SS lineage stays in the main text or moves to a supplement. Still to do: re-export Fig.~4 from v2 at journal size with the TfCut2/Cut190 label overlap fixed, rewrite the novelty paragraph for the chosen unit, build the supplementary tables (per-family enrichment, architecture, T9SS families), and check whether the PET30/PET27 paper already reported the CTD, which limits what the T9SS paragraph can claim as new. Downsample the figure to 600\,DPI before committing the PDF.
+
+\textbf{Discussion.} Rewrite the resource paragraph. Confirm the website labels non-plasticome entries as putative on every page. Supply the maintenance plan, funding horizon and approximate running cost.
+
+\textbf{Methods.} Both AI-drafted subsections are mostly placeholders. Fill in the web stack, the DIAMOND parameters and shard count, the result-storage mechanism, the latency benchmark design, the Atlas embedding and projection parameters, the literature-curation protocol for the 464 kinetics records, and the coverage filter used for the reported novelty numbers.
+
+\textbf{Citations.} \texttt{petadex-references.bib} is still empty, so every \todo{cite \ldots} is unresolved. PAZy, PlasticDB, DIAMOND and ESM-2 can be copied from \texttt{archive/\allowbreak v1-petadex-manuscript/\allowbreak petadex-references.bib}; PMBD, TED, IQ-TREE, FAMSA, ClipKIT, Pfam, HMMER, SignalP, consenTRAIT, BacDive, Cut190, TfCut2, PET30 and PET27 need new entries.
 
 %% ============================================================
 %% References
