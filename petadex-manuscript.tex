@@ -73,7 +73,7 @@ Despite the relative novelty of plastics, some microorganisms have adapted to br
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth,trim={0 1450bp 0 0},clip]{plastics_intro-260811.png}
+\includegraphics[width=\textwidth,trim={0 1450bp 0 0},clip]{figures/plastics_intro-260811.png}
 \caption{\textbf{Plastic waste and its enzymatic degradation.} \textbf{(A)} Mass of plastics compared with Earth's major groups of life (1 square = 1 billion tonnes). Of 13~Gt of plastics, 6.3~Gt has been recycled or incinerated and 6.7~Gt remains in landfill or the environment, 2.6-fold the mass of all animals (2.5~Gt). \todo{update Fig.~1A graphic: label should read ``recycled or incinerated'', not ``recycled''} \textbf{(B)} Plastic-degrading enzymes as a route out of the plastics crisis: IsPETase hydrolyses PET to the monomer BHET, then to TPA and EG, which feed biomass or recycling.}
 \label{fig:intro}
 \end{figure*}
@@ -97,20 +97,24 @@ Improving upon our previous PETadex dataset, by updating the input search query 
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{petadex-manuscript-figure.2_petadex-dataset.png}
+\includegraphics[width=\textwidth]{figures/petadex-manuscript-figure.2_petadex-dataset.png}
 \caption{\textbf{The PETadex-260701 dataset.} \textbf{(A)} Composition of the plasticome: the 609-enzyme union of the two PAZy snapshots, its collapse to 411 cluster centroids at 90\% amino acid identity, the 46 graph components those centroids resolve into, and the CATH folds assigned to them, coloured by provenance. \textbf{(B)} Overview of PETadex generation, from the 411 input sequences through the PETadex-nr and PETadex-logan expansions. \textbf{(C)} Hierarchical clustering of catalytic sequences into enzymes (90\% identity), families (60\%), superfamilies (30\%) and distinct folds. \textbf{(D)} Cluster size distributions at the protein, enzyme and family levels.}
 \label{fig:dataset}
 \end{figure*}
 
-To generate this updated PETadex-260701 dataset, we created a starting search query from combining two versions of the PAZy database, the first from the original PETadex generation (pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; $n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was then clustered at 90\% amino acid identity to 411 cluster centroids (Fig.~\ref{fig:dataset}A). Predicting structures of these centroids using ESMFold2 (ESMC-6B trunk), then searches against the CATH S40 database with Foldseek alongside searching against InterProScan resolved the proteins into 15 distinct protein domains. These centroids are further aligned into 46 graph components ($\ge$30\% amino acid identity and $E < 1\times10^{-5}$) (Fig.~\ref{fig:dataset}A).
+To generate this updated PETadex-260701 dataset, we created a starting search query from combining two versions of the PAZy database, the first from the original PETadex generation (pazy-240826; $n=212$; August 26th, 2024), and a recently updated version (pazy-260701; $n=473$; July 1st, 2026). Sourcing 136 enzymes from pazy-240826, 397 enzymes from pazy-260701 and 76 merged between both, generating a 609 enzyme union set (plasticome). Plasticome was then clustered at 90\% amino acid identity to 411 cluster centroids (Fig.~\ref{fig:dataset}A). Structure- and sequence-based domain assignment of predicted structures resolved the proteins into 15 distinct protein domains, and all-vs-all alignment further groups the centroids into 46 graph components (Fig.~\ref{fig:dataset}A; Methods).
+% NOTE (2026-10-01): tool and threshold detail (ESMFold2 ESMC-6B trunk, Foldseek vs CATH S40, InterProScan, the >=30% identity / E < 1e-5 edge criterion) moved to Methods > "Plasticome construction" and "Domain assignment of the plasticome".
 
 \subsection{Homology-based retrieval yields a dataset of 215.7 million putative plastic-degrading enzymes}
 
-To expand the dataset of known PDEs beyond the plasticome set, we first searched these 411 centroids into the NCBI nr database using DIAMOND(DIAMOND v2.2.4.184, \texttt{-{}-very-sensitive}, \texttt{-k0}), recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences \todo{cite}. Of these, 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns a final count of 7,825,107 sequences (Fig.~\ref{fig:dataset}B).
+To expand the dataset of known PDEs beyond the plasticome set, we first searched these 411 centroids against the NCBI nr database using DIAMOND \todo{cite}, recovering 42,053,081 pairwise alignments, collapsing to 8,850,583 unique sequences. Of these, 7,825,535 pass the e-value filter ($E \le 1\times10^{-5}$), and further removing plasticome self-hits returns a final count of 7,825,107 sequences (Fig.~\ref{fig:dataset}B; Methods).
+% NOTE (2026-10-01): DIAMOND version and flags moved to Methods > "Retrieval of homologs from NCBI-nr".
 
-In order to search Logan with only the catalytic domains of these plasticome homologs, we built profile HMMs to characterize the plastic-degrading domain boundaries and catalytic residues. These HMMs were built from seed MSAs (MUSCLE 5.3) of plasticome sequences together with their closest nr homologs ($E \le 1\times10^{-50}$), where each member of the alignments must contain the residues involved in the catalytic mechanism, annotated from literature \todo{cite}. The 46 graph components were further segmented using these catalytic mechanisms, resolving into 53 MSAs. The HMMs were built from the seed MSAs using a pipeline analogous to JACKhmmer \todo{cite}. HMMs were created using HMMbuild, and then searched (HMMsearch) against close NCBI-nr homologs ($E \le 1\times10^{-10}$), annotating the catalytic residues \todo{cite}. Alignments were created from sequences that were below the e-value cut-off of 1.0E-10 and contained all of the canonical catalytic residues. These MSAs serve as the seed MSAs for the next iteration of the pipeline. While creating the next iteration's HMMs, match and insert state annotations were progated from the previous HMM and any column of the alignment that had an occupancy below 0.7 was declared an insert state. The pipeline was then repeated for a total of 4 iterations.
+In order to search Logan with only the catalytic domains of these plasticome homologs, we built profile HMMs to characterize the plastic-degrading domain boundaries and catalytic residues. These HMMs were seeded from alignments of plasticome sequences together with their closest nr homologs, where each member of the alignments must contain the residues involved in the catalytic mechanism, annotated from literature \todo{cite}. The 46 graph components were further segmented using these catalytic mechanisms, resolving into 53 seed alignments. Each seed alignment was then expanded over four iterations of a pipeline analogous to JackHMMER \todo{cite}, in which an nr homolog enters the next iteration only if it retains all of the canonical catalytic residues (Methods).
+% NOTE (2026-10-01): the iteration procedure (HMMbuild/HMMsearch steps, the 1e-50 and 1e-10 cut-offs, MUSCLE 5.3, the 0.7 occupancy threshold) moved to Methods > "Catalytic-residue-constrained profile HMMs".
 
-Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,397 HMM hits. Of these hits, the HMM range of 6,857,582 contained all of the positions of the catalytic residues ("complete hits"), of which 6,343,582 contained the canonical catalytic residue identities. The ranges annotated as the catalytic domains were then clustered (DIAMOND --linclust), resulting in 2,740,458 90\% centroids (Fig.~\ref{fig:dataset}B). These centroids serve as the input query into Logan.
+% NOTE (2026-10-01): the four counts in this paragraph do not match the counts the vault measured on disk on 2026-09-04 (PETadex/Manuscript/Thomas/Artifact Index.md): 7,562,485 sequences with an HMM hit, 6,764,973 complete catalytic hits, 2,747,171 Logan-query centroids. Left as written here; confirm with T.Q. which run each set comes from before submission.
+Searching these component HMMs against the 7,825,107 nr sequences yielded 7,562,397 HMM hits. Of these hits, the HMM range of 6,857,582 contained all of the positions of the catalytic residues (``complete hits''), of which 6,343,582 contained the canonical catalytic residue identities. The ranges annotated as the catalytic domains were then clustered at 90\% identity, resulting in 2,740,458 centroids (Fig.~\ref{fig:dataset}B; Methods). These centroids serve as the input query into Logan.
 
 Expanding on the nr search, we queried these \todo{x} million enzyme homologs across Logan (version \todo{x}) contigs, recovering \todo{x} billion matching sequences (Fig.~\ref{fig:dataset}B). Of these Logan sequences, \todo{x} matched an nr enzyme at 90\% identity, and clustering the remaining \todo{x} at 90\% aaid, yielding \todo{x} million non-redundant enzyme homologs (Fig.~\ref{fig:dataset}C,D). We've dubbed this dataset PETadex-v2, with sub sets dubbed PETadex-plasticome (or simply plasticome), PETadex-nr and PETadex-logan, depending on the origin. \todo{Describe a domain from the search, can be a/B hydrolase, Amydases, etc.}
 
@@ -118,13 +122,13 @@ Expanding on the nr search, we queried these \todo{x} million enzyme homologs ac
 
 To explore the PETadex dataset, we annotated its sequences structurally and taxonomically, and linked each sequence to the metadata of the sample it was recovered from.
 
-We first predicted structures for the 22,235 superfamily centroids (30\% amino acid identity) using ESMFold2 (ESMC-6B trunk). These structures resolve both the catalytic domain and the accessory domains flanking it, which may additionally contribute to the catalytic mechanism.
+We first predicted structures for the 22,235 superfamily centroids (30\% amino acid identity) using ESMFold2 \todo{cite ESMFold2} (Methods). These structures resolve both the catalytic domain and the accessory domains flanking it, which may additionally contribute to the catalytic mechanism.
 
 We next assigned each sequence a source organism, from the NCBI taxonomy of its GenBank record (PETadex-nr) or the taxonomic composition of its source run (PETadex-logan). Of \todo{x} PETadex-nr sequences, 1,192,350 (\todo{x}\%) carry an assignment, overwhelmingly bacterial (1,071,209; 89.8\%), followed by Eukaryota (103,380; 8.7\%), Archaea (17,493; 1.5\%) and Viruses (268; $<$0.1\%) \todo{taxonomy panel removed from Fig.~3; cite a Supplementary figure or drop the reference}.
 
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figure3_metadata.png}
+\includegraphics[width=\textwidth]{figures/figure3_metadata.png}
 \caption{\textbf{Environmental metadata of the PETadex corpus.} \textbf{(A)} Share of corpus ORFs ($n = 307{,}155{,}746$) with each metadata field. Solid bars, stated in BioSample records; hatched bars (*), inferred from BacDive optima of the taxa in each BioSample. \textbf{(B)} PETadex sequences by stated BioSample coordinates (log scale). \textbf{(C)} Environment categories of profiled BioSamples (left; $n = 2{,}478{,}477$) and of 90\% clusters with $\geq 2$ profiled ORFs (right; $n = 6{,}904{,}458$). Blue, environmental; grey, host-associated or other.}
 \label{fig:metadata}
 \end{figure*}
@@ -212,7 +216,7 @@ Finally, we measured how far this diversity sits from what has been characterize
 % caption matches it. Downsample to 600 DPI before committing the PDF (see CLAUDE.md).
 \begin{figure*}[!t]
 \centering
-\includegraphics[width=\textwidth]{figure_4_superfamily-case-study_composite.png}
+\includegraphics[width=\textwidth]{figures/figure_4_superfamily-case-study_composite.png}
 \caption{\textbf{Characterized PET hydrolases sample a narrow corner of the IsPETase/LCC superfamily, most of whose diversity is recovered only from Logan.} PETadex superfamily 6 (30\% identity cluster) contains 41,871 ORFs, 77\% of them from Logan assemblies of SRA runs, in 407 families at 60\% identity. The superfamily is an operational unit, not a clade: neighbouring superfamilies nest within it. \textbf{(A)} Maximum-likelihood phylogeny (IQ-TREE, WAG+F+I+R10, midpoint-rooted) of 563 representatives: 388 family centroids (60\% identity), 161 characterized plasticome enzymes (filled dots), 8 characterized sequences absent from PETadex (open dots), the four reference enzymes IsPETase, LCC, Cut190 and TfCut2 (diamonds), and 2 neighbouring-superfamily centroids (red triangles). The deep backbone is weakly supported and is not interpreted. Rings, inner to outer: sample type and environment category of each family's BioSamples. \textbf{(B)} The same tree drawn linearly, with the domain architecture of each representative: Pfam domains, SignalP~6.0 signal peptides, and the catalytic triad (dots; Ser-Asp-His in 548 of the 555 representatives present in the corpus). \textbf{(C)} Identity of each member to its nearest characterized enzyme (plasticome v2). Logan members: median 61.8\%, 32\% below 50\% ($n = 32{,}228$). nr members: median 78.9\%, 11\% below 50\% ($n = 9{,}565$). nr is enriched near characterized enzymes by construction. \textbf{(D)} Identity of every member to each reference enzyme, and to any characterized enzyme. Only 41 (LCC) to 233 (Cut190) members are $\geq$90\% identical to a reference.}
 \label{fig:superfamily}
 \end{figure*}
@@ -234,6 +238,105 @@ PETadex complements, rather than replaces, curated resources of plastic-degradin
 %% Methods
 %% ============================================================
 \section{Methods}
+
+%% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-10-01) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
+%% Dataset-generation and annotation Methods, ordered by pipeline rather than by Results
+%% heading. Two sources: (1) methods detail lifted out of Results on 2026-10-01 (the HMM
+%% iteration procedure, the 0.7 occupancy threshold, the MUSCLE/DIAMOND flags, the plasticome
+%% structure/CATH tooling; see the NOTE comments in Results), and (2) the Obsidian vault:
+%%   Plasticome construction ...... PETadex/Projects/Logan Work/Runs/Plasticome pipeline end to end.md
+%%                                  PETadex/Projects/Logan Work/Documentation/Plasticome v2 Build Overview.md
+%%   Domain assignment ............ PETadex/Projects/Plasticome CATH Assignment/00 Project Overview.md
+%%   Structure prediction ......... PETadex/Projects/Narval Folding/ESMFold2 Plasticome Folding.md
+%%   NCBI-nr retrieval, HMMs ...... PETadex/Manuscript/Thomas/ (Overview, HMM_Documentation, Seed MSAs and
+%%                                  Reference Structure Annotations, PETadex-HMM Creation, Artifact Index)
+%%   Logan search, clustering ..... PETadex/Projects/Logan Work/Documentation/petadex.v260701_generation-thomas.md
+%%                                  (a PLAN, written before the run -- hence the \todo{}s)
+%%   BioSample metadata ........... PETadex/Manuscript/Metadata Section/Metadata Section - Writing Notes.md
+%%                                  PETadex/Projects/Metadata/Metadata Profiles Experiment/01 Profiles - Method and Decisions.md
+%%   Inferred temperature and pH .. PETadex/Projects/Metadata/SRA Metadata Acquisition/pH Metadata/04 How pH_env Is Computed.md
+%% Anything the vault does not record is a \todo{}; nothing here was filled in by guessing.
+%%
+%% CORPUS CAVEAT (vault: Manuscript/Figures Generation/00 Figure Data Extraction - Server Plan.md,
+%% section 0). The plasticome, nr and HMM subsections describe PETadex-260701 (v2). The Logan
+%% ORF count (307,155,746), the 22,235 superfamily centroids and every metadata number in
+%% Results/Fig. 3 are from the v1 corpus, because the v2 Logan search and the metadata rebuild
+%% were not finished when those notes were written. The Logan and metadata subsections below
+%% describe the method; their counts must be regenerated on v2.
+
+\subsection{Plasticome construction}
+
+% AI-GENERATED -- paragraph 1: PAZy snapshots, curation, union
+The plasticome is the union of two snapshots of the PAZy database \todo{cite PAZy}: pazy-240826 (26 August 2024; $n=212$), the seed set of the original PETadex build \todo{cite PETadex v1}, and pazy-260701 (1 July 2026) \todo{confirm the pull date; the vault's reconciliation notes give 2026-06-30 for the same snapshot}. The 495 records in the 2026 snapshot were curated manually against their source publications: 26 records without experimentally reported activity were removed and 4 sequences were added (one reported in the literature but absent from PAZy, one replacing an inactive PAZy record, and two that PAZy aggregates under a single identifier), leaving 473 enzymes. Each enzyme was additionally annotated for whether its activity was demonstrated directly (purified enzyme) or indirectly \todo{state how indirect-evidence enzymes were handled, and give the curation table as a Supplementary Table}. The two snapshots were joined on accession, ignoring accession version, giving a union of 609 enzymes: 397 from pazy-260701 only, 136 from pazy-240826 only and 76 present in both. Sequences were retrieved by accession from NCBI Protein, falling back in order to UniProt, RCSB PDB, coding-sequence translations in NCBI Nucleotide, MGnify and UniParc; a manually curated sequence was used for enzymes with no resolvable accession \todo{Supplementary Table: accession, source snapshot and sequence provenance of all 609 enzymes}.
+
+% AI-GENERATED -- paragraph 2: 90% clustering
+The 609 sequences were clustered at 90\% amino acid identity with USEARCH v11.0.667 \todo{cite USEARCH} in a reference-seeded scheme. Thirteen well-characterized enzymes \todo{list the 13 curated seeds in a Supplementary Table} were fixed as cluster centroids, the remaining sequences were first recruited to these centroids (\texttt{usearch\_global -id 0.9 -top\_hit\_only}), and those left unassigned were clustered \textit{de novo} with centroids chosen by decreasing length (\texttt{cluster\_fast -id 0.9 -sort length}). This produced 411 clusters (13 reference-seeded and 398 \textit{de novo}; 272 singletons). The 411 centroids are the query set for the NCBI-nr search. Separately, collapsing the plasticome at 100\% identity gives 493 non-redundant proteins, which were used to seed the profile HMMs.
+
+% AI-GENERATED -- paragraph 3: component graph
+Graph components follow the definition used in Logan \todo{cite Logan}: connected components of the all-vs-all amino acid similarity graph. The 411 centroids were aligned all-vs-all with USEARCH v11.0.667 (\texttt{-allpairs\_local -acceptall}, run over both query--target orientations), and the highest-scoring alignment by bit score was kept for each pair. Thresholds were applied after the search, not as search parameters, because identity and e-value thresholds given to the aligner prune candidate pairs before alignment and under-connect the graph. Pairs with $\ge$30\% amino acid identity and $E < 1\times10^{-5}$ (22,203 of 30,588 aligned pairs; e-values as reported for the 144,560-residue database) were taken as edges, and single-linkage connected components of this graph define the 46 components (25 containing a single centroid; the largest containing 232).
+
+\subsection{Domain assignment of the plasticome}
+
+% AI-GENERATED -- CATH by two routes
+Structures of all 609 plasticome enzymes were predicted with ESMFold2 (see Structure prediction). CATH homologous superfamilies were assigned by two independent routes and compared. In the structure-based route, predicted structures were segmented into domains with Merizo \todo{cite Merizo; version} and each domain was searched with Foldseek \todo{cite Foldseek; version} against the CATH S40 non-redundant domain set (CATH v4.3.0, with results confirmed against v4.4.0) \todo{cite CATH}, accepting hits with TM-score $\ge 0.5$ and $E \le 1\times10^{-5}$; domains without a hit were searched against TED50 \todo{cite TED} under the same thresholds. In the sequence-based route, sequences were scanned with the CATH-Gene3D HMM library (v21.0.0) and overlapping hits were resolved with cath-resolve-hits \todo{cite Gene3D, cath-resolve-hits}. Assignments were compared at the four-level CATH code, and the two routes agreed for all 643 domains matched by both. A CATH superfamily was assigned to 400 of the 411 centroids. The remaining 11 form a single component of rubber oxygenases (Pfam PF09995), a domain with no CATH superfamily in either release, and were annotated from Pfam (release 38.2) \todo{cite Pfam}. \todo{Results says ``InterProScan'' and ``15 distinct protein domains''. The vault records Gene3D + cath-resolve-hits for the sequence route, and the count of 15 comes from the catalytic annotation table. State where InterProScan was used and how the 15 were counted.}
+
+\subsection{Retrieval of homologs from NCBI-nr}
+
+% AI-GENERATED -- DIAMOND parameters, filters, self-hit removal
+The NCBI nr protein database \todo{download date / release of nr} was exported to FASTA with \texttt{blastdbcmd} (BLAST+ 2.17.0) and formatted as a DIAMOND database (DIAMOND v2.2.4.184; 1,101,054,423 sequences, 417,051,418,494 residues) \todo{cite DIAMOND, BLAST+}. The 411 plasticome centroids were searched against it with \texttt{diamond blastp -{}-very-sensitive -k0}, the latter removing the limit on target sequences reported per query. An nr sequence hit by more than one query was assigned to its lowest-e-value query, and inherits that query's graph component. Sequences with $E \le 1\times10^{-5}$ were retained. Retained sequences matching a plasticome protein by accession or by exact amino acid sequence were removed from the nr set (428), so that PETadex-plasticome and PETadex-nr are mutually non-redundant at 100\% identity.
+
+\subsection{Catalytic-residue-constrained profile HMMs}
+
+% AI-GENERATED -- paragraph 1: catalytic residue annotation
+For each of the 15 protein domains in the plasticome, the residues required for catalysis were annotated from the mechanistic literature and anchored to a reference sequence with a solved or predicted structure \todo{cite the mechanism papers; give the per-domain catalytic residues, reference structures and sources as a Supplementary Table -- the annotation currently exists only as a Google Sheet}. Where cofactors make no single residue strictly essential, the conserved metal- or cofactor-ligating residues were used instead. Components whose members could not be aligned to their domain's reference with every catalytic residue in the expected column were given a component-specific reference, annotated by structural alignment to the domain reference in PyMOL.
+
+% AI-GENERATED -- paragraph 2: seed MSAs
+Seed alignments were built per component from the plasticome sequences and their close nr homologs. Signal peptides were predicted and removed with SignalP~6.0 \todo{cite SignalP}. For each component, nr homologs with $E \le 1\times10^{-50}$ to a plasticome query were clustered with DIAMOND \texttt{linclust}, at an identity threshold chosen by component size (30\% for components of more than 50,000 homologs, 50\% for more than 10,000, 70\% for more than 100 and 90\% otherwise) so that each component was reduced to roughly 100--1,000 sequences. Sequences were aligned with MUSCLE~5.3 (Super5 algorithm) \todo{cite MUSCLE}, and any sequence lacking the annotated residue at a catalytic column was removed. Accessory domains and unaligned N- and C-terminal regions were then trimmed manually, and the trimmed alignments were realigned with the MUSCLE PPP algorithm (Super5 for the cytochrome P450 component, for which PPP did not complete in reasonable time). Components whose members could not all be aligned on one set of catalytic columns were split into sub-components, each with its own reference, giving 57 alignments from the 46 components. Four of these, consisting of fragments or of enzymes with no known mechanism, were discarded, leaving 53 seed alignments.
+
+% AI-GENERATED -- paragraph 3: the iterative build (procedure moved from Results)
+Profile HMMs were built from the seed alignments with HMMER~3.4 \todo{cite HMMER} by an iterative procedure analogous to JackHMMER \todo{cite JackHMMER}, with the added constraint that catalytic residues are conserved. In each iteration, (i) a profile was built from the current alignment with \texttt{hmmbuild}; (ii) the reference sequence was aligned to the profile with \texttt{hmmalign}, mapping its catalytic positions onto match states; (iii) the profile was searched with \texttt{hmmsearch} against the nr homologs of its component with a DIAMOND $E < 1\times10^{-10}$, using the size of nr as the search space (\texttt{-Z 1101054423}); and (iv) domain hits with $E \le 1\times10^{-10}$ that carried the reference residue at every catalytic match state were collected into the alignment that seeds the next iteration. If a sequence contained two domains passing these criteria, both were kept. When the next profile was built, match and insert state annotations were propagated from the previous profile, and any alignment column with an occupancy below 0.7 was declared an insert state. The procedure was run for a total of four iterations.
+
+% AI-GENERATED -- paragraph 4: how the parameters were chosen
+These parameters were chosen by benchmarking. The nr homologs were divided into those with a DIAMOND $E < 1\times10^{-10}$ ($\sim$6.0 million), which alone could enter a profile, and a held-out set with $1\times10^{-10} \le E \le 1\times10^{-5}$ ($\sim$1.8 million). On four components we built profiles for every combination of e-value cut-off ($1\times10^{-5}$, $1\times10^{-10}$, $1\times10^{-15}$), column occupancy (0.5, 0.7, 0.9) and iteration number (1--5), and searched each against the held-out set, recording the number of hits, the number spanning all catalytic positions and the number carrying the reference catalytic residues. The e-value cut-off had no appreciable effect. Occupancies of 0.7 and 0.9 were then compared over five iterations on all components and performed equivalently, except that one component yielded no usable profile at 0.9, so 0.7 was used. Hit counts had not plateaued at three iterations and declined slightly at five, so four were used \todo{Supplementary Table: per-iteration statistics for each HMM}. \todo{Decide whether to report the AFragmenter comparison of HMM hit ranges with AlphaFold DB domain boundaries (up to 1,000 structures per component), given its known artefacts.}
+
+% AI-GENERATED -- paragraph 5: applying the HMMs to nr
+The 53 profiles were searched against the 7,825,107 nr sequences with \texttt{hmmsearch}, and the reference catalytic positions were transferred to each hit. A hit was called complete if the profile positions it aligns to span every catalytic match state, and canonical if, in addition, the residue at each of those positions matches the reference. The catalytic domain of a sequence was defined as the region of the sequence aligned to the profile. Catalytic domains were clustered at 90\% identity with DIAMOND \texttt{linclust} \todo{coverage and other clustering parameters; say whether complete or canonical hits were clustered} to give the Logan query. \todo{Profiles are searched independently and a sequence may match more than one. State how such sequences are counted and assigned to a component, and report the planned check that regions matched by different profiles overlap by $>$90\%.}
+
+\subsection{Logan search and hierarchical clustering}
+
+% AI-GENERATED -- paragraph 1: Logan search. From the v260701 generation plan; almost every parameter is open.
+The Logan query was searched with DIAMOND against the contigs of Logan v1.2 \todo{cite Logan; confirm the version, the number of accessions searched, DIAMOND sensitivity mode, e-value cut-off and any identity or coverage filters}. Contigs with at least one hit were retrieved and translated in all six reading frames to call open reading frames (ORFs) \todo{tool, minimum ORF length, treatment of ORFs truncated at contig ends}. The 53 profile HMMs were searched against these ORFs as for nr, and ORFs with an HMM hit were retained, with catalytic domains and catalytic residues annotated in the same way \todo{thresholds; whether incomplete hits are kept in PETadex-logan}.
+
+% AI-GENERATED -- paragraph 2: hierarchical clustering
+Catalytic domains from the plasticome, nr and Logan were clustered with DIAMOND at 90\%, 60\% and 30\% amino acid identity, which we term enzymes, families and superfamilies \todo{clustering command, coverage thresholds, DIAMOND version}. Clustering was hierarchical, in that the centroids of one level were the input to the next, and ordered by origin, so that centroids are drawn preferentially from characterized sequences. Plasticome domains were clustered first. nr domains were assigned to a plasticome centroid where they aligned to one at the given threshold, and the remainder were clustered among themselves. Logan domains were assigned to plasticome or nr centroids in the same way before the remainder were clustered. Full-length sequences were then joined back to each catalytic domain. \todo{state how folds were assigned to superfamilies (Fig.~\ref{fig:dataset}C)}
+
+\subsection{Structure prediction}
+
+% AI-GENERATED -- ESMFold2 settings
+Structures were predicted with ESMFold2 (\texttt{biohub/ESMFold2}, release \texttt{esmfold2-2026-05}), which uses the ESMC-6B language model as its trunk \todo{cite ESMFold2, ESM C}, at bfloat16 precision on NVIDIA A100 GPUs \todo{number of recycles and any other non-default settings}. For the 609 plasticome enzymes the mean pLDDT was 0.94, and 605 structures (99.3\%) had a mean pLDDT of at least 0.70. \todo{Confirm that the 22,235 superfamily centroids were folded with the same model and settings, and give their pLDDT summary and any sequence-length limit.}
+
+\subsection{Taxonomic assignment}
+
+% AI-GENERATED -- the vault has no method record for taxonomy; these two sentences restate Results.
+PETadex-nr sequences were assigned the NCBI taxonomy of their GenBank record \todo{mapping file and date; how a sequence with accessions from several taxa was resolved; why only 1,192,350 sequences carry an assignment}. PETadex-logan sequences were annotated with the taxonomic composition of their source run \todo{source of run-level taxonomy, presumably the SRA Taxonomy Analysis Tool; note that this describes the run, not the contig}.
+
+\subsection{BioSample metadata and environment categories}
+
+% AI-GENERATED -- paragraph 1: linking ORFs to BioSamples
+Each Logan ORF carries the accession of the SRA run it was assembled from. Runs were linked to BioSample and BioProject records through SRA metadata \todo{source and retrieval date of the SRA and BioSample metadata}. Of the 7,626,110 runs contributing ORFs, 1,414,327 have no BioSample record, which accounts for the ORFs without one. The map in Fig.~\ref{fig:metadata}B uses only coordinates stated in BioSample records.
+
+% AI-GENERATED -- paragraph 2: the 21 categories
+BioSamples were classified into 21 environment categories by rule. Nine are environmental (soil, marine, freshwater, sediment, wastewater sludge, extreme, engineered or built, air and other environmental) and twelve are host-associated or other (human gut, human oral, human skin, human respiratory, human urogenital, human other, animal gut, animal other, gut unspecified, plant-associated, laboratory culture and food). Metadata fields were consulted in a fixed order of precedence, and the first field matching a category rule determined the category. Fields that state the environment were consulted first (a metagenome label in the organism field, environmental package, broad-scale environment, environmental medium, GOLD ecosystem, habitat and metagenome source), followed by fields from which it can be inferred (isolation source, host body site and host), followed by the submission package. The submission package was mapped through an explicit table in which ambiguous packages map to no category, and a BioSample described by its submission package alone was not classified. Species names in the organism field were not used, so that the categories are independent of taxonomy. Gut and stool samples were assigned to human gut or animal gut only where the host was stated, and otherwise to gut unspecified. Temperature, pH, salinity and depth were not used for classification. Of 6,796,722 BioSamples, 2,744,599 carried at least one usable field, and 2,478,477 of these were assigned a category: 709,397 (28.6\%) from a stated environment, 1,153,864 (46.6\%) from isolation source or host, and 615,216 (24.8\%) from the submission package together with another field \todo{state the main reason the remaining 266,122 match no category; release the full rule set as Supplementary Data or in the code repository}.
+
+% AI-GENERATED -- paragraph 3: cluster propagation
+Each 90\% cluster was assigned its dominant category, the most frequent category among member ORFs whose BioSample was classified. An ORF with a classified BioSample keeps its own category; an ORF without one takes the dominant category of its cluster, and is therefore annotated by inference. Clusters with a single classified ORF were excluded from cluster-level comparisons of categories (Fig.~\ref{fig:metadata}C), because a single observation assigns a cluster wholly to one category by construction; this leaves 6,904,458 of the 14,455,359 clusters with a dominant category. Shares of BioSamples per category are not corrected for the size of individual BioProjects \todo{decide whether to cap BioSamples per BioProject and category; capping at 25 moves human other from 28.9\% to 17.0\%}.
+
+\subsection{Inferred temperature and pH}
+
+% AI-GENERATED -- BacDive inference and its validation
+% NOTE: inferred temperature rests on a BacDive cache in which many optima are incubator settings (see the NOTE in Results); recompute from the full BacDive pull or hold temperature out.
+The temperature and pH of each BioSample were inferred from the organisms detected in it. Read counts per taxon for each run were taken from the SRA taxonomic analysis \todo{cite STAT}, counting only reads assigned directly to a taxon and not those assigned to its descendants, and were summed per taxon over the runs of a BioSample so that each taxon contributes once. Taxon identifiers were resolved to current NCBI taxonomy and matched to growth optima in BacDive \todo{cite BacDive; retrieval date}, excluding entries above species rank and non-prokaryotes (612 taxa with a temperature optimum, 203 with a pH optimum). The inferred value is the mean of the optima of the taxa detected, weighted by their read counts, and is undefined where no taxon with an optimum has reads. Inferred values were compared with the temperature and pH stated in BioSample records where both exist (45,741 and 6,473 BioSamples) by Pearson correlation, for the read-weighted mean and for an unweighted mean over taxa \todo{report the mean absolute error against a constant predictor, which Results refers to}.
+%% <<<<<<<<<< END AI-GENERATED DRAFT (Methods: dataset generation and annotation) <<<<<<<<<<
 
 %% >>>>>>>>>> AI-GENERATED DRAFT (Claude, 2026-09-30) -- REWRITE BEFORE SUBMISSION >>>>>>>>>>
 %% Stub for the stack/infrastructure details the plan moves out of Results. Almost
@@ -313,13 +416,42 @@ Members of superfamily 6 were exported from the PETadex clustering tables with t
 %%   non-plasticome entries as putative on every page. Supply the
 %%   maintenance plan, funding horizon and approximate running cost.
 %%
-%% METHODS.
+%% METHODS - WEB PLATFORM, CASE STUDY (2026-09-30 blocks).
 %%   Both AI-drafted subsections are mostly placeholders. Fill in the
 %%   web stack, the DIAMOND parameters and shard count, the
 %%   result-storage mechanism, the latency benchmark design, the Atlas
 %%   embedding and projection parameters, the literature-curation
 %%   protocol for the 464 kinetics records, and the coverage filter used
 %%   for the reported novelty numbers.
+%%
+%% METHODS - DATASET GENERATION AND ANNOTATION (2026-10-01 block).
+%%   Not yet mirrored in the vault TODO note. Rewrite all nine
+%%   subsections. Methods detail was moved out of Results (NOTE comments
+%%   mark each spot); check the one-line summaries left behind.
+%%   Numbers to reconcile: the Results HMM counts (7,562,397 /
+%%   6,857,582 / 6,343,582 / 2,740,458) against the vault's on-disk
+%%   counts of 2026-09-04 (7,562,485 / 6,764,973 / 2,747,171); the
+%%   pazy-260701 pull date (1 July vs 30 June 2026); "InterProScan" and
+%%   "15 distinct protein domains" in Results against the Gene3D route
+%%   the vault records.
+%%   Corpus: Logan, clustering and all metadata numbers are from the v1
+%%   corpus (307,155,746 ORFs); regenerate on v260701.
+%%   No vault record, so written as todo: Logan search parameters, ORF
+%%   calling, clustering commands and coverage thresholds, fold
+%%   assignment of superfamilies, taxonomy for nr and Logan, ESMFold2
+%%   settings for the 22,235 superfamily centroids, nr download date,
+%%   SRA/BioSample/BacDive retrieval dates.
+%%   Decisions: how sequences matching several HMMs are counted (no
+%%   cross-HMM arbitration exists; A.B.'s >90% overlap check is not
+%%   run); whether the AFragmenter check is reported; whether BioSample
+%%   shares are capped per BioProject; whether inferred temperature is
+%%   held out until the BacDive optima are recomputed.
+%%   Supplementary items the text now promises: PAZy curation and
+%%   provenance tables, the 13 seeds, the catalytic residue annotation
+%%   table (Google Sheet only at present), per-iteration HMM statistics,
+%%   the category rule set.
+%%   A Statistics subsection was not written; tests are described in the
+%%   subsection that uses them.
 %%
 %% CITATIONS.
 %%   petadex-references.bib is still empty, so every "todo cite ..."

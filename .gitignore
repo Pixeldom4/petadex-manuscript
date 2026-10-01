@@ -15,3 +15,8 @@ scratch/
 # local-only repo notes for Claude Code
 CLAUDE.md
 .DS_Store
+
+# local-only: editor config, local toolchain notes, derived previews (not needed on Overleaf)
+.vscode/
+LATEX-BUILD.md
+figure-svgs/*_preview.png
