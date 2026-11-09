@@ -1,0 +1,25 @@
+{
+  "source": "petadex-color-palette.png",
+  "primary": {
+    "red": "#D43844",
+    "green": "#70BA4B",
+    "blue": "#5776F7"
+  },
+  "secondary": {
+    "yellow": "#EFC233",
+    "teal": "#437A76",
+    "orange": "#E07251",
+    "purple": "#680070",
+    "brown": "#7A4028"
+  },
+  "accent": [
+    { "light": "#BE7C7E", "dark": "#491214" },
+    { "light": "#C399C6", "dark": "#340038" },
+    { "light": "#9AADFA", "dark": "#2C3B7C" },
+    { "light": "#F9E7AD", "dark": "#B39226" },
+    { "light": "#D5E5CC", "dark": "#4B6040" },
+    { "light": "#ECAA97", "dark": "#A02B10" },
+    { "light": "#8EAFAD", "dark": "#223D3B" },
+    { "light": "#AF8C7E", "dark": "#32170B" }
+  ]
+}
