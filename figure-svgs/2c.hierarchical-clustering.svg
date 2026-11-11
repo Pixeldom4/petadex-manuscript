@@ -2,13 +2,13 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="88.975662mm"
+   width="144.975662mm"
    height="99.303825mm"
-   viewBox="0 0 88.975662 99.303825"
+   viewBox="0 0 144.975662 99.303825"
    version="1.1"
    id="svg1"
    inkscape:version="1.4.2 (ebf0e940, 2025-05-08)"
-   sodipodi:docname="2c.hierarchical-clustering.transparent.svg"
+   sodipodi:docname="2c.hierarchical-clustering.sources.svg"
    xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -98,7 +98,7 @@
          transform="scale(0.5)"
          style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
          d="M 5.77,0 -2.88,5 V -5 Z"
-         id="path135-5-7-1-0-6-0-2-5" /></marker></defs><rect id="white-background" x="0" y="0" width="88.975662" height="99.303825" style="fill:#ffffff;stroke:none" /><g
+         id="path135-5-7-1-0-6-0-2-5" /></marker></defs><rect id="white-background" x="0" y="0" width="144.975662" height="99.303825" style="fill:#ffffff;stroke:none" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
@@ -739,7 +739,7 @@
              id="tspan42-5-9-1-37-2"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Ubuntu Sans';-inkscape-font-specification:'Ubuntu Sans Bold';fill:#9d5e91;fill-opacity:1;stroke:none;stroke-width:1.1142;text-anchor:middle;text-align:center"
              x="-47.855687"
-             y="93.452232">n = 3.23M</tspan></text></g><g
+             y="93.452232">n = 3.2M</tspan></text></g><g
          id="g12-3-4"
          transform="matrix(0.64953209,0,0,0.64953209,48.835211,69.303274)"><text
            xml:space="preserve"
@@ -794,7 +794,7 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.80188px;font-family:'Ubuntu Sans';-inkscape-font-specification:'Ubuntu Sans';fill:#ac493d;fill-opacity:1;stroke:none;stroke-width:1;text-anchor:middle;text-align:center"
              x="14.802916"
              y="174.92889"
-             id="tspan846">(non-redundant complete</tspan></text><text
+             id="tspan846">(one complete catalytic</tspan></text><text
            xml:space="preserve"
            style="font-size:4.23333px;writing-mode:lr-tb;direction:ltr;fill:#e1595b;fill-opacity:1;stroke:#0054d2;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;text-anchor:middle;text-align:center"
            x="12.319621"
@@ -804,7 +804,7 @@
              id="tspan42-5-9-1-3-0-0"
              style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Ubuntu Sans';-inkscape-font-specification:'Ubuntu Sans Bold';fill:#ac493d;fill-opacity:1;stroke:none;stroke-width:1;text-anchor:middle;text-align:center"
              x="12.319621"
-             y="187.60393">n = 299M</tspan></text><text
+             y="187.60393">n = 298.7M</tspan></text><text
            xml:space="preserve"
            style="font-size:3.80188px;writing-mode:lr-tb;direction:ltr;fill:#e1595b;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1;text-anchor:middle;text-align:center"
            x="13.974398"
@@ -814,7 +814,7 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.80188px;font-family:'Ubuntu Sans';-inkscape-font-specification:'Ubuntu Sans';fill:#ac493d;fill-opacity:1;stroke:none;stroke-width:1;text-anchor:middle;text-align:center"
              x="13.974398"
              y="179.17632"
-             id="tspan846-2"> catalytic domain)</tspan></text><text
+             id="tspan846-2"> domain per protein)</tspan></text><text
            xml:space="preserve"
            style="font-size:3.80188px;writing-mode:lr-tb;direction:ltr;fill:#e1595b;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-dasharray:none;stroke-opacity:1"
            x="19.000084"
@@ -962,4 +962,44 @@
          sodipodi:role="line"
          id="tspan1"
          x="10.234978"
-         y="133.48372">C</tspan></text></g></svg>
+         y="133.48372">C</tspan></text></g><g id="source-breakdown">
+<rect x="86.000" y="24.150" width="1.246" height="5.0" style="fill:#9d5e91;stroke:#ffffff;stroke-width:0.25" />
+<rect x="87.246" y="24.150" width="53.754" height="5.0" style="fill:#679a79;stroke:#ffffff;stroke-width:0.25" />
+<text x="86.000" y="22.750" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#9d5e91;text-anchor:start;dominant-baseline:central">2.3%</text>
+<text x="141.000" y="22.750" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#679a79;text-anchor:end;dominant-baseline:central">97.7%</text>
+<text x="86.000" y="30.550" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#9d5e91;text-anchor:start;dominant-baseline:central">PAZy + NR</text>
+<text x="141.000" y="30.550" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#679a79;text-anchor:end;dominant-baseline:central">Logan</text>
+<rect x="86.000" y="39.120" width="4.053" height="5.0" style="fill:#9d5e91;stroke:#ffffff;stroke-width:0.25" />
+<rect x="90.053" y="39.120" width="50.947" height="5.0" style="fill:#679a79;stroke:#ffffff;stroke-width:0.25" />
+<text x="86.000" y="37.720" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#9d5e91;text-anchor:start;dominant-baseline:central">7.4%</text>
+<text x="141.000" y="37.720" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#679a79;text-anchor:end;dominant-baseline:central">92.6%</text>
+<rect x="86.000" y="53.950" width="7.057" height="5.0" style="fill:#9d5e91;stroke:#ffffff;stroke-width:0.25" />
+<rect x="93.057" y="53.950" width="47.943" height="5.0" style="fill:#679a79;stroke:#ffffff;stroke-width:0.25" />
+<text x="86.000" y="52.550" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#9d5e91;text-anchor:start;dominant-baseline:central">12.8%</text>
+<text x="141.000" y="52.550" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#679a79;text-anchor:end;dominant-baseline:central">87.2%</text>
+<rect x="86.000" y="69.120" width="6.746" height="5.0" style="fill:#9d5e91;stroke:#ffffff;stroke-width:0.25" />
+<rect x="92.746" y="69.120" width="48.254" height="5.0" style="fill:#679a79;stroke:#ffffff;stroke-width:0.25" />
+<text x="86.000" y="67.720" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#9d5e91;text-anchor:start;dominant-baseline:central">12.3%</text>
+<text x="141.000" y="67.720" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:bold;fill:#679a79;text-anchor:end;dominant-baseline:central">87.7%</text>
+<path d="M 84.2 23.650 V 74.620" style="stroke:#80543f;stroke-width:0.25;fill:none" />
+<path d="M 83.400 26.650 H 84.2" style="stroke:#80543f;stroke-width:0.25" />
+<circle cx="81.000" cy="26.650" r="1.305" style="fill:#e6bcb5;stroke:#ac493d;stroke-width:0.35" />
+<path d="M 83.400 41.620 H 84.2" style="stroke:#80543f;stroke-width:0.25" />
+<polygon points="82.450,41.620 81.725,42.876 80.275,42.876 79.550,41.620 80.275,40.364 81.725,40.364" style="fill:#c1d6ca;stroke:#679a79;stroke-width:0.35" />
+<path d="M 83.400 56.450 H 84.2" style="stroke:#80543f;stroke-width:0.25" />
+<polygon points="81.000,55.000 82.379,56.002 81.852,57.623 80.148,57.623 79.621,56.002" style="fill:#d5b9d0;stroke:#9d5e91;stroke-width:0.35" />
+<path d="M 83.400 71.620 H 84.2" style="stroke:#80543f;stroke-width:0.25" />
+<rect x="79.876" y="70.496" width="2.248" height="2.248" style="fill:#e7d8aa;stroke:#cba945;stroke-width:0.35" />
+<path d="M 86.0 76.72 H 141.0" style="stroke:#80543f;stroke-width:0.25;fill:none" />
+<path d="M 86.000 76.72 V 77.52" style="stroke:#80543f;stroke-width:0.25" />
+<text x="86.000" y="78.920" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:normal;fill:#80543f;text-anchor:middle;dominant-baseline:central">0%</text>
+<path d="M 99.750 76.72 V 77.52" style="stroke:#80543f;stroke-width:0.25" />
+<text x="99.750" y="78.920" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:normal;fill:#80543f;text-anchor:middle;dominant-baseline:central">25%</text>
+<path d="M 113.500 76.72 V 77.52" style="stroke:#80543f;stroke-width:0.25" />
+<text x="113.500" y="78.920" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:normal;fill:#80543f;text-anchor:middle;dominant-baseline:central">50%</text>
+<path d="M 127.250 76.72 V 77.52" style="stroke:#80543f;stroke-width:0.25" />
+<text x="127.250" y="78.920" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:normal;fill:#80543f;text-anchor:middle;dominant-baseline:central">75%</text>
+<path d="M 141.000 76.72 V 77.52" style="stroke:#80543f;stroke-width:0.25" />
+<text x="141.000" y="78.920" style="font-size:1.95px;font-family:'Ubuntu Sans',Helvetica,Arial,sans-serif;font-weight:normal;fill:#80543f;text-anchor:middle;dominant-baseline:central">100%</text>
+</g>
+</svg>

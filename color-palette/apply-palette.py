@@ -46,19 +46,28 @@ PNG_OUT = HERE / "pngs"
 PNG_WIDTH, PNG_DPI = 3780, 600
 
 # ---------------------------------------------------------------- palette ---
+# The source palette (petadex-color-palette.json) is too light to read on a white
+# page: green 2.4:1, yellow 1.7:1, orange 3.1:1 and the light accents 1.2-2.4:1
+# against white. These are the same hues pulled down in OKLCH lightness (chroma kept,
+# hue fixed) until each clears a contrast target against white -- marks >= 3:1
+# where the hue allows, yellow 2.2:1 (any darker and it stops being yellow), fills
+# visibly tinted. Text gets a second pass to >= 4.5:1 (see text_safe below).
+# Source -> print values are listed in petadex-color-palette-print.json.
 P = dict(
-    red="#D43844", green="#70BA4B", blue="#5776F7",                     # primary
-    yellow="#EFC233", teal="#437A76", orange="#E07251",                 # secondary
+    red="#D43844", green="#559E2C", blue="#4E6BEB",                     # primary
+    yellow="#D4A904", teal="#437A76", orange="#D46747",                 # secondary
     purple="#680070", brown="#7A4028",                                  # brown: not used
     rose_l="#BE7C7E", rose_d="#491214",                                 # accents
-    lilac_l="#C399C6", lilac_d="#340038",
-    peri_l="#9AADFA", peri_d="#2C3B7C",
-    cream_l="#F9E7AD", cream_d="#B39226",
-    sage_l="#D5E5CC", sage_d="#4B6040",
-    salmon_l="#ECAA97", salmon_d="#A02B10",
-    slate_l="#8EAFAD", slate_d="#223D3B",
+    lilac_l="#BC92BF", lilac_d="#340038",
+    peri_l="#8A9DE8", peri_d="#2C3B7C",
+    cream_l="#F2D472", cream_d="#917302",
+    sage_l="#B6D5A3", sage_d="#4B6040",
+    salmon_l="#DC9B88", salmon_d="#A02B10",
+    slate_l="#7B9B99", slate_d="#223D3B",
     taupe_l="#AF8C7E", taupe_d="#32170B",
 )
+TINT = 0.8        # tints keep 80 % of their old distance to white: pale, but not blank
+TEXT_MIN = 4.5    # minimum contrast of coloured text against white
 DARK = {P[k].upper(): P[v] for k, v in [
     ("blue", "peri_d"), ("red", "rose_d"), ("orange", "salmon_d"), ("green", "sage_d"),
     ("purple", "lilac_d"), ("teal", "slate_d"), ("yellow", "cream_d"),
@@ -91,7 +100,7 @@ def family_rgb(l, src, tgt):
     T = np.array(hex2rgb(tgt))
     D = np.array(hex2rgb(dark_partner(tgt)))
     l = np.asarray(l, dtype=np.float64)[..., None]
-    up = np.clip((l - ls) / max(1 - ls, 1e-6), 0, 1)
+    up = np.clip((l - ls) / max(1 - ls, 1e-6), 0, 1) * TINT
     dn = np.clip((ls - l) / max(ls, 1e-6), 0, 1)
     light = T + (1 - T) * up
     dark = T + (D - T) * np.clip(dn * 1.6, 0, 1)   # reach the partner by ~40 % below the anchor
@@ -108,6 +117,94 @@ def fam(src, tgt, *members):
     m = {src: tgt}
     m.update({c: family(c, src, tgt) for c in members})
     return m
+
+
+# ------------------------------------------------ contrast / OKLCH helpers ---
+def _lin(c):
+    c = np.asarray(c, dtype=np.float64)
+    return np.where(c <= 0.04045, c / 12.92, ((c + 0.055) / 1.055) ** 2.4)
+
+
+def _srgb(c):
+    c = np.clip(c, 0, 1)
+    return np.where(c <= 0.0031308, 12.92 * c, 1.055 * c ** (1 / 2.4) - 0.055)
+
+
+_M1 = np.array([[0.4122214708, 0.5363325363, 0.0514459929],
+                [0.2119034982, 0.6806995451, 0.1073969566],
+                [0.0883024619, 0.2817188376, 0.6299787005]])
+_M2 = np.array([[0.2104542553, 0.7936177850, -0.0040720468],
+                [1.9779984951, -2.4285922050, 0.4505937099],
+                [0.0259040371, 0.7827717662, -0.8086757660]])
+
+
+def contrast_on_white(h):
+    r, g, b = _lin(hex2rgb(h))
+    return 1.05 / (0.2126 * r + 0.7152 * g + 0.0722 * b + 0.05)
+
+
+def deepen(h, target):
+    """Lower OKLCH lightness of `h` (hue fixed, chroma kept in gamut) until it
+    reaches `target` contrast against white."""
+    lab = _M2 @ np.cbrt(_M1 @ _lin(hex2rgb(h)))
+    L, C, H = lab[0], np.hypot(lab[1], lab[2]), np.arctan2(lab[2], lab[1])
+    out = h
+    while contrast_on_white(out) < target and L > 0.05:
+        L -= 0.002
+        c = C
+        while True:
+            rgb = np.linalg.inv(_M1) @ ((np.linalg.inv(_M2) @ [L, c * np.cos(H), c * np.sin(H)]) ** 3)
+            if (rgb >= -1e-4).all() and (rgb <= 1 + 1e-4).all():
+                break
+            c *= 0.98
+        out = rgb2hex(_srgb(rgb))
+    return out
+
+
+def text_safe(h):
+    """Coloured text below TEXT_MIN is deepened; white/near-white labels (which
+    sit on dark boxes) and already-dark text are left alone."""
+    c = contrast_on_white(h)
+    return h if c < 1.25 or c >= TEXT_MIN else deepen(h, TEXT_MIN)
+
+
+def text_pass(text):
+    """Apply text_safe to every colour inside a <text>/<tspan> opening tag."""
+    fix = lambda m: text_safe(m.group(0)).lower()
+    return re.sub(r"<(?:text|tspan)\b[^>]*>",
+                  lambda t: re.sub(r"#[0-9a-fA-F]{6}\b", fix, t.group(0)), text)
+
+
+def recolor_ramp(text, log):
+    """Fig. 3B: re-ramp the heatmap and its colourbar. The colourbar (wide, short
+    image) gives the old ramp; each pixel is matched to its nearest ramp step and
+    the cream -> red half is rebuilt from RAMP_LOW to red in linear light."""
+    imgs = [(m, Image.open(io.BytesIO(base64.b64decode(m.group(2)))).convert("RGBA"))
+            for m in re.finditer(r"data:(image/png);base64,([A-Za-z0-9+/=\s]+)", text)]
+    bars = [im for _, im in imgs if im.size[0] > 8 * im.size[1]]
+    if not bars:
+        return text
+    bar = np.asarray(bars[0]).astype(np.float64)[..., :3] / 255
+    old = bar[bar.shape[0] // 2]
+    k = int(np.argmin(((old - np.array(hex2rgb(P["red"]))) ** 2).sum(1)))
+    s = (np.arange(len(old)) / max(k, 1))[:, None]
+    lo, hi = _lin(hex2rgb(RAMP_LOW)), _lin(old[k])
+    new = old.copy()
+    new[:k + 1] = _srgb(lo + np.clip(s[:k + 1], 0, 1) * (hi - lo))
+    for m, im in imgs:
+        a = np.asarray(im).astype(np.float64) / 255
+        rgb = a[..., :3].reshape(-1, 3)
+        uniq, inv = np.unique(rgb, axis=0, return_inverse=True)
+        d = ((uniq[:, None, :] - old[None]) ** 2).sum(-1)
+        idx, dist = d.argmin(1)[inv.ravel()], d.min(1)[inv.ravel()]
+        on = (dist < 0.004) & (a[..., 3].reshape(-1) > 0)
+        rgb[on] = new[idx[on]]
+        a[..., :3] = rgb.reshape(a.shape[:2] + (3,))
+        buf = io.BytesIO()
+        Image.fromarray((a * 255).round().astype(np.uint8), "RGBA").save(buf, "PNG", optimize=True)
+        text = text.replace(m.group(0), f"data:{m.group(1)};base64," + base64.b64encode(buf.getvalue()).decode())
+        log.append(f"    ramp image {im.size[0]}x{im.size[1]}: {on.sum()} px re-ramped")
+    return text
 
 
 # ------------------------------------------------------------- Figure 1 ----
@@ -196,11 +293,13 @@ FIG2.update({
 
 
 # ------------------------------------------------------------- Figure 3 ----
-# The Fig. 3 panels (matplotlib) are already drawn in palette colours: red
-# #D43844 (stated / clusters), yellow #EFC233 (inferred), teal #437A76
-# (BioSamples) and the cream -> red -> dark-rose map ramp. Nothing to remap,
-# and the 3B heatmap raster must NOT go through the Fig. 2 raster passes.
-FIG3 = {}
+# The Fig. 3 panels (matplotlib) are drawn in the source palette: red #D43844
+# (stated / clusters), yellow #EFC233 (inferred), teal #437A76 (BioSamples) and a
+# cream -> red -> dark-rose ramp for the 3B heatmap and its colourbar. Vector
+# colours go through the hex map; the two ramp rasters go through recolor_ramp,
+# never through the Fig. 2 raster passes.
+FIG3 = {"#EFC233": P["yellow"], "#D43844": P["red"], "#437A76": P["teal"]}
+RAMP_LOW = "#EDC458"   # new light end of the 3B ramp (was #F9E7AD, invisible on grey land)
 NO_RASTER_PASS = (FIG3,)
 
 
@@ -346,6 +445,9 @@ def main():
         text = re.sub(r"#[0-9a-fA-F]{6}\b", sub, text)
         if not any(cmap is m for m in NO_RASTER_PASS):
             text = recolor_images(text, log)
+        else:
+            text = recolor_ramp(text, log)
+        text = text_pass(text)
         # Inkscape export of a copy goes to its twin in pngs/, never ../figures/
         png = PNG_OUT / Path(rel).with_suffix(".png")
         svg = SVG_OUT / rel

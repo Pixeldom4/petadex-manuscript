@@ -20,3 +20,5 @@ CLAUDE.md
 .vscode/
 LATEX-BUILD.md
 figure-svgs/*_preview.png
+
+__pycache__/

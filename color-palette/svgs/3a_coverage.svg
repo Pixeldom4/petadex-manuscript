@@ -283,7 +283,7 @@ L 338.79558 146.527924
 L 338.79558 135.483933 
 L 132.935438 135.483933 
 z
-" clip-path="url(#p8e14a02f58)" style="fill: #efc233"/>
+" clip-path="url(#p8e14a02f58)" style="fill: #d4a904"/>
    </g>
    <g id="patch_10">
     <path d="M 132.935438 164.340814 
@@ -291,7 +291,7 @@ L 336.820416 164.340814
 L 336.820416 153.296822 
 L 132.935438 153.296822 
 z
-" clip-path="url(#p8e14a02f58)" style="fill: #efc233"/>
+" clip-path="url(#p8e14a02f58)" style="fill: #d4a904"/>
    </g>
    <g id="patch_11">
     <path d="M 132.935438 182.153704 
@@ -384,7 +384,7 @@ L 256.501688 203.493187
 L 256.501688 199.293187 
 L 250.501688 199.293187 
 z
-" style="fill: #efc233; stroke: #efc233; stroke-linejoin: miter"/>
+" style="fill: #d4a904; stroke: #d4a904; stroke-linejoin: miter"/>
     </g>
     <g id="text_30">
      <text style="font-size: 6px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #0b0b0b" x="261.301688" y="203.493187" transform="rotate(-0 261.301688 203.493187)">inferred from taxonomy (BacDive)</text>

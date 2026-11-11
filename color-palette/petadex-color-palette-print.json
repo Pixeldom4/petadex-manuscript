@@ -1,0 +1,19 @@
+{
+  "about": "Print-safe PETadex palette used by apply-palette.py. Same hues as petadex-color-palette.json, lightness lowered in OKLCH until each colour reads on a white page. Contrast is WCAG ratio against #FFFFFF. Coloured text is further deepened to >= 4.5:1 per element by apply-palette.py (text_safe).",
+  "changed": {
+    "green":    { "source": "#70BA4B", "print": "#559E2C", "contrast": "2.4 -> 3.3", "text": "#3E8605" },
+    "blue":     { "source": "#5776F7", "print": "#4E6BEB", "contrast": "3.9 -> 4.5" },
+    "yellow":   { "source": "#EFC233", "print": "#D4A904", "contrast": "1.7 -> 2.2", "text": "#917303" },
+    "orange":   { "source": "#E07251", "print": "#D46747", "contrast": "3.1 -> 3.6", "text": "#C15637" },
+    "lilac_l":  { "source": "#C399C6", "print": "#BC92BF", "contrast": "2.4 -> 2.6" },
+    "peri_l":   { "source": "#9AADFA", "print": "#8A9DE8", "contrast": "2.2 -> 2.6" },
+    "cream_l":  { "source": "#F9E7AD", "print": "#F2D472", "contrast": "1.2 -> 1.45" },
+    "cream_d":  { "source": "#B39226", "print": "#917302", "contrast": "3.0 -> 4.5" },
+    "sage_l":   { "source": "#D5E5CC", "print": "#B6D5A3", "contrast": "1.3 -> 1.6" },
+    "salmon_l": { "source": "#ECAA97", "print": "#DC9B88", "contrast": "2.0 -> 2.3" },
+    "slate_l":  { "source": "#8EAFAD", "print": "#7B9B99", "contrast": "2.4 -> 3.0" },
+    "map_ramp_low": { "source": "#F9E7AD", "print": "#EDC458", "note": "Fig. 3B heatmap light end" }
+  },
+  "unchanged": ["red #D43844", "teal #437A76", "purple #680070", "brown #7A4028", "all dark accents except cream_d", "rose_l #BE7C7E", "taupe_l #AF8C7E"],
+  "tints": "Shades/tints derived from palette anchors keep 80% of their old distance to white (TINT = 0.8)."
+}
